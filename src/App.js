@@ -5,6 +5,7 @@ import './App.css';
 import NotFound from './components/NotFound'
 import Home from './components/Home'
 import Footer from './components/Footer'
+import NavBar from './components/Nav'
 
 class App extends Component {
   componentDidMount() {
