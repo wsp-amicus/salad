@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Axios from 'axios'
-import './App.css';
+import './styles/App.css';
 import NotFound from './components/NotFound'
 import Home from './components/Home'
 import Footer from './components/Footer'
@@ -20,7 +20,7 @@ class App extends Component {
       <Router>
         <div>
           <NavBar />
-          <div className="container">
+          <div>
             <Switch>
               <Route exact path="/" component={Home} />
 
@@ -31,8 +31,8 @@ class App extends Component {
               {/* 404 not found */}
               <Route component={NotFound} />
             </Switch>
-            <Footer />
           </div>
+          <Footer />
         </div>
       </Router>
     );

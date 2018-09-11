@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  animation: appear 1s;
+}
+
+@keyframes appear {
+  from { opacity: 0; }
+  to { opacity: 100; }
+}
+
+@keyframes fade {
+  from { margin-top: -50px }
+  to { margin-top: 0; }
+}

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, Row, Col } from 'react-bootstrap'
-import './styles/Footer.css'
-
+import '../styles/Footer.css'
 
 export default class Home extends Component {
   render() {
