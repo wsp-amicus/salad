@@ -18,7 +18,14 @@
     margin-top: 20px;
 }
 
-#login {
+.login {
     font-size: 18px;
     padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.login.active {
+    color: rgb(48,147,64);
+    text-decoration: none;
 }
