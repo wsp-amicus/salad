@@ -8,6 +8,7 @@
   "dependencies": {
     "ajv": "^6.5.3",
     "autoprefixer": "7.1.6",
+    "axios": "^0.18.0",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -45,7 +46,6 @@
     "resolve": "1.6.0",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
-    "ttab": "^0.6.1",
     "url-loader": "0.6.2",
     "webpack": "3.8.1",
     "webpack-dev-server": "2.11.3",
@@ -53,7 +53,8 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "dev": "ttab -w 'nodemon server/app.js' & npm run frontend",
+    "dev": "nodemon server/app.js & npm run frontend",
+    "start": "nodemon server/app.js & npm run frontend",
     "backend": "node server/app.js",
     "frontend": "node scripts/start.js",
     "build": "node scripts/build.js",
@@ -100,5 +101,6 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
