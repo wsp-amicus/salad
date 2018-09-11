@@ -19,16 +19,20 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Switch>
-            <Route exact path="/" component={Home} />
+          <NavBar />
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Home} />
 
-            {/* Users */}
-            <Route path="/users/register" component={Register} />
-            <Route path="/users/login" component={Login} />
+              {/* Users */}
+              <Route path="/users/register" component={Register} />
+              <Route path="/users/login" component={Login} />
 
-            {/* 404 not found */}
-            <Route component={NotFound} />
-          </Switch>
+              {/* 404 not found */}
+              <Route component={NotFound} />
+            </Switch>
+            <Footer />
+          </div>
         </div>
       </Router>
     );
