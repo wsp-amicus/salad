@@ -17,10 +17,10 @@ export default class Home extends Component {
           <Grid>
             <Row className="show-grid">
               <Col  md={3}>
-              <p>Amicus</p>
+                <p>Amicus</p>
               </Col>
               <Col  md={3}>
-              <p>Product</p>
+                <p>Product</p>
               </Col>
               <Col md={3}>
                 <p>Useful Link</p>
