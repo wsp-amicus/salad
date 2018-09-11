@@ -6,7 +6,7 @@ import {Grid,Col} from 'react-bootstrap'
 class NavBar extends Component {
     render() {
         return (
-            <Grid class = 'bar'>
+            <Grid className='bar wrapper'>
                 <Col md={10}> 
                     <a href="#home"><img src={picture} alt="logo" width='250px' /></a>
                 </Col>
