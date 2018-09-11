@@ -16,10 +16,14 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route component={NotFound} />
-          </Switch>
+          <NavBar />
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route component={NotFound} />
+            </Switch>
+            <Footer />
+          </div>
         </div>
       </Router>
     );
