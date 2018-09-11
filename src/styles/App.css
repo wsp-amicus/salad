@@ -6,7 +6,7 @@ body {
 }
 
 .main {
-  margin-top: 69px;
+  margin: 69px 0;
 }
 
 @keyframes appear {

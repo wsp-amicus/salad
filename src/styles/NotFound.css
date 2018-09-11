@@ -1,0 +1,12 @@
+.notfound {
+  text-align: center;
+  font-size: 60px;
+}
+
+.notfound b {
+  font-size: 200px;
+}
+
+.notfound p{
+  font-size: 20px;
+}
