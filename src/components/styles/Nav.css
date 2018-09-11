@@ -1,0 +1,31 @@
+.bar{
+    background-color: rgb(31,36,34)	;
+}
+
+.wrapper {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    background-color: rgb(31,36,34)	;
+}
+
+.col-md-10 {
+    padding: 0px
+}
+
+.col-md-1 {
+    padding: 0px;
+    margin-top: 20px;
+}
+
+.login {
+    font-size: 18px;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.login.active {
+    color: rgb(48,147,64);
+    text-decoration: none;
+}
