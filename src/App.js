@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Axios from 'axios'
-import './Layout.css';
+import './App.css';
 
-class Layout extends Component {
+class App extends Component {
   componentDidMount() {
     Axios.get('/test').then((res) => console.log(res.data))
   }
@@ -18,4 +18,4 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+export default App;
