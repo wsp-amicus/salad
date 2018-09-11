@@ -3,6 +3,7 @@ import Axios from 'axios'
 import './App.css';
 import Home from './components/Home'
 import Footer from './components/Footer'
+import NavBar from './components/Nav'
 
 class App extends Component {
   componentDidMount() {
@@ -13,7 +14,7 @@ class App extends Component {
     return (
       <div>
         {/* Router */}
-        {/* Navigator Bar */}
+        <NavBar />
         {/* Footer */}
         <Home />
         <Footer />
