@@ -5,6 +5,10 @@ body {
   animation: appear 1s;
 }
 
+.main {
+  margin-top: 69px;
+}
+
 @keyframes appear {
   from { opacity: 0; }
   to { opacity: 100; }

@@ -25,7 +25,7 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="home">
         <Parallax bgImage={cover} strength={500} style={{ height: this.state.height * 0.7 }}>
           <div className="cover" style={{ paddingTop: this.state.height * 0.28, paddingBottom: this.state.height * 0.28 }}>
             Amicus
