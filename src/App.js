@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Axios from 'axios'
 import './App.css';
+import Home from './components/Home'
+import Footer from './components/Footer'
 
 class App extends Component {
   componentDidMount() {
@@ -13,6 +15,8 @@ class App extends Component {
         {/* Router */}
         {/* Navigator Bar */}
         {/* Footer */}
+        <Home />
+        <Footer />
       </div>
     );
   }
