@@ -53,9 +53,8 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "dev": "nodemon server/app.js & npm run frontend",
     "start": "nodemon server/app.js & npm run frontend",
-    "backend": "node server/app.js",
+    "backend": "nodemon server/app.js",
     "frontend": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
