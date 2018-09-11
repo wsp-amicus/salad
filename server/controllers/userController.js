@@ -4,7 +4,8 @@ const userController = {
         res.send('indexing')
     },
     create(req,res) {
-
+        console.log("creting user")
+        res.send('200 OK')
     },
     update(req,res) {
 
