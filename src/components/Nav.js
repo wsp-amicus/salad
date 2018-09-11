@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 class NavBar extends Component {
     render() {
         const currentURL = window.location.pathname
-        console.log(currentURL);
         return (
             <Grid className='bar wrapper'>
                 <Col md={10}> 

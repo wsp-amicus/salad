@@ -8,7 +8,7 @@ const userController = {
         res.send('200 OK')
     },
     update(req,res) {
-
+        
     },
     delete(req,res) {
 

@@ -11,7 +11,7 @@ export class Register extends Component {
     return (
       <div className='container'>
         <h1>Register</h1>
-        <form action="/users/register" method="post">
+        <form action="/users/create" method="post">
           <div className="form-group">
             <label htmlFor="exampleInputPassword1">First name</label>
             <input type="text" className="form-control" id="firstname" placeholder="First Name" />
