@@ -1,0 +1,8 @@
+.font{
+    font-family: 'Open Sans', sans-serif;
+}
+.outset{
+    border-style: outset;
+    border-width: .5px;
+    width: 50%;
+}
