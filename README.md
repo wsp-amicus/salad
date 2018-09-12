@@ -6,6 +6,7 @@
 
 ### frontend
 - React
+- Bootstrap
 
 ### backend
 - Node
