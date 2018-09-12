@@ -26,6 +26,7 @@
 .login {
     font-size: 18px;
     padding: 10px;
+    float: right;
     color: white;
     text-decoration: none;
 }
@@ -33,4 +34,28 @@
 .login.active {
     color: rgb(48,147,64);
     text-decoration: none;
+}
+
+.login {
+    padding-top: 23px;
+}
+
+#burger {
+    display: none;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+@media (max-width: 991px){
+    .login {
+        display: none;
+    }
+
+    #burger {
+        float: right;
+        display: block;
+        margin-top: 22px;
+        magin-right: 20px
+    }
+
 }
