@@ -4,7 +4,7 @@
     top: 0;
     z-index: 99;
     animation: none;
-    animation: fade 1s;
+    animation: slideDown 1s;
 }
 
 .wrapper {

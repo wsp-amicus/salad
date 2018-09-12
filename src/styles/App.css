@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
-  animation: appear 1s;
+  animation: fadeIn 1s;
 }
 
 .flexwrap {
@@ -18,12 +18,25 @@ body {
   margin: 69px 0;
 }
 
-@keyframes appear {
+.fadeIn {
+  animation: fadeIn 1s;
+}
+
+.fadeOut {
+  animation: fadeOut 1s;
+}
+
+@keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 100; }
 }
 
-@keyframes fade {
+@keyframes fadeOut {
+  from { opacity: 100; }
+  to { opacity: 0; }
+}
+
+@keyframes slideDown {
   from { margin-top: -50px }
   to { margin-top: 0; }
 }
