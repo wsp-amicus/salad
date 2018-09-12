@@ -5,7 +5,8 @@ const userController = {
     },
     create(req,res) {
         console.log("creting user")
-        res.send('200 OK')
+        console.log(req.body)
+        res.send('yang mai dai tum // userController:9')
     },
     update(req,res) {
         

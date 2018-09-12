@@ -1,0 +1,21 @@
+#login-form {
+    width: 50%;
+    min-width: 400px;
+    margin: auto;
+    padding: 50px 50px;
+    border: 1.5px solid rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.025)
+}
+
+#login-form button {
+    width: 100%;
+    border-radius: 0;
+}
+
+#login-form input {
+    border-radius: 0;
+}
+
+.login-header {
+    margin: 50px 0 25px 0;
+}
