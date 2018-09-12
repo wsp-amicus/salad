@@ -29,8 +29,9 @@ class App extends Component {
   }
 
   updateWindowDimensions() {
-    if (this.state.width === 0 && this.state.height === 0)
-      this.setState({ width: window.innerWidth, height: window.innerHeight });
+    if (this.state.height === 0)
+      this.setState({ height: window.innerHeight });
+    this.setState({ width: window.innerWidth })
   }
 
   render() {
