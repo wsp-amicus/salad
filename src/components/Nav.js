@@ -17,7 +17,7 @@ class NavBar extends Component {
         // const currentURL = window.location.pathname
         return (
             <div className='bar wrapper'>
-                <button id='burger'><img src={burger} width='30px' /></button>
+                <button id='burger'><img src={burger} width='30px' alt="Menu"/></button>
                 <Link to="/"><img src={logo} alt="logo" width='250px' /></Link>
                 <span>
                     <Link to="/users/login" className={`login ${this.state.currentURL === '/users/login' ? 'active' : ''}`}>Login</Link>
