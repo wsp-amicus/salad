@@ -1,17 +1,54 @@
 import React, { Component } from 'react'
 import { Parallax } from 'react-parallax'
 import { Roll } from 'react-reveal'
+import { Fade } from 'react-bootstrap'
 import cover from '../static/cover.jpg'
 import '../styles/Home.css'
 
 export default class Home extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: true,
+      slogan: ''
+    }
+    this.changeSlogan = this.changeSlogan.bind(this)
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.setState({ open: !this.state.open }), 0);
+  }
+
+  componentDidUpdate() {
+    clearInterval(this.interval);
+    this.interval = setInterval(() => {
+      if (!this.state.open)
+        this.changeSlogan()
+      this.setState({ open: !this.state.open })
+    }, this.state.open ? 4000 : 500)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  changeSlogan() {
+    const slogans = [
+      'slogan1', 'slogan2', 'slogan3'
+    ]
+    const index = slogans.indexOf(this.state.slogan)
+    this.setState({ slogan: slogans[(index + 1) % slogans.length] })
+  }
+
   render() {
     return (
       <div className="home">
         <Parallax bgImage={cover} strength={500} style={{ height: this.props.height * 0.85 }}>
-          <div className="cover" style={{ paddingTop: this.props.height * 0.3, paddingBottom: this.props.height * 0.35 }}>
+          <div className="cover" style={{ paddingTop: this.props.height * 0.3, paddingBottom: this.props.height * 0.4 }}>
             <h1>Amicus</h1>
-            <p>Salad Salad Salad</p>
+            <Fade in={this.state.open}>
+              <p>{this.state.slogan}</p>
+            </Fade>
           </div>
         </Parallax>
         <div className="container promotion">
