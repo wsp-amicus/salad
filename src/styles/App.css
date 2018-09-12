@@ -1,8 +1,17 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
   animation: appear 1s;
+}
+
+.flexwrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shadow {
+  box-shadow: 0px 10px 20px 5px #c6c6c6; 
 }
 
 .main {

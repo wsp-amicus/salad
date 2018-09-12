@@ -27,13 +27,31 @@ export default class Home extends Component {
   render() {
     return (
       <div className="home">
-        <Parallax bgImage={cover} strength={500} style={{ height: this.state.height * 0.7 }}>
-          <div className="cover" style={{ paddingTop: this.state.height * 0.28, paddingBottom: this.state.height * 0.28 }}>
-            Amicus
+        <Parallax bgImage={cover} strength={500} style={{ height: this.state.height * 0.8 }}>
+          <div className="cover" style={{ paddingTop: this.state.height * 0.28, paddingBottom: this.state.height * 0.32 }}>
+            <h1>Amicus</h1>
+            <p>Salad Salad Salad</p>
           </div>
         </Parallax>
-        <div style={{ height: '1000px' }}>
-
+        <div className="container promotion">
+          <h1>Promotions</h1>
+          <hr />
+          <div className="flexwrap">
+            <div className="shadow">
+              <img
+                className="shadow"
+                src="https://i1.wp.com/www.sgdtips.com/wp-content/uploads/2015/11/KFC-Roast-Chicken-Salad-Meal-promo.jpg"
+                alt="example"
+              />
+            </div>
+            <div>
+              <img
+                className="shadow"
+                src="https://s3-ap-southeast-1.amazonaws.com/s3.loopme.sg/img/newos/posts/d/14933_1QUh1xZNbf2hFN9V_.jpg"
+                alt="example"
+              />
+            </div>
+          </div>
         </div>
       </div>
     )
