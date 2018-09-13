@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import logo from '../static/small_logo.jpg'
-import burger from '../static/menu.png'
 import '../styles/Nav.css'
 import { Link} from 'react-router-dom'
-import {Nav,Navbar, NavDropdown, MenuItem, NavItem} from 'react-bootstrap'
+import { Nav, Navbar } from 'react-bootstrap'
 class NavBar extends Component {
     constructor(props) {
         super(props)
@@ -23,12 +22,19 @@ class NavBar extends Component {
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav pullRight>
-                            <NavItem eventKey={1} href="/users/login" className={`login ${currentURL === '/users/login' ? 'active' : ''}`}>
+                            <li className={`presentation login ${currentURL === '/users/login' ? 'active' : ''}`}>
+                                <Link to="/users/login">Login</Link>
+                            </li>
+                            <li className={`presentation login ${currentURL === '/users/register' ? 'active' : ''}`}>
+                                <Link to="/users/register">Register</Link>
+                            </li>
+                            {/* ใช้ไม่ได้ */}
+                            {/* <NavItem eventKey={1} href="/users/login" className={`login ${currentURL === '/users/login' ? 'active' : ''}`}>
                                 Login
-                            </NavItem>
-                            <NavItem eventKey={2} href="/users/register" className={`login ${currentURL === '/users/register' ? 'active' : ''}`}>
+                            </NavItem> */}
+                            {/* <NavItem eventKey={2} href="/users/register" className={`login ${currentURL === '/users/register' ? 'active' : ''}`}>
                                 Register
-                            </NavItem>
+                            </NavItem> */}
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
