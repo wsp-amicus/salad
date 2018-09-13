@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
 import logo from '../static/small_logo.jpg'
 import '../styles/Nav.css'
-<<<<<<< HEAD
 import { Link} from 'react-router-dom'
-import {Nav,Navbar,NavItem} from 'react-bootstrap'
-=======
-import { Link } from 'react-router-dom'
 import { Nav, Navbar } from 'react-bootstrap'
->>>>>>> bf1aa91c32d755801d1d9ac5c9d74838143aa295
+
 class NavBar extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      overflowWidth: 991,
-    }
-  }
 
   render() {
     const currentURL = window.location.pathname
