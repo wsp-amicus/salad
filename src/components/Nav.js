@@ -23,13 +23,6 @@ class NavBar extends Component {
               <li className={`presentation login ${currentURL === '/users/register' ? 'active' : ''}`}>
                 <Link to="/users/register">Register</Link>
               </li>
-              {/* ใช้ไม่ได้ */}
-              {/* <NavItem eventKey={1} href="/users/login" className={`login ${currentURL === '/users/login' ? 'active' : ''}`}>
-                                Login
-                            </NavItem> */}
-              {/* <NavItem eventKey={2} href="/users/register" className={`login ${currentURL === '/users/register' ? 'active' : ''}`}>
-                                Register
-                            </NavItem> */}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
