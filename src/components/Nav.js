@@ -13,6 +13,7 @@ class NavBar extends Component {
 
     render() {
         const currentURL = window.location.pathname
+        console.log("Warning เดี๋ยวค่อยแก้ !!");
         return (
             <div className='bar wrapper'>
                 <Navbar inverse collapseOnSelect>

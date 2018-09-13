@@ -10,7 +10,7 @@ export class Login extends Component {
           <form>
             <div className="form-group">
               <label>Username</label>
-              <input type="text" className="form-control" id="username" placeholder="example@example.com"  autoComplete="username"/>
+              <input type="text" className="form-control" id="username" placeholder="example"  autoComplete="username"/>
             </div>
 
             <div className="form-group">
