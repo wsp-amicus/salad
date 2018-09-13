@@ -26,7 +26,6 @@
 .login {
     font-size: 18px;
     padding: 10px;
-    /* float: right; */
     color: white;
     text-decoration: none;
 }
@@ -42,13 +41,10 @@
 
 .container{
     margin: 0px;
+    padding: 0px;
     width:100%; 
 }
 
 .navbar {
     margin: 0px;
-}
-
-.navbar-right {
-    margin-right: 20px;
 }
