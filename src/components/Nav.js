@@ -2,27 +2,36 @@ import React, { Component } from 'react';
 import logo from '../static/small_logo.jpg'
 import burger from '../static/menu.png'
 import '../styles/Nav.css'
-import { Link } from 'react-router-dom'
-
+import { Link} from 'react-router-dom'
+import {Nav,Navbar, NavDropdown, MenuItem, NavItem} from 'react-bootstrap'
 class NavBar extends Component {
     constructor(props) {
         super(props)
         this.state = {
             overflowWidth: 991,
-            currentURL: window.location.pathname
         }
     }
 
     render() {
-        // const currentURL = window.location.pathname
+        const currentURL = window.location.pathname
         return (
             <div className='bar wrapper'>
-                <button id='burger'><img src={burger} width='30px' alt="Menu"/></button>
-                <Link to="/"><img src={logo} alt="logo" width='250px' /></Link>
-                <span>
-                    <Link to="/users/login" className={`login ${this.state.currentURL === '/users/login' ? 'active' : ''}`}>Login</Link>
-                    <Link to="/users/register" className={`login ${this.state.currentURL === '/users/register' ? 'active' : ''}`}>Register</Link>
-                </span>
+                <Navbar inverse collapseOnSelect>
+                    <Navbar.Header>
+                            <Link to="/"><img src={logo} alt="logo" width='200px' /></Link>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
+                    <Navbar.Collapse>
+                        <Nav pullRight>
+                            <NavItem eventKey={1} href="/users/login" className={`login ${currentURL === '/users/login' ? 'active' : ''}`}>
+                                Login
+                            </NavItem>
+                            <NavItem eventKey={2} href="/users/register" className={`login ${currentURL === '/users/register' ? 'active' : ''}`}>
+                                Register
+                            </NavItem>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
             </div>
         )
     }
