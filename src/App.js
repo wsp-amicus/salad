@@ -12,7 +12,7 @@ import Login from './components/users/Login'
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { width: 0, height: 0 };
+    this.state = { height: 0 };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
@@ -31,14 +31,13 @@ class App extends Component {
   updateWindowDimensions() {
     if (this.state.height === 0)
       this.setState({ height: window.innerHeight });
-    this.setState({ width: window.innerWidth })
   }
 
   render() {
     return (
       <Router>
         <div>
-          <NavBar height={this.state.height} width={this.state.width} />
+          <NavBar />
           <div className="main">
             <Switch>
               <Route exact path="/" component={() => <Home height={this.state.height} />} />

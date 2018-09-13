@@ -25,8 +25,7 @@
 
 .login {
     font-size: 18px;
-    padding: 10px;
-    /* float: right; */
+    padding: 5px;
     color: white;
     text-decoration: none;
 }
@@ -36,14 +35,10 @@
     text-decoration: none;
 }
 
-.login {
-    padding: 5px;
-}
-
 .navbar {
     margin: 0px;
 }
 
-.navbar-right {
-    margin-right: 20px;
+.navbar-toggle{
+    margin: 10px;
 }
