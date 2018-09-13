@@ -1,44 +1,38 @@
 import React, { Component } from 'react';
-import picture from '../static/small_logo.jpg'
+import logo from '../static/small_logo.jpg'
+import burger from '../static/menu.png'
 import '../styles/Nav.css'
-import { Grid, Col, ButtonToolbar, MenuItem} from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-
+import { Link} from 'react-router-dom'
+import {Nav,Navbar, NavDropdown, MenuItem, NavItem} from 'react-bootstrap'
 class NavBar extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            overflowWidth: 991
-        }
-        console.log(this.props.width);
-        
-    }
-
-    menu() {
-        if (this.props.width < this.state.overflowWidth) {
-            return (<ButtonToolbar>
-                <MenuItem eventKey="1">Action</MenuItem>
-            </ButtonToolbar>)
-        } else {
-
+            overflowWidth: 991,
         }
     }
 
     render() {
         const currentURL = window.location.pathname
         return (
-            <Grid className='bar wrapper'>
-                <Col md={10}>
-                    <Link to="/"><img src={picture} alt="logo" width='250px' /></Link>
-                </Col>
-                <Col md={1}>
-                    <Link to="/users/login" className={`login ${currentURL === '/users/login' ? 'active' : ''}`}>Login</Link>
-                    <Link to="/users/register" className={`login ${currentURL === '/users/register' ? 'active' : ''}`}>Register</Link>
-                    {this.props.width <= this.state.overflowWidth ?
-                        <a>true</a>
-                    :<a>false</a>}
-                </Col>
-            </Grid>
+            <div className='bar wrapper'>
+                <Navbar inverse collapseOnSelect>
+                    <Navbar.Header>
+                            <Link to="/"><img src={logo} alt="logo" width='200px' /></Link>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
+                    <Navbar.Collapse>
+                        <Nav pullRight>
+                            <NavItem eventKey={1} href="/users/login" className={`login ${currentURL === '/users/login' ? 'active' : ''}`}>
+                                Login
+                            </NavItem>
+                            <NavItem eventKey={2} href="/users/register" className={`login ${currentURL === '/users/register' ? 'active' : ''}`}>
+                                Register
+                            </NavItem>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            </div>
         )
     }
 }
