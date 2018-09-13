@@ -41,10 +41,15 @@
 
 .container{
     margin: 0px;
-    padding: 0px;
+    padding-left: 10px;
+    padding-right: 15px;
     width:100%; 
 }
 
 .navbar {
     margin: 0px;
+}
+
+.navbar-toggle{
+    margin: 10px;
 }

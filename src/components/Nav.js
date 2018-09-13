@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import logo from '../static/small_logo.jpg'
-import burger from '../static/menu.png'
 import '../styles/Nav.css'
 import { Link} from 'react-router-dom'
-import {Nav,Navbar, NavDropdown, MenuItem, NavItem} from 'react-bootstrap'
+import {Nav,Navbar,NavItem} from 'react-bootstrap'
 class NavBar extends Component {
     constructor(props) {
         super(props)
