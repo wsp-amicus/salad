@@ -5,18 +5,22 @@ import { Fade } from 'react-bootstrap'
 import cover from '../static/cover.jpg'
 import '../styles/Home.css'
 
+const slogans = [
+  'slogan1', 'slogan2', 'slogan3'
+]
+
 export default class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
       open: true,
-      slogan: ''
+      slogan: slogans[0]
     }
     this.changeSlogan = this.changeSlogan.bind(this)
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => this.setState({ open: !this.state.open }), 0);
+    this.interval = setInterval(() => this.setState({ open: !this.state.open }), 4000);
   }
 
   componentDidUpdate() {
@@ -33,9 +37,6 @@ export default class Home extends Component {
   }
 
   changeSlogan() {
-    const slogans = [
-      'slogan1', 'slogan2', 'slogan3'
-    ]
     const index = slogans.indexOf(this.state.slogan)
     this.setState({ slogan: slogans[(index + 1) % slogans.length] })
   }
