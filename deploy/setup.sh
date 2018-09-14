@@ -4,5 +4,5 @@ sudo apt update;
 sudo apt install nodejs;
 sudo apt install npm;
 nodejs -v;
-npm i -g serve;
+sudo npm i -g serve;
 
