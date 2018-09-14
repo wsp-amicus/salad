@@ -1,22 +1,39 @@
 import React, { Component } from 'react';
-import picture from '../static/small_logo.jpg'
-import './styles/Nav.css'
-import { Grid, Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import logo from '../static/small_logo.jpg'
+import '../styles/Nav.css'
+import { Link} from 'react-router-dom'
+import { Nav, Navbar } from 'react-bootstrap'
 
 class NavBar extends Component {
     render() {
         const currentURL = window.location.pathname
+        console.log("Warning เดี๋ยวค่อยแก้ !!");
         return (
-            <Grid className='bar wrapper'>
-                <Col md={10}> 
-                    <Link to="/"><img src={picture} alt="logo" width='250px' /></Link>
-                </Col>
-                <Col md={1}>
-                    <Link to="/users/login" className={`login ${currentURL === '/users/login' ? 'active':''}`}>Login</Link>
-                    <Link to="/users/register" className={`login ${currentURL === '/users/register' ? 'active':''}`}>Register</Link>
-                </Col>
-            </Grid>
+            <div className='bar wrapper'>
+                <Navbar inverse collapseOnSelect>
+                    <Navbar.Header>
+                            <Link to="/"><img src={logo} alt="logo" width='200px' /></Link>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
+                    <Navbar.Collapse>
+                        <Nav pullRight>
+                            <li className={`presentation login ${currentURL === '/users/login' ? 'active' : ''}`}>
+                                <Link to="/users/login">Login</Link>
+                            </li>
+                            <li className={`presentation login ${currentURL === '/users/register' ? 'active' : ''}`}>
+                                <Link to="/users/register">Register</Link>
+                            </li>
+                            {/* ใช้ไม่ได้ */}
+                            {/* <NavItem eventKey={1} href="/users/login" className={`login ${currentURL === '/users/login' ? 'active' : ''}`}>
+                                Login
+                            </NavItem> */}
+                            {/* <NavItem eventKey={2} href="/users/register" className={`login ${currentURL === '/users/register' ? 'active' : ''}`}>
+                                Register
+                            </NavItem> */}
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            </div>
         )
     }
 }

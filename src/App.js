@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Axios from 'axios'
-import './App.css';
+import './styles/App.css';
 import NotFound from './components/NotFound'
 import Home from './components/Home'
 import Footer from './components/Footer'
@@ -10,9 +10,27 @@ import Register from './components/users/Register'
 import Login from './components/users/Login'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { height: 0 };
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+
   componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+
     // test api
     Axios.get('/test').then((res) => console.log(res.data))
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions() {
+    if (this.state.height === 0)
+      this.setState({ height: window.innerHeight });
   }
 
   render() {
@@ -20,9 +38,9 @@ class App extends Component {
       <Router>
         <div>
           <NavBar />
-          <div className="container">
+          <div className="main">
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" component={() => <Home height={this.state.height} />} />
 
               {/* Users */}
               <Route path="/users/register" component={Register} />
@@ -31,8 +49,8 @@ class App extends Component {
               {/* 404 not found */}
               <Route component={NotFound} />
             </Switch>
-            <Footer />
           </div>
+          <Footer />
         </div>
       </Router>
     );
