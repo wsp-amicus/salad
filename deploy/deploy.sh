@@ -1,8 +1,11 @@
 #!/bin/bash
 USERNAME=wsp
 HOSTS="wsp.thitgorn.com"
-SCRIPT="git clone https://github.com/wsp-amicus/salad.git;
-cd salad;
-ls;"
+SCRIPT="cd salad;
+git pull;
+npm install;
+npm run build;
+serve -s build;
+npm run backend-prod;"
 ssh -l ${USERNAME} ${HOSTS} "${SCRIPT}"
 

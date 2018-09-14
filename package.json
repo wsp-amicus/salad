@@ -5,6 +5,7 @@
   "description": "wsp group project",
   "repository": "https://github.com/wsp-amicus/salad.git",
   "license": "MIT",
+  "homepage": "http://wsp.thitgorn.com",
   "dependencies": {
     "ajv": "^6.5.3",
     "autoprefixer": "7.1.6",
@@ -62,6 +63,7 @@
   "scripts": {
     "start": "nodemon server/app.js & npm run frontend",
     "backend": "nodemon server/app.js",
+    "backend-prod": "node server/app.js",
     "frontend": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
