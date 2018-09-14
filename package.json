@@ -63,7 +63,7 @@
   "scripts": {
     "start": "nodemon server/app.js & npm run frontend",
     "backend": "nodemon server/app.js",
-    "backend-prod": "node server/app.js",
+    "backend-prod": "node server/app.js &",
     "frontend": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
