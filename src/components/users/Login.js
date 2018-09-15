@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { genSalt, hash } from 'bcryptjs'
+import Axios from 'axios'
 import '../../styles/Login.css'
 
 export class Login extends Component {
@@ -23,8 +24,18 @@ export class Login extends Component {
     e.preventDefault();
     genSalt(10, (err, salt) => {
         hash(this.state.password, salt, (err, hash) => {
-          // axios login
-          console.log(hash);
+          Axios.post('/users/login', {
+            username: this.state.username,
+            password: hash
+          }).then((res) => {
+            switch(res.data.header) {
+              case 401: console.log("wrong password"); break;
+              case 200: console.log("you are now login to system"); break;
+              default: console.log("error when sending data")
+            }
+          }).catch((err)=> {
+            console.log(err)
+          })
         });
     });
   }

@@ -3,13 +3,9 @@ const userController = require('../controllers/userController')
 const express = require('express');
 const router = express.Router();
 
-// read
-router.get('/', userController.index)
-// Update
-router.put('/update', userController.update)
-// Delete
-router.delete('/delete', userController.delete)
-// Create
-router.post('/create', userController.create)
+router.post('/register', userController.register)
+router.post('/login', userController.login)
+router.get('/forgetPassword', userController.forgetPassword)
+router.put('/createNewPassword', userController.createNewPassword)
 
 module.exports = router;

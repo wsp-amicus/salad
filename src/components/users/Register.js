@@ -42,7 +42,7 @@ export class Register extends Component {
       <div className='container'>
         <h1>Register</h1>
         <hr />
-        <form action="/users/create" method="post">
+        <form action="/users/register" method="post">
           <div className="row">
             <div className="form-group col-12 col-md-6">
               <label>First name</label>
