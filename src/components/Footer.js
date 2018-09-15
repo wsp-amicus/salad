@@ -44,13 +44,6 @@ export default class Home extends Component {
           </Col>
           </Row>
         </Grid>
-        <Grid>
-        <Row className="show-grid">
-            <div className="center padding">
-              &copy;{(new Date().getFullYear())} copyright: Amicus 
-            </div>
-          </Row>
-        </Grid>
       </div>
     )
   }

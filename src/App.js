@@ -8,6 +8,7 @@ import Footer from './components/Footer'
 import NavBar from './components/Nav'
 import Register from './components/users/Register'
 import Login from './components/users/Login'
+import Copyright from './components/Copyright'
 
 class App extends Component {
   constructor(props) {
@@ -51,6 +52,7 @@ class App extends Component {
             </Switch>
           </div>
           <Footer />
+          <Copyright />
         </div>
       </Router>
     );
