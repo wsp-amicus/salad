@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 //support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/test', (req, res) => res.send('Hello World!'))
+app.get('/test', (req, res) => res.send('You are now connected with backend !'))
 
 // register route in app
 app.use('/users', require('./routes/users'))
