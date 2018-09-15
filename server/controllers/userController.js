@@ -1,55 +1,74 @@
-const bcrypt = require('bcryptjs')
+// #######################################
+// #######################################
+// 
+// READ THIS
+// I already hash password before sending to server
+// you don't need to hash again
+// I already check confirm password from client side
+// you can save all recieve data right the way.
+// 
+// #######################################
+// #######################################
+
+// const bcrypt = require('bcryptjs')
+const User = require('../models/user')
 
 const userController = {
-  index(req, res) {
-    console.log("indexing")
-    res.send('indexing')
-  },
-  create(req, res) {
-    console.log("creting user")
-    console.log(req.body)
-    // res.send('yang mai dai tum // userController:9')
+  register(req, res) {
+    // this function is for creating the user
+    // in case user register it
+    // 
+    // recieve the data from client
+    // save the data to database
+    // then redirect to users/login
 
     const firstName = req.body.firstName
     const lastName = req.body.lastName
     const email = req.body.email
     const username = req.body.username
-    const password = req.body.password
-    const password2 = req.body.password2
+    const hashPassword = req.body.password
 
-    if (password.equal(password2)) {
-      let newUser = new User({
-        firstName,
-        lastName,
-        email,
-        username,
-        password
-      })
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) {
-            console.log(err);
-          }
-          newUser.password = hash;
-          newUser.save((err) => {
-            if (err) {
-              console.log(err);
-              return;
-            } else {
-              // req.flash('success', 'You are now registered and can log in');
-              res.redirect('/users/login');
-            }
-          });
-        });
-      });
-    }
+    let newUser = new User({
+      firstName,
+      lastName,
+      email,
+      username,
+      hashPassword
+    })
+
+    newUser.save((err) => {
+      if (err) {
+        console.log(err);
+        return;
+      } else {
+        res.redirect('/users/login');
+      }
+    });
   },
-  update(req, res) {
-
+  login(req, res) {
+    // get username ,hash password from login field
+    // find username from database
+    // check if hash password is corrent // use bcryptjs
+    // 
+    // return status
+    // case username is not found or password is not correct
+    // return { 
+    //           header: 401,
+    //           body: "username or password is not match" 
+    //        }
+    // case success
+    // return 
+    //        {
+    //            header: 200
+    //            body: "" // could be cookie token one day expire token
+    //        }
   },
-  delete(req, res) {
-
-  }
+  forgetPassword(req, res) {
+    // idk maybe send email to reset password
+  },
+  createNewPassword(req, res) {
+    // update new hash password to database
+  },
 }
 
 module.exports = userController
