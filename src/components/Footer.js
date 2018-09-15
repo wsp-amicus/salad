@@ -10,24 +10,45 @@ export default class Home extends Component {
       </Col>
     )
     return (
-      <div className="container font">
+      <div className="container font textcolor bgcolor padding">
         <Grid>
           <Row className="show-grid">
             <Col md={3}>
-              <p>Amicus</p>
+              <strong>Amicus</strong>
             </Col>
             <Col md={3}>
-              <p>Product</p>
+              <strong>Product</strong>
             </Col>
             <Col md={3}>
-              <p>Useful Link</p>
+              <strong>Useful Link</strong>
             </Col>
             <Col md={3}>
-              <p>Contact</p>
+              <strong>Contact</strong>
             </Col>
           </Row>
           <Row >
             {line}{line}{line}{line}
+          </Row>
+          <Row>
+          <Col md={3}>
+              <p>For salad lover from salad lover</p>
+          </Col>
+          <Col md={3}>
+              <p>Salad</p>
+          </Col>
+          <Col md={3}>
+              <p>Test</p>
+            </Col>
+          <Col md={3}>
+              <p>Gear@gmail.com</p>
+          </Col>
+          </Row>
+        </Grid>
+        <Grid>
+        <Row className="show-grid">
+            <div className="center padding">
+              &copy;{(new Date().getFullYear())} copyright: Amicus 
+            </div>
           </Row>
         </Grid>
       </div>

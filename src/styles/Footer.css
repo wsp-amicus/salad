@@ -3,3 +3,24 @@
     border-width: .5px;
     width: 50%;
 }
+
+.bgcolor {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    background-color:rgb(31,36,34);
+}
+
+
+.textcolor{
+    font-size: 14px;
+    color: white;
+}
+
+.center{
+    text-align: center;
+}
+
+.padding{
+    padding: 10px;
+}
