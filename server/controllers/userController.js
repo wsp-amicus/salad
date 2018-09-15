@@ -57,11 +57,10 @@ const userController = {
     //           body: "username or password is not match" 
     //        }
     // case success
-    // return 
-    //        {
-    //            header: 200
-    //            body: "" // could be cookie token one day expire token
-    //        }
+    res.send({
+               header: 200,
+               body: "" // could be cookie token one day expire token
+           })
   },
   forgetPassword(req, res) {
     // idk maybe send email to reset password
