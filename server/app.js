@@ -22,7 +22,6 @@ app.use('/users', require('./routes/users'))
 if(process.env.NODE_ENV === 'production') {
     // serve react app in production
     app.use(express.static(`${__dirname}/../build`))
-
     
     // Handles any requests that don't match the ones above
     app.get('*', (req,res) =>{
@@ -30,12 +29,6 @@ if(process.env.NODE_ENV === 'production') {
     })
 
     // # certificate part HTTPS
-
-    // verify certificate
-    app.get('/.well-known/acme-challenge/5TiT4Mxfc9atVdR6YsVF28fIx1DvwaJJkdesn81_1d8', (req,res) => {
-        res.send('5TiT4Mxfc9atVdR6YsVF28fIx1DvwaJJkdesn81_1d8.Uu7iEQCQf9geWmNlvr7t9ugz1CbwmFs6JNiD4LSq_lE')
-    })
-
     // Certificate
     const privateKey = fs.readFileSync('/etc/letsencrypt/live/wsp.thitgorn.com/privkey.pem', 'utf8')
     const certificate = fs.readFileSync('/etc/letsencrypt/live/wsp.thitgorn.com/cert.pem', 'utf8')
@@ -46,6 +39,7 @@ if(process.env.NODE_ENV === 'production') {
         cert: certificate,
         ca: ca
     }
+    
     const httpsServer = https.createServer(credentials, app)
     httpsServer.listen(5556, () => {
         console.log('HTTPS Server running on port 5556')
