@@ -11,7 +11,6 @@ export default class Home extends Component {
     )
     return (
       <div className="container font textcolor bgcolor padding">
-      <div>
         <Grid>
           <Row className="show-grid">
             <Col md={3}>
@@ -60,7 +59,6 @@ export default class Home extends Component {
             </Col>
           </Row>
         </Grid>
-        </div>
       </div>
     )
   }
