@@ -13,19 +13,19 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { height: 0 };
-    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
   }
 
   componentDidMount() {
     this.updateWindowDimensions();
-    window.addEventListener('resize', this.updateWindowDimensions);
+    window.addEventListener('resize', this.updateWindowDimensions)
 
     // test api
     Axios.get('/test').then((res) => console.log(res.data))
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions);
+    window.removeEventListener('resize', this.updateWindowDimensions)
   }
 
   updateWindowDimensions() {
