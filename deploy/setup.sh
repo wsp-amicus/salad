@@ -1,8 +1,6 @@
 #!/bin/bash
-#run this in server machine
+# run this in server machine
 sudo apt update;
 sudo apt install nodejs;
 sudo apt install npm;
 nodejs -v;
-sudo npm i -g serve;
-
