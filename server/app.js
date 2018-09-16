@@ -1,4 +1,5 @@
 const express = require('express')
+const https = require('https');
 const path = require('path');
 const bodyParser = require('body-parser');
 const app = express()
@@ -21,14 +22,32 @@ if(process.env.NODE_ENV === 'production') {
     // serve react app in production
     app.use(express.static(`${__dirname}/../build`))
 
-    // certificate
+    
+    // Handles any requests that don't match the ones above
+    app.get('*', (req,res) =>{
+        res.sendFile(path.join(__dirname + '/../build/index.html'));
+    });
+
+    // # certificate part HTTPS
+
+    // verify certificate
     app.get('/.well-known/acme-challenge/5TiT4Mxfc9atVdR6YsVF28fIx1DvwaJJkdesn81_1d8', (req,res) => {
         res.send('5TiT4Mxfc9atVdR6YsVF28fIx1DvwaJJkdesn81_1d8.Uu7iEQCQf9geWmNlvr7t9ugz1CbwmFs6JNiD4LSq_lE')
     })
 
-    // Handles any requests that don't match the ones above
-    app.get('*', (req,res) =>{
-        res.sendFile(path.join(__dirname + '/../build/index.html'));
+    // Certificate
+    const privateKey = fs.readFileSync('/etc/letsencrypt/live/wsp.thitgorn.com/privkey.pem', 'utf8');
+    const certificate = fs.readFileSync('/etc/letsencrypt/live/wsp.thitgorn.com/cert.pem', 'utf8');
+    const ca = fs.readFileSync('/etc/letsencrypt/live/wsp.thitgorn.com/chain.pem', 'utf8');
+
+    const credentials = {
+        key: privateKey,
+        cert: certificate,
+        ca: ca
+    };
+    const httpsServer = https.createServer(credentials, app);
+    httpsServer.listen(443, () => {
+        console.log('HTTPS Server running on port 443');
     });
 }
 
