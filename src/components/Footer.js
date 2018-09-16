@@ -5,45 +5,62 @@ import '../styles/Footer.css'
 export default class Home extends Component {
   render() {
     const line = (
-      <Col md={3}>
+      <Col md={12}>
         <div className="outset"></div>
-      </Col>
+       </Col>
     )
     return (
       <div className="container font textcolor bgcolor padding">
+      <div>
         <Grid>
           <Row className="show-grid">
             <Col md={3}>
               <strong>Amicus</strong>
+              <Row>
+                {line}
+              </Row>
+              <Row>
+                <Col md={12}>
+                <p>For salad lover from salad lover</p>
+                </Col>
+              </Row>
             </Col>
             <Col md={3}>
               <strong>Product</strong>
+              <Row>
+                {line}
+              </Row>
+              <Row>
+                <Col md={12}>
+                  <p>Salad</p>
+                </Col>
+              </Row>
             </Col>
             <Col md={3}>
               <strong>Useful Link</strong>
+              <Row>
+                {line}
+              </Row>
+              <Row>
+                <Col md={12}>
+                  <p>Test</p>
+                </Col>
+              </Row>
             </Col>
             <Col md={3}>
               <strong>Contact</strong>
+              <Row>
+                {line}
+              </Row>
+              <Row>
+                <Col md={12}>
+                  <p>Gear@gmail.com</p>
+                </Col>
+              </Row>
             </Col>
-          </Row>
-          <Row >
-            {line}{line}{line}{line}
-          </Row>
-          <Row>
-          <Col md={3}>
-              <p>For salad lover from salad lover</p>
-          </Col>
-          <Col md={3}>
-              <p>Salad</p>
-          </Col>
-          <Col md={3}>
-              <p>Test</p>
-            </Col>
-          <Col md={3}>
-              <p>Gear@gmail.com</p>
-          </Col>
           </Row>
         </Grid>
+        </div>
       </div>
     )
   }
