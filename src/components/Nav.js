@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../static/small_logo.jpg'
+import transparent_logo from '../static/small_transparent_logo.png'
 import '../styles/Nav.css'
 import { Link } from 'react-router-dom'
 import { Nav, Navbar } from 'react-bootstrap'
@@ -31,13 +32,14 @@ class NavBar extends Component {
 
   render() {
     const currentURL = window.location.pathname
+    const logoColor = this.state.transparent && currentURL === '/' ? transparent_logo : logo
     const barColor = `${this.state.transparent && currentURL === '/' ? 'transparent' : 'non-transparent'}`
     const linkColor = `${this.state.transparent && currentURL === '/' ? 'white' : ''}`
     return (
       <div className='bar wrapper'>
         <Navbar inverse collapseOnSelect className={barColor}>
           <Navbar.Header>
-            <Link to="/"><img src={logo} alt="logo" width='200px' /></Link>
+            <Link to="/"><img src={logoColor} alt="logo" width='200px' /></Link>
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
