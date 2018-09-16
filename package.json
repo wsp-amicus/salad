@@ -5,6 +5,7 @@
   "description": "wsp group project",
   "repository": "https://github.com/wsp-amicus/salad.git",
   "license": "MIT",
+  "homepage": "http://wsp.thitgorn.com",
   "dependencies": {
     "ajv": "^6.5.3",
     "autoprefixer": "7.1.6",
@@ -64,7 +65,8 @@
     "backend": "nodemon server/app.js",
     "frontend": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "deploy": "deploy/deploy.sh"
   },
   "jest": {
     "collectCoverageFrom": [

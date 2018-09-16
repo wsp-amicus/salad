@@ -1,5 +1,33 @@
 .outset{
     border-style: outset;
     border-width: .5px;
-    width: 50%;
+}
+
+.bgcolor {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    background-color:#363636;
+}
+
+.copyright{
+    background-color: #101010;
+    margin: 0px;
+    padding: 15px;
+    width: 100%;
+    font-size: 14px;
+    color: white;
+}
+
+.textcolor{
+    font-size: 14px;
+    color: white;
+}
+
+.center{
+    text-align: center;
+}
+
+.padding{
+    padding: 10px;
 }
