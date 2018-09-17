@@ -20,11 +20,21 @@ app.use('/users', require('./routes/users'))
 
 // use this in production only
 if(process.env.NODE_ENV === 'production') {
-    // serve react app in production
-    app.use(express.static(`${__dirname}/../build`))
+    // // serve react app in production
+    // app.use(express.static(`${__dirname}/../build`))
+    
+    // automatic redirect to https
+    app.use (function (req, res, next) {
+      var schema = (req.headers['x-forwarded-proto'] || '').toLowerCase();
+      if (schema === 'https') {
+        next();
+      } else {
+        res.redirect('https://' + req.headers.host + req.url);
+      }
+    });
     
     // Handles any requests that don't match the ones above
-    app.get('*', (req,res) =>{
+    app.get('*', (req, res) =>{
         res.sendFile(path.join(__dirname + '/../build/index.html'))
     })
 
