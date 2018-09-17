@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../static/small_logo.jpg'
 import transparent_logo from '../static/small_transparent_logo.png'
 import '../styles/Nav.css'
 import { Link } from 'react-router-dom'
@@ -42,6 +41,7 @@ class NavBar extends Component {
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
+            { !this.props.user ? 
             <Nav pullRight>
               <li className={`presentation login ${currentURL === '/users/login' ? 'active' : ''}`}>
                 <Link to="/users/login" className={linkColor}>Login</Link>
@@ -49,14 +49,14 @@ class NavBar extends Component {
               <li className={`presentation login ${currentURL === '/users/register' ? 'active' : ''}`}>
                 <Link to="/users/register" className={linkColor}>Register</Link>
               </li>
-              {/* ใช้ไม่ได้ */}
-              {/* <NavItem eventKey={1} href="/users/login" className={`login ${currentURL === '/users/login' ? 'active' : ''}`}>
-                                Login
-                            </NavItem> */}
-              {/* <NavItem eventKey={2} href="/users/register" className={`login ${currentURL === '/users/register' ? 'active' : ''}`}>
-                                Register
-                            </NavItem> */}
             </Nav>
+              :
+            <Nav pullRight>
+              <li className={`presentation login ${currentURL === '/users/register' ? 'active' : ''}`}>
+                <Link to={{pathname: '/users/logout', state: { prevPath: window.location.pathname }}} className={linkColor}><i className="fas fa-user" style={{ marginRight: '10px' }}></i>{this.props.user.username}</Link>
+              </li>
+            </Nav>
+            }
           </Navbar.Collapse>
         </Navbar>
       </div>

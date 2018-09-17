@@ -55,6 +55,14 @@ const userController = {
   createNewPassword(req, res) {
     // update new hash password to database
   },
+  verification(req, res) {
+    User.findOne({_id: req.body.uid}, (err, user) => {
+      if(err) throw err;
+      res.send({
+        username: user.username
+      })
+    })
+  }
 }
 
 module.exports = userController

@@ -29,10 +29,13 @@ export class Login extends Component {
     }).then((res) => {
       switch(res.data.header) {
         case 401: console.log("wrong password"); break;
+
         case 200: console.log("you are now login to system");
                   Cookies.set('amicus-salad-uid', res.data.body, { expires: 1 })
                   this.setState({redirect: true})
+                  this.props.verifyLogin()
                   break;
+
         default: console.log("error when sending data")
       }
     }).catch((err)=> {
