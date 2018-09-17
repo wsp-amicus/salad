@@ -9,6 +9,7 @@ import NavBar from './components/Nav'
 import Register from './components/users/Register'
 import Login from './components/users/Login'
 import Copyright from './components/Copyright'
+import Cookies  from 'js-cookie'
 
 class App extends Component {
   constructor(props) {
@@ -23,6 +24,16 @@ class App extends Component {
 
     // test api
     Axios.get('/test').then((res) => console.log(res.data))
+
+    // user logged-in
+    const uid = Cookies.get('amicus-salad-uid')
+    console.log(uid)
+    if(uid) {
+      // find id from database
+      // 
+    } else {
+      // window.localStorage.uid = null
+    }
   }
 
   componentWillUnmount() {
