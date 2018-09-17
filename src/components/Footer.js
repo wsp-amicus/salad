@@ -53,7 +53,7 @@ export default class Home extends Component {
               </Row>
               <Row>
                 <Col md={12}>
-                  <p>Gear@gmail.com</p>
+                  <p>gear2727@gmail.com</p>
                 </Col>
               </Row>
             </Col>
