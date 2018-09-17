@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { genSalt, hash } from 'bcryptjs'
 import Axios from 'axios'
+import Cookies from 'js-cookie'
+import { Redirect } from 'react-router-dom'
 import '../../styles/Login.css'
 
 export class Login extends Component {
@@ -22,25 +23,27 @@ export class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    genSalt(10, (err, salt) => {
-        hash(this.state.password, salt, (err, hash) => {
-          Axios.post('/users/login', {
-            username: this.state.username,
-            password: hash
-          }).then((res) => {
-            switch(res.data.header) {
-              case 401: console.log("wrong password"); break;
-              case 200: console.log("you are now login to system"); break;
-              default: console.log("error when sending data")
-            }
-          }).catch((err)=> {
-            console.log(err)
-          })
-        });
-    });
+    Axios.post('/users/login', {
+      username: this.state.username,
+      password: this.state.password
+    }).then((res) => {
+      switch(res.data.header) {
+        case 401: console.log("wrong password"); break;
+        case 200: console.log("you are now login to system");
+                  Cookies.set('amicus-salad-uid', res.data.body, { expires: 1 })
+                  this.setState({redirect: true})
+                  break;
+        default: console.log("error when sending data")
+      }
+    }).catch((err)=> {
+      console.log(err)
+    })
   }
 
   render() {
+    if(this.state.redirect) {
+      return <Redirect to="/" />
+    }
     return (
       <div className='container'>
         <h1 className='text-center login-header'>Login</h1>

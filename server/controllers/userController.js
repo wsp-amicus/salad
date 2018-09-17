@@ -1,66 +1,53 @@
-// #######################################
-// #######################################
-// 
-// READ THIS
-// I already hash password before sending to server
-// you don't need to hash again
-// I already check confirm password from client side
-// you can save all recieve data right the way.
-// 
-// #######################################
-// #######################################
-
-// const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs')
 const User = require('../models/user')
 
 const userController = {
   register(req, res) {
-    // this function is for creating the user
-    // in case user register it
-    // 
-    // recieve the data from client
-    // save the data to database
-    // then redirect to users/login
-
     const firstName = req.body.firstName
     const lastName = req.body.lastName
     const email = req.body.email
     const username = req.body.username
-    const hashPassword = req.body.password
+    const password = req.body.password
 
-    let newUser = new User({
+    let user = new User({
       firstName,
       lastName,
       email,
       username,
-      hashPassword
+      password
     })
 
-    newUser.save((err) => {
-      if (err) {
-        console.log(err);
-        return;
-      } else {
-        res.redirect('/users/login');
-      }
-    });
+    user.save()
+
+    res.redirect('/users/login')
   },
   login(req, res) {
-    // get username ,hash password from login field
-    // find username from database
-    // check if hash password is corrent // use bcryptjs
-    // 
-    // return status
-    // case username is not found or password is not correct
-    // return { 
-    //           header: 401,
-    //           body: "username or password is not match" 
-    //        }
-    // case success
-    res.send({
+    const username = req.body.username
+    const password = req.body.password
+    User.findOne({username: username}, (err, user) => {
+      if(err) throw err;
+      if(!user){
+        res.send({ 
+              header: 401,
+              body: "username or password is not match" 
+        })
+      }
+
+      bcrypt.compare(password, user.password, function(err, isMatch){
+        if(err) throw err;
+        if(isMatch){
+          res.send({
                header: 200,
-               body: "" // could be cookie token one day expire token
+               body: user._id
            })
+        } else {
+          res.send({ 
+              header: 401,
+              body: "username or password is not match" 
+          })
+        }
+      });
+    })
   },
   forgetPassword(req, res) {
     // idk maybe send email to reset password

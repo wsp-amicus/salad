@@ -3,9 +3,24 @@ const fs = require('fs')
 const https = require('https')
 const path = require('path')
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const config = require('../config/database')
 const app = express()
 
 let port = process.env.PORT || 5000
+
+mongoose.connect(config.database)
+let db = mongoose.connection
+
+// Check connection
+db.once('open', function(){
+  console.log('Connected to MongoDB')
+})
+
+// Check for DB errors
+db.on('error', function(err){
+  console.log(err);
+})
 
 // support parsing of application/json type post data
 app.use(bodyParser.json())
