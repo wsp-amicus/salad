@@ -21,7 +21,7 @@ app.use('/users', require('./routes/users'))
 // use this in production only
 if(process.env.NODE_ENV === 'production') {
     // serve react app in production
-    // app.use(express.static(`${__dirname}/../build`))
+    app.use(express.static(`${__dirname}/../build`))
     
     // Handles any requests that don't match the ones above
     app.get('*', (req,res) =>{
