@@ -6,7 +6,7 @@ import cover from '../static/cover.jpg'
 import '../styles/Home.css'
 
 const slogans = [
-  'slogan1', 'slogan2', 'slogan3'
+  'Custom Your Owns.', 'More Than Just a Salad.', 'Salad Evolution.'
 ]
 
 export default class Home extends Component {
