@@ -32,14 +32,13 @@ class NavBar extends Component {
 
   render() {
     const currentURL = window.location.pathname
-    const logoColor = this.state.transparent && currentURL === '/' ? transparent_logo : logo
     const barColor = `${this.state.transparent && currentURL === '/' ? 'transparent' : 'non-transparent'}`
     const linkColor = `${this.state.transparent && currentURL === '/' ? 'white' : ''}`
     return (
       <div className='bar wrapper'>
         <Navbar inverse collapseOnSelect className={barColor}>
           <Navbar.Header>
-            <Link to="/"><img src={logoColor} alt="logo" width='200px' /></Link>
+            <Link to="/"><img src={transparent_logo} alt="logo" width='200px' /></Link>
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>

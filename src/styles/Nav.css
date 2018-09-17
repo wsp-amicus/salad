@@ -43,16 +43,36 @@
 
 .transparent {
     background: transparent;
-    border: none;
-    animation: fadeIn 1s;
+    /* animation: fade-background-out 1s; */
 }
 
 .non-transparent {
-    animation: slideDown 1s;
+    /* animation: slideDown 1s; */
+    animation: fade-background-in 1s;
+    background-color: #222;
+}
+
+@keyframes fade-background-out {
+    from {
+        background-color: #222;
+    }
+    to {
+        background-color: transparent;
+    }
+}
+
+@keyframes fade-background-in {
+    from {
+        background-color: transparent;
+    }
+    to {
+        background-color: #222;
+    }
 }
 
 .navbar {
     margin: 0px;
+    border: none;
 }
 
 .navbar-toggle{
