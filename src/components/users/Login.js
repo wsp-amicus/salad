@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import Axios from 'axios'
 import Cookies from 'js-cookie'
 import { Redirect } from 'react-router-dom'
+import queryString from 'query-string'
 import '../../styles/Login.css'
 
 export class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      username: '',
+      username: queryString.parse(window.location.search).username || '',
       password: ''
     }
   }
@@ -46,8 +47,15 @@ export class Login extends Component {
     if(this.state.redirect) {
       return <Redirect to={'/'}/>
     }
+    const username = queryString.parse(window.location.search).username
     return (
       <div className='container'>
+        {
+          username ?
+            <div className="alert alert-success text-center">You have successfully registered</div>
+          :
+            null
+        }
         <h1 className='text-center login-header'>Login</h1>
         <div id="login-form">
           {
