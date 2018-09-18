@@ -9,17 +9,33 @@ const userController = {
     const username = req.body.username
     const password = req.body.password
 
-    let user = new User({
-      firstName,
-      lastName,
-      email,
-      username,
-      password
+    // if email exist
+    User.findOne({email: email}, (err, user) => {
+      if(err) throw err;
+      if(user != null) {
+        res.send({header: 401, body: 'Email is already taken.'})
+      } else {
+        // if username exist
+        User.findOne({username: username}, (err, user1) => {
+          if(err) throw err;
+          if(user1 != null) {
+            res.send({header: 401, body: 'Username is already taken.'})
+          } else {
+            let user = new User({
+              firstName,
+              lastName,
+              email,
+              username,
+              password
+            })
+
+            user.save()
+
+            res.send({header: 200, body: 'You are ready to login!'})
+          }
+        })
+      }
     })
-
-    user.save()
-
-    res.redirect('/users/login')
   },
   login(req, res) {
     const username = req.body.username
