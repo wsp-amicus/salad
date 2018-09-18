@@ -29,24 +29,24 @@ const userController = {
       if(!user){
         res.send({ 
               header: 401,
-              body: "username or password is not match" 
+              body: "Username or Password is not match" 
         })
+      } else {
+        bcrypt.compare(password, user.password, function(err, isMatch){
+          if(err) throw err;
+          if(isMatch){
+            res.send({
+                header: 200,
+                body: user._id
+            })
+          } else {
+            res.send({ 
+                header: 401,
+                body: "Username or Password is not match" 
+            })
+          }
+        });
       }
-
-      bcrypt.compare(password, user.password, function(err, isMatch){
-        if(err) throw err;
-        if(isMatch){
-          res.send({
-               header: 200,
-               body: user._id
-           })
-        } else {
-          res.send({ 
-              header: 401,
-              body: "username or password is not match" 
-          })
-        }
-      });
     })
   },
   forgetPassword(req, res) {

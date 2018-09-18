@@ -19,3 +19,16 @@
 .login-header {
     margin: 50px 0 25px 0;
 }
+
+.alert.warning {
+    animation: 1s fade-in;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

@@ -28,10 +28,9 @@ export class Login extends Component {
       password: this.state.password
     }).then((res) => {
       switch(res.data.header) {
-        case 401: console.log("wrong password"); break;
+        case 401: this.setState({error: res.data.body}); break;
 
-        case 200: console.log("you are now login to system");
-                  Cookies.set('amicus-salad-uid', res.data.body, { expires: 1 })
+        case 200: Cookies.set('amicus-salad-uid', res.data.body, { expires: 1 })
                   this.setState({redirect: true})
                   this.props.verifyLogin()
                   break;
@@ -45,12 +44,18 @@ export class Login extends Component {
 
   render() {
     if(this.state.redirect) {
-      return <Redirect to="/" />
+      return <Redirect to={'/'}/>
     }
     return (
       <div className='container'>
         <h1 className='text-center login-header'>Login</h1>
         <div id="login-form">
+          {
+            !this.state.error ? 
+              null
+            :
+              <div className={`alert alert-danger warning`}>{this.state.error}</div>
+          }
           <form>
             <div className="form-group">
               <label>Username</label>
