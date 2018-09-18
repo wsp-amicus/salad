@@ -10,6 +10,7 @@ import Register from './components/users/Register'
 import Login from './components/users/Login'
 import Logout from './components/users/Logout'
 import Copyright from './components/Copyright'
+import adminRoutes from './admin/routes'
 import Cookies  from 'js-cookie'
 
 class App extends Component {
@@ -56,11 +57,18 @@ class App extends Component {
   }
 
   render() {
+    const adminRoute = adminRoutes.map((item) => {
+      return <Route exact path={item.path} component={item.component} />
+    })
     return (
       <Router>
         <div>
-          <NavBar user={this.state.user} />
-          <div className="main">
+          { window.location.pathname.includes('/admin') ? 
+            null
+            :
+            <NavBar user={this.state.user} />
+          }
+          <div className={`${ window.location.pathname.includes('/admin') ? '' : 'main' }`}>
             <Switch>
               <Route exact path="/" component={() => <Home height={this.state.height} />} />
 
@@ -69,12 +77,22 @@ class App extends Component {
               <Route path="/users/login" component={ () => <Login verifyLogin={this.verifyLogin} />} />
               <Route path='/users/logout' component={ () => <Logout verifyLogin={this.verifyLogin} />} />
 
+              {/* Admin */}
+              {adminRoute}
+
               {/* 404 not found */}
               <Route component={NotFound} />
             </Switch>
           </div>
-          <Footer />
-          <Copyright />
+          { 
+            window.location.pathname.includes('/admin') ? 
+            null
+            :
+            <div>
+              <Footer />
+              <Copyright />
+            </div>
+          }
         </div>
       </Router>
     );
