@@ -35,6 +35,9 @@ app.use('/users', require('./routes/users'))
 
 // use this in production only
 if(process.env.NODE_ENV === 'production') {
+    if(window.location.protocol==="http:") {
+        window.location.href = "https://" + window.location.href.substring(7)
+    }
     // serve react app in production
     app.use(express.static(`${__dirname}/../build`))
     
