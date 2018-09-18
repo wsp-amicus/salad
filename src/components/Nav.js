@@ -48,6 +48,7 @@ class NavBar extends Component {
               </button>
             </div>
             <div className="navbar-collapse collapse">
+            {!this.props.user ? 
               <ul className="nav navbar-nav navbar-right">
                 <li className="presentation login ">
                   <Link className={`${linkColor}`} to="/users/login">Login</Link>
@@ -56,7 +57,15 @@ class NavBar extends Component {
                   <Link className={`${linkColor}`} to="/users/register">Register</Link>
                 </li>
               </ul>
+              :
+              <ul className="nav navbar-nav navbar-right">
+                <li className={`presentation login ${currentURL === '/users/register' ? 'active' : ''}`}>
+                  <Link to='/users/logout' className={linkColor}><i className="fas fa-user" style={{ marginRight: '10px' }}></i>{this.props.user.username}</Link>
+                </li>
+              </ul>
+            }
             </div>
+
           </div>
         </nav>
       </div>
