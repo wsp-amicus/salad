@@ -11,7 +11,7 @@ import Login from './components/users/Login'
 import Logout from './components/users/Logout'
 import Copyright from './components/Copyright'
 import adminRoutes from './admin/routes'
-import Admin from './admin'
+import Admin from './admin/Index'
 import Cookies  from 'js-cookie'
 
 class App extends Component {
