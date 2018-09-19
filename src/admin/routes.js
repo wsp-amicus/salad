@@ -1,6 +1,6 @@
-import Test from './components/Test'
-import Index from './Index'
+
+import Dashboard from './pages/Dashboard'
+
 export default [
-    { path: '/admin', component: Index },
-    { path: '/admin/test', component: Test }
+    { path: '/admin', component: Dashboard },
 ]

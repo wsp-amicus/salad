@@ -11,6 +11,7 @@ import Login from './components/users/Login'
 import Logout from './components/users/Logout'
 import Copyright from './components/Copyright'
 import adminRoutes from './admin/routes'
+import Admin from './admin'
 import Cookies  from 'js-cookie'
 
 class App extends Component {
@@ -57,8 +58,8 @@ class App extends Component {
   }
 
   render() {
-    const adminRoute = adminRoutes.map((item) => {
-      return <Route exact path={item.path} component={item.component} />
+    const adminRoute = adminRoutes.map((item, id) => {
+      return <Route key={`${id}-router`} exact path={item.path} component={ () => <Admin>{item.component}</Admin> } />
     })
     return (
       <Router>

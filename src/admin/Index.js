@@ -1,47 +1,40 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import Sidebar from './components/Sidebar'
+import Footer from './components/Footer'
 import '../styles/Admin.css'
 
-export class Index extends Component {
+export class Admin extends Component {
   render() {
     return (
       <div id="admin">
-        <Navbar />
+        <div className="wrapper">
+            <Navbar />
+            <Sidebar />
 
-        <div className="row">
-            <div className="col-12 col-md-2">
-                menuuu
+            {/* content */}
+            <div className="content-wrapper">
+                <section className="content-header">
+                  <h1>
+                      Page Header
+                      <small>Optional description</small>
+                  </h1>
+                  <ol className="breadcrumb">
+                      <li><a><i className="fa fa-dashboard"></i> Level</a></li>
+                      <li className="active">Here</li>
+                  </ol>
+                </section>
+
+                <section className="content container-fluid">
+                  <this.props.children />
+                </section>
             </div>
-            <div className="col-12 col-md-10">
-                Bodyyyy
-            </div>
+
+            <Footer />
         </div>
-
-
-        <div className="row">
-            <div className="col-12 col-md-2">
-                menuuu
-            </div>
-            <div className="col-12 col-md-10">
-                Bodyyyy
-            </div>
-        </div>
-
-
-        <div className="row">
-            <div className="col-12 col-md-2">
-                menuuu
-            </div>
-            <div className="col-12 col-md-10">
-                Bodyyyy
-            </div>
-        </div>
-
-        <Route to="/admin/test" component={this}/>
       </div>
     )
   }
 }
 
-export default Index
+export default Admin
