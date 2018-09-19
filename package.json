@@ -64,7 +64,7 @@
     "backend": "nodemon server/app.js",
     "frontend": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
+    "test": "testcafe chrome test/AmicusTest.test.js",
     "deploy": "deploy/deploy.sh"
   },
   "jest": {
