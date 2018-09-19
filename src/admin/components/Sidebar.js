@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 export class Sidebar extends Component {
   render() {
@@ -7,10 +8,10 @@ export class Sidebar extends Component {
             <section className="sidebar">
                 <ul className="sidebar-menu" data-widget="tree">
                     <li className="active">
-                        <a>
+                        <Link to='/admin'>
                             <i className="fa fa-tachometer-alt"></i>
                             <span>Dashboard</span>
-                        </a>
+                        </Link>
                     </li>
                     <li className="header">HEADER</li>
                     <li className="treeview">
@@ -22,7 +23,7 @@ export class Sidebar extends Component {
                             </span>
                         </a>
                         <ul className="treeview-menu">
-                            <li><a>Link in level 2</a></li>
+                            <li><Link to='/admin/users'>User</Link></li>
                         </ul>
                     </li>
 
