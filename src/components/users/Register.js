@@ -47,12 +47,10 @@ export class Register extends Component {
       username: this.state.username,
       password: this.state.hashPassword
     }).then((res) => {
-      switch (res.data.header) {
-        case 200: this.setState({ redirect: true }); break;
-        case 401: this.setState({ errormsg: res.data.body }); break;
-        default:
-      }
-    }).catch((err) => console.log(err))
+      this.setState({ redirect: true })
+    }).catch((err) => {
+      this.setState({ errormsg: err.response.data })
+    })
   }
 
   render() {
