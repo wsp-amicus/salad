@@ -8,7 +8,7 @@ export class Dashboard extends Component {
         Header
         </div>
         <div className="box-body">
-        Body
+        Bodyasdasdasd
         </div>
       </div>
     )
