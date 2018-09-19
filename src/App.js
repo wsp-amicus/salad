@@ -10,7 +10,7 @@ import Register from './components/users/Register'
 import Login from './components/users/Login'
 import Logout from './components/users/Logout'
 import Copyright from './components/Copyright'
-import Cookies  from 'js-cookie'
+import Cookies from 'js-cookie'
 
 class App extends Component {
   constructor(props) {
@@ -41,21 +41,27 @@ class App extends Component {
 
   verifyLogin() {
     const uid = Cookies.get('amicus-salad-uid')
-    if(uid) {
+    if (uid) {
       Axios.post('/users/verification', {
         uid: uid
-      }).then((res)=> {
-        this.setState({user: {
-          uid: uid,
-          username: res.data.username
-        }})
+      }).then((res) => {
+        this.setState({
+          user: {
+            uid: uid,
+            username: res.data.username
+          }
+        })
       }).catch((error) => console.log(error))
     } else {
-      this.setState({user: null})
+      this.setState({ user: null })
     }
   }
 
   render() {
+    // const body = document.body
+    // const height = Math.max(body.scrollHeight, body.offsetHeight)
+    // console.log(this.state.height - height)
+    // const remainSpace = this.state.height < height ? this.state.height - height - 190 : ''
     return (
       <Router>
         <div>
@@ -66,8 +72,8 @@ class App extends Component {
 
               {/* Users */}
               <Route path="/users/register" component={Register} />
-              <Route path="/users/login" component={ () => <Login verifyLogin={this.verifyLogin} />} />
-              <Route path='/users/logout' component={ () => <Logout verifyLogin={this.verifyLogin} />} />
+              <Route path="/users/login" component={() => <Login verifyLogin={this.verifyLogin} />} />
+              <Route path='/users/logout' component={() => <Logout verifyLogin={this.verifyLogin} />} />
 
               {/* 404 not found */}
               <Route component={NotFound} />
@@ -76,7 +82,7 @@ class App extends Component {
           <Footer />
           <Copyright />
         </div>
-      </Router>
+      </Router >
     );
   }
 }
