@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 
-export class User extends Component {
+export class Product extends Component {
   render() {
     return (
       <div className="panel panel-primary">
         <div className="panel-heading">
           <span>
-            User
+            Product
           </span>
         </div>
         <div className="panel-body">
-          List all the user
+          List all the product
         </div>
       </div>
     )
   }
 }
 
-export default User
+export default Product

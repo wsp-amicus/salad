@@ -3,21 +3,19 @@ import React, { Component } from 'react'
 export class Navbar extends Component {
   render() {
     return (
-        <header className="main-header">
-            <a href="index2.html" class="logo">
-              <span class="logo-lg">Amicus</span>
-            </a>
-            <nav className="navbar navbar-static-top">
-            <a className="sidebar-toggle" data-toggle="push-menu" role="button">
-                <span className="sr-only">Toggle navigation</span>
-            </a>
-            <div className="navbar-custom-menu">
-                <ul className="nav navbar-nav">
-                    ขวา
+        <nav className="navbar navbar-inverse">
+            <div className="container-fluid">
+                <div className="navbar-header">
+                    <a className="navbar-brand">Amicus</a>
+                </div>
+                <ul className="nav navbar-nav navbar-right">
+                    <li className='presentation login'><a href="/">View page as User</a></li>
+                    <li className='presentation login'>
+                        <a><i className="fas fa-user" style={{ marginRight: '10px' }}></i>username</a>
+                    </li>
                 </ul>
             </div>
-            </nav>
-        </header>
+        </nav>
     )
   }
 }

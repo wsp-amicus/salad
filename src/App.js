@@ -70,7 +70,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          {window.location.pathname.includes('/admin') ?
+          {
+            window.location.pathname.includes('/admin') ?
             null
             :
             <NavBar user={this.state.user} />
