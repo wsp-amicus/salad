@@ -78,3 +78,14 @@
 .navbar-toggle{
     margin: 10px;
 }
+
+.rc-dropdown-menu.rc-dropdown-menu-root.rc-dropdown-menu-vertical {
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 0;
+    color: black;
+}
+
+/* .rc-dropdown-menu-item.rc-dropdown-menu-item-active {
+    background-color: rgba(0,0,0,0.3) !important;
+} */

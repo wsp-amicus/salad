@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import transparent_logo from '../static/small_transparent_logo.png'
-import '../styles/Nav.css'
 import { Link } from 'react-router-dom'
+import Dropdown from 'rc-dropdown';
+import Menu, { Item as MenuItem } from 'rc-menu';
+import 'rc-dropdown/assets/index.css';
+import '../styles/Nav.css'
 
 class NavBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      transparent: true
+      transparent: true,
+      redirect: '',
     }
     this.handleScroll = this.handelScroll.bind(this)
   }
@@ -59,13 +63,21 @@ class NavBar extends Component {
               </ul>
               :
               <ul className="nav navbar-nav navbar-right">
-                <li className={`presentation login ${currentURL === '/users/register' ? 'active' : ''}`}>
-                  <Link to='/users/logout' className={linkColor}><i className="fas fa-user" style={{ marginRight: '10px' }}></i>{this.props.user.username}</Link>
+                <li className={`presentation login`}>
+                  <Dropdown overlay={<Menu>
+                                        <MenuItem key="1"
+                                          style={{backgroundColor: `${barColor === 'transparent' ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,1)'}`, cursor:'pointer'}}
+                                          onClick={() => window.location.pathname = '/users/logout'}>
+                                          <span style={{color:'white'}}>Logout</span>
+                                        </MenuItem>
+                                    </Menu>}>
+                       <a className={linkColor}><i className="fas fa-user" style={{ marginRight: '10px' }}></i>{this.props.user.username}</a>
+                  </Dropdown>
                 </li>
               </ul>
             }
+            
             </div>
-
           </div>
         </nav>
       </div>
