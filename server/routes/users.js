@@ -8,5 +8,6 @@ router.post('/login', userController.login)
 router.get('/forgetPassword', userController.forgetPassword)
 router.put('/createNewPassword', userController.createNewPassword)
 router.post('/verification', userController.verification)
+router.get('/index', userController.index)
 
 module.exports = router;

@@ -12,6 +12,14 @@ const validateEmail = (req, res, next) => {
 }
 
 const userController = {
+  index(req,res) {
+    User.find({}, (err, users) => {
+      if(err) {
+        res.status(500).send('Error on query.')
+      }
+      res.send(users)
+    })
+  },
   register(req, res) {
     const firstName = req.body.firstName
     const lastName = req.body.lastName
