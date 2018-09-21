@@ -1,5 +1,42 @@
 import React, { Component } from 'react'
+import SortableTbl from 'react-sort-search-table'
 import axios from 'axios'
+
+const tHead = [
+    "First name",
+    "Last name",
+    "Username",
+    "Permission",
+    "Action"
+]
+
+const col = [
+    "firstName",
+    "lastName",
+    "username",
+    "permission",
+    "action"
+]
+
+class Action extends Component {
+    constructor(props) {
+		super(props)
+		this.editItem = this.editItem.bind(this)
+        this.deleteItem = this.deleteItem.bind(this)
+	}
+    editItem() {
+		console.log(this.props.rowData)
+	}
+    deleteItem() {
+        console.log(this.props.rowData)
+    }
+    render() {
+        return (<td>
+                    <button className="btn btn-warning" onClick={this.editItem}>Edit</button>
+                    <button className="btn btn-danger" onClick={this.deleteItem}>Delete</button>
+                </td>)
+    }
+}
 
 export class User extends Component {
     constructor(props) {
@@ -9,54 +46,30 @@ export class User extends Component {
         }
     }
     componentDidMount() {
-        console.log("Mounted");
         axios.get('/users/index').then((res) => {
             this.setState({users: res.data})
         }).catch((err) => console.log(err))
     }
 
     render() {
-        const users = this.state.users.map((user,key) => {
-            return <tr key={`user-${key}`}>
-                        <td>{user.firstName}</td>
-                        <td>{user.lastName}</td>
-                        <td>{user.username}</td>
-                        <td>{user.permission}</td>
-                        <td>Edit</td>
-                    </tr>
-        })
         return (
         <div className="panel panel-primary">
             <div className="panel-heading">
-            <span>
-                User
-            </span>
+                <span>
+                    User
+                </span>
             </div>
-            {
-                (this.state.users) ? 
-                <div className="panel-body">
-                    List all the user
-                    <table className="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Firstname</th>
-                                <th scope="col">Lastname</th> 
-                                <th scope="col">Username</th>
-                                <th scope="col">Permission</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {users}
-                        </tbody>
-                    </table>
-                </div>
-                :
-                <div>
-                    loading
-                </div>
-            }
-            
+            <div className="panel-body">
+                <SortableTbl tblData={this.state.users}
+                    tHead={tHead}
+                    customTd={[
+                            {custd: Action, keyItem: "action"},
+                    ]}
+                    dKey={col}
+                    search
+                    defaultCSS
+                />
+            </div>
         </div>
         )
     }
