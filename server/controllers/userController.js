@@ -66,7 +66,7 @@ const userController = {
         bcrypt.compare(password, user.password, function (err, isMatch) {
           if (err) throw err;
           if (isMatch) {
-            res.status(200).send({ id: user._id })
+            res.status(200).send(user)
           } else {
             res.status(400).send("Username or Password is not match")
           }
@@ -83,9 +83,7 @@ const userController = {
   verification(req, res) {
     User.findOne({ _id: req.body.uid }, (err, user) => {
       if (err) throw err;
-      res.send({
-        username: user.username
-      })
+      res.send(user)
     })
   }
 }

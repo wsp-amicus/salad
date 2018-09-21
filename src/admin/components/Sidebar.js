@@ -12,18 +12,23 @@ const content = [
   {
     icon: 'user',
     label: 'User',
-    content: [
-      {
-        icon: 'plus',
-        label: 'user',
-        to: '/admin/users',
-      },
-    ],
+    to: '/admin/users',
   },
   {
       icon: 'shopping-basket',
       label: 'Product',
-      to: '/admin/products'
+      content: [
+        {
+          icon: 'eye',
+          label: 'View',
+          to: '/admin/products'
+        },
+        {
+          icon: 'plus',
+          label: 'Add',
+          to: '/admin/products/create',
+        },
+      ]
   }
 ];
 

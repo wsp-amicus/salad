@@ -9,7 +9,7 @@ export class Admin extends Component {
       <div id="admin">
         <div className="row">
             <div className="col-md-12">
-              <Navbar />
+              <Navbar user={this.props.user}/>
             </div>
             <div className="col-md-3">
               <Sidebar />
