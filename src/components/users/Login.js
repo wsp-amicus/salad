@@ -24,7 +24,7 @@ export class Login extends Component {
       username: this.state.username,
       password: this.state.password
     }).then((res) => {
-      Cookies.set('amicus-salad-uid', res.data.id, { expires: 1 })
+      Cookies.set('amicus-salad-uid', res.data._id, { expires: 1 })
       this.setState({ redirect: true })
       this.props.verifyLogin()
     }).catch((err) => {
