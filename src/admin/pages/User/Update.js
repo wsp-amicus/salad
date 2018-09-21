@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import queryString from 'query-string'
 import axios from 'axios'
 import Select from 'react-select';
+import { Redirect } from 'react-router-dom'
+import { genSalt, hash } from 'bcryptjs'
 
 const options = [
   { value: 0, label: 'User' },
@@ -24,6 +26,7 @@ export class Update extends Component {
       },
       loaded: false,
       selectedOption: null,
+      passwordEdited: false,
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -36,7 +39,7 @@ export class Update extends Component {
       .then(
         (res) => { 
           const selectedPermission = options.filter((item) => item.value === res.data.permission)[0]
-          this.setState({user:res.data, loaded: true, selectedOption: selectedPermission}) 
+          this.setState({user:res.data, loaded: true, selectedOption: selectedPermission, defaultHash:res.data.password}) 
         }
       ).catch((err) => console.log(err))
     }
@@ -49,14 +52,34 @@ export class Update extends Component {
   handleChange(e) {
     const { name, value } = e.target
     this.setState({ user: { ...this.state.user, [name]: value } })
+    if(name==='password') {
+      this.setState({passwordEdited: true})
+    }
+  }
+
+  handleGeneratePassword(e) {
+     genSalt(10, (err, salt) => {
+        if (err)
+          console.log(err)
+        else
+          hash(this.state.user.password, salt, (err, hash) => {
+            if (err)
+              console.log(err)
+            else
+              this.setState({ user: { ...this.state.user, password: hash }, passwordEdited: false })
+          })
+      })
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log(this.state.user);
+    axios.post('/users/update',this.state.user).then((res) => this.setState({redirect: true})).catch(err => console.log(err))
   }
 
   render() {
+    if(this.state.redirect) {
+      return <Redirect to="/admin/users" />
+    }
     return (
       <div className="panel panel-warning">
         <div className="panel-heading">
@@ -91,8 +114,9 @@ export class Update extends Component {
               <input className="form-control" value={this.state.user.username} readOnly/>
             </div>
             <div className="col-12 col-md-6">
-              <label>Password # need to gen when change</label>
+              <label>Password</label>
               <input name="password" className="form-control" value={this.state.user.password} onChange={this.handleChange}/>
+              <button className="btn btn-primary" onClick={this.handleGeneratePassword.bind(this)} disabled={!this.state.passwordEdited}>Generate</button>
             </div>
           </div>
           <h3>Permission</h3>

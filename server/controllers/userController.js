@@ -96,6 +96,23 @@ const userController = {
       if (err) throw err;
       res.send(user)
     })
+  },
+  update(req,res) {
+    User.findOne({ _id: req.body._id }, (err, user) => {
+      if (err) throw err
+      user.firstName = req.body.firstName
+      user.lastName = req.body.lastName
+      user.password = req.body.password
+      user.permission = req.body.permission
+      user.save()
+      res.status(200).send('done')
+    })
+  },
+  delete(req,res) {
+    User.deleteOne(req.query, (err) => {
+      if(err) throw err
+      res.status(200).send('done')
+    })
   }
 }
 
