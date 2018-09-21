@@ -20,6 +20,17 @@ const userController = {
       res.send(users)
     })
   },
+  find(req,res) {
+    User.findOne(req.query, (err, users) => {
+      if(err) {
+        res.status(500).send('Error on query.')
+      }
+      if(!users) {
+        res.status(404).send('User is not found')
+      }
+      res.send(users)
+    })
+  },
   register(req, res) {
     const firstName = req.body.firstName
     const lastName = req.body.lastName

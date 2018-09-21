@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SortableTbl from 'react-sort-search-table'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const tHead = [
     "First name",
@@ -32,7 +33,7 @@ class Action extends Component {
     }
     render() {
         return (<td>
-                    <button className="btn btn-warning" onClick={this.editItem}>Edit</button>
+                    <Link to={`/admin/users/edit?_id=${this.props.rowData._id}`}><button className="btn btn-warning">Edit</button></Link>
                     <button className="btn btn-danger" onClick={this.deleteItem}>Delete</button>
                 </td>)
     }
