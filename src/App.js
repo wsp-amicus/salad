@@ -48,10 +48,7 @@ class App extends Component {
         uid: uid
       }).then((res) => {
         this.setState({
-          user: {
-            uid: uid,
-            username: res.data.username
-          }
+          user: res.data
         })
       }).catch((error) => console.log(error))
     } else {
@@ -65,7 +62,7 @@ class App extends Component {
     // console.log(this.state.height - height)
     // const remainSpace = this.state.height < height ? this.state.height - height - 190 : ''
     const adminRoute = adminRoutes.map((item, id) => {
-      return <Route key={`${id}-router`} exact path={item.path} component={() => <Admin>{item.component}</Admin>} />
+      return <Route key={`${id}-router`} exact path={item.path} component={() => <Admin user={this.state.user}>{item.component}</Admin>} />
     })
     return (
       <Router>
