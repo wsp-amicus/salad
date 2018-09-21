@@ -9,12 +9,19 @@
     border-radius: 0;
     background-color: rgb(48,51,54);
     border: 1px solid black;
+    margin: 0;
 }
 
-.metismenu {
-    min-height: 100vh;
+@media (min-width:769px) {
+    .metismenu {
+        min-height: 100vh;
+    }
 }
 
 .content {
     margin-top: 20px;
+}
+
+.sortable-table .table tbody tr td {
+    text-align: center;
 }

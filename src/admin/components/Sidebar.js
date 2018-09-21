@@ -5,7 +5,7 @@ import 'react-metismenu/dist/react-metismenu-standart.min.css'
 
 const content = [
   {
-    icon: 'tachometer-alt',
+    icon: 'dashboard',
     label: 'Dashboard',
     to: '/admin',
   },
