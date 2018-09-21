@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SortableTbl from 'react-sort-search-table'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const tHead = [
     "First name",
@@ -21,18 +22,15 @@ const col = [
 class Action extends Component {
     constructor(props) {
 		super(props)
-		this.editItem = this.editItem.bind(this)
         this.deleteItem = this.deleteItem.bind(this)
 	}
-    editItem() {
-		console.log(this.props.rowData)
-	}
     deleteItem() {
-        console.log(this.props.rowData)
+        axios.delete('/users/delete?_id=' + this.props.rowData._id).then((res)=> console.log(res)).catch((err) => console.log(err))
+        window.location.reload()
     }
     render() {
         return (<td>
-                    <button className="btn btn-warning" onClick={this.editItem}>Edit</button>
+                    <Link to={`/admin/users/edit?_id=${this.props.rowData._id}`}><button className="btn btn-warning">Edit</button></Link>
                     <button className="btn btn-danger" onClick={this.deleteItem}>Delete</button>
                 </td>)
     }

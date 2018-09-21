@@ -62,7 +62,7 @@ class App extends Component {
     // console.log(this.state.height - height)
     // const remainSpace = this.state.height < height ? this.state.height - height - 190 : ''
     const adminRoute = adminRoutes.map((item, id) => {
-      return <Route key={`${id}-router`} exact path={item.path} component={() => <Admin user={this.state.user}>{item.component}</Admin>} />
+      return <Route key={`${id}-router`} exact={item.exact} path={item.path} component={() => <Admin user={this.state.user}>{item.component}</Admin>} />
     })
     return (
       <Router>

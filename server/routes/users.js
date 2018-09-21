@@ -9,5 +9,8 @@ router.get('/forgetPassword', userController.forgetPassword)
 router.put('/createNewPassword', userController.createNewPassword)
 router.post('/verification', userController.verification)
 router.get('/index', userController.index)
+router.get('/find', userController.find)
+router.post('/update',userController.update)
+router.delete('/delete',userController.delete)
 
 module.exports = router;

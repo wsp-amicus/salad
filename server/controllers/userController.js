@@ -20,6 +20,17 @@ const userController = {
       res.send(users)
     })
   },
+  find(req,res) {
+    User.findOne(req.query, (err, users) => {
+      if(err) {
+        res.status(500).send('Error on query.')
+      }
+      if(!users) {
+        res.status(404).send('User is not found')
+      }
+      res.send(users)
+    })
+  },
   register(req, res) {
     const firstName = req.body.firstName
     const lastName = req.body.lastName
@@ -84,6 +95,23 @@ const userController = {
     User.findOne({ _id: req.body.uid }, (err, user) => {
       if (err) throw err;
       res.send(user)
+    })
+  },
+  update(req,res) {
+    User.findOne({ _id: req.body._id }, (err, user) => {
+      if (err) throw err
+      user.firstName = req.body.firstName
+      user.lastName = req.body.lastName
+      user.password = req.body.password
+      user.permission = req.body.permission
+      user.save()
+      res.status(200).send('done')
+    })
+  },
+  delete(req,res) {
+    User.deleteOne(req.query, (err) => {
+      if(err) throw err
+      res.status(200).send('done')
     })
   }
 }
