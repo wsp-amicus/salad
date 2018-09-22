@@ -79,13 +79,29 @@
     margin: 10px;
 }
 
-.rc-dropdown-menu.rc-dropdown-menu-root.rc-dropdown-menu-vertical {
-    background-color: transparent;
-    border: 1px solid white;
-    border-radius: 0;
-    color: black;
+.dropdown-button {
+    background: transparent;
+    color: white;
+    border: 1px solid transparent;
+    margin-top: 5px;
 }
 
-/* .rc-dropdown-menu-item.rc-dropdown-menu-item-active {
-    background-color: rgba(0,0,0,0.3) !important;
-} */
+.dropdown-button:hover {
+    border: 1px solid white !important;
+    color: white !important;
+    background: transparent !important;
+}
+
+.dropdown-menu {
+    margin: 0;
+    border: 0.5px solid rgba(255,255,255,0.3);
+}
+
+.dropdown-menu li a {
+    color: white;
+}
+
+.dropdown-menu li a:hover{
+    color: white;
+    background: rgba(255,255,255,0.3);
+}
