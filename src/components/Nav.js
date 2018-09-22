@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import transparent_logo from '../static/small_transparent_logo.png'
 import { Link } from 'react-router-dom'
-import Dropdown from 'rc-dropdown';
-import Menu, { Item as MenuItem } from 'rc-menu';
-import 'rc-dropdown/assets/index.css';
+import { DropdownButton, Glyphicon, Navbar } from 'react-bootstrap'
 import '../styles/Nav.css'
 
 class NavBar extends Component {
@@ -12,6 +10,7 @@ class NavBar extends Component {
     this.state = {
       transparent: true,
       redirect: '',
+      open: false,
     }
     this.handleScroll = this.handelScroll.bind(this)
   }
@@ -38,48 +37,58 @@ class NavBar extends Component {
     const linkColor = `${this.state.transparent && currentURL === '/' ? 'white' : ''}`
     return (
       <div className='bar wrapper'>
-        <nav className={`${barColor} navbar navbar-inverse`}>
-            <div className="container">
-              <div className="navbar-header">
-                <Link to="/">
-                  <img src={transparent_logo} alt="logo" width="200px"/>
-                </Link>
-              <button type="button" className="navbar-toggle collapsed">
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-              </button>
-            </div>
-            <div className="navbar-collapse collapse">
-            {!this.props.user ? 
-              <ul className="nav navbar-nav navbar-right">
-                <li className="presentation login ">
-                  <Link className={`${linkColor}`} to="/users/login">Login</Link>
-                </li>
-                <li className="presentation login ">
-                  <Link className={`${linkColor}`} to="/users/register">Register</Link>
-                </li>
-              </ul>
-              :
-              <ul className="nav navbar-nav navbar-right">
-                <li className={`presentation login`}>
-                  <Dropdown overlay={<Menu>
-                                        <MenuItem key="1"
-                                          style={{backgroundColor: `${barColor === 'transparent' ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,1)'}`, cursor:'pointer'}}
-                                          onClick={() => window.location.pathname = '/users/logout'}>
-                                          <span style={{color:'white'}}>Logout</span>
-                                        </MenuItem>
-                                    </Menu>}>
-                       <a className={linkColor}><i className="fas fa-user" style={{ marginRight: '10px' }}></i>{this.props.user.username}</a>
-                  </Dropdown>
-                </li>
-              </ul>
-            }
-            
-            </div>
-          </div>
-        </nav>
+        <Navbar inverse collapseOnSelect className={barColor}>
+        {/* <nav className={`${barColor} navbar navbar-inverse`}> */}
+            <Navbar.Header>
+              <Link to="/">
+                <img src={transparent_logo} alt="logo" width="200px" />
+              </Link>
+              <Navbar.Toggle />
+            </Navbar.Header>
+            <Navbar.Collapse>
+              {!this.props.user ?
+                <ul className="nav navbar-nav navbar-right">
+                  <li className="presentation login">
+                    <Link className={`${linkColor}`} to="/users/login">Login</Link>
+                  </li>
+                  <li className="presentation login">
+                    <Link className={`${linkColor}`} to="/users/register">Register</Link>
+                  </li>
+                </ul>
+                :
+                <ul className="nav navbar-nav navbar-right">
+                    <li className='presentation login d-none d-md-block'>
+                        <DropdownButton
+                          title={<div><Glyphicon glyph="user" style={{ marginRight: '10px' }} />{this.props.user.username}</div>}
+                          id="0"
+                          noCaret
+                          open={this.state.open}
+                          onToggle
+                          onMouseOver={() => this.setState({ open: true })}
+                          onMouseLeave={() => this.setState({ open: false })}
+                          className="dropdown-button"
+                        >
+                          <li role="presentation" style={{ background: this.state.transparent ? 'transparent' : '#222' }}>
+                            <Link role="menuitem" tabindex="-1" to="/users/logout">Logout</Link>
+                          </li>
+                        </DropdownButton>
+                    </li>
+                    <li className='presentation login d-md-none'>
+                      <Link className={`${linkColor}`} to="/"><Glyphicon glyph="user" style={{ marginRight: '10px' }} />{this.props.user.username}</Link>
+                    </li>
+                    <li className="presentation login d-md-none">
+                      <Link className={`${linkColor}`} to="/users/logout">Logout</Link>
+                    </li>
+                </ul>
+              }
+            </Navbar.Collapse>
+        </Navbar>
+        {/* </nav> */}
+        <style>{`
+          .dropdown-menu {
+            background: ${this.state.transparent ? 'transparent' : '#222'};
+          }
+        `}</style>
       </div>
     )
   }
