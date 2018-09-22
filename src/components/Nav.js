@@ -56,7 +56,7 @@ class NavBar extends Component {
                   <li className="presentation login">
                     <Link className={`${linkColor}`} to="/users/login">Login</Link>
                   </li>
-                  <li className="presentation login ">
+                  <li className="presentation login">
                     <Link className={`${linkColor}`} to="/users/register">Register</Link>
                   </li>
                 </ul>
@@ -65,8 +65,10 @@ class NavBar extends Component {
                   <li className='presentation login'>
                     <DropdownButton
                       title={<div ><i className="fas fa-user" style={{ marginRight: '10px' }}></i>{this.props.user.username}</div>}
-                      noCaret="true"
+                      id="0"
+                      noCaret
                       open={this.state.open}
+                      onToggle
                       onMouseOver={() => this.setState({ open: true })}
                       onMouseLeave={() => this.setState({ open: false })}
                       className="dropdown-button"
