@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import transparent_logo from '../static/small_transparent_logo.png'
 import { Link } from 'react-router-dom'
-import { DropdownButton, MenuItem } from 'react-bootstrap'
+import { DropdownButton, MenuItem, Glyphicon } from 'react-bootstrap'
 import '../styles/Nav.css'
 
 class NavBar extends Component {
@@ -64,7 +64,7 @@ class NavBar extends Component {
                 <ul className="nav navbar-nav navbar-right">
                   <li className='presentation login'>
                     <DropdownButton
-                      title={<div ><i className="fas fa-user" style={{ marginRight: '10px' }}></i>{this.props.user.username}</div>}
+                      title={<div><Glyphicon glyph="user" style={{ marginRight: '10px' }} />{this.props.user.username}</div>}
                       id="0"
                       noCaret
                       open={this.state.open}
