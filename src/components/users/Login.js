@@ -10,7 +10,8 @@ export class Login extends Component {
     super(props)
     this.state = {
       username: queryString.parse(window.location.search).username || '',
-      password: ''
+      password: '',
+      loading: false,
     }
   }
 
@@ -20,15 +21,16 @@ export class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.setState({ loading: true })
     Axios.post('/users/login', {
       username: this.state.username,
       password: this.state.password
     }).then((res) => {
       Cookies.set('amicus-salad-uid', res.data._id, { expires: 1 })
-      this.setState({ redirect: true })
+      this.setState({ redirect: true, loading: false })
       this.props.verifyLogin()
     }).catch((err) => {
-      this.setState({ error: err.response.data })
+      this.setState({ error: err.response.data, loading: false })
     })
   }
 
@@ -63,7 +65,7 @@ export class Login extends Component {
               <label>Password</label>
               <input type="password" className="form-control" id="password" placeholder="......" autoComplete="new-password" value={this.state.password} name="password" onChange={this.handleInputChange.bind(this)} />
             </div>
-            <button type="submit" className="btn btn-primary" onClick={this.handleSubmit.bind(this)}>Submit</button>
+            {!this.state.loading ? <button type="submit" className="btn btn-primary" onClick={this.handleSubmit.bind(this)}>Submit</button> : <div className="loader"></div>}
           </form>
         </div>
         <hr />
