@@ -38,7 +38,6 @@ class NavBar extends Component {
     return (
       <div className='bar wrapper'>
         <Navbar inverse collapseOnSelect className={barColor}>
-        {/* <nav className={`${barColor} navbar navbar-inverse`}> */}
             <Navbar.Header>
               <Link to="/">
                 <img src={transparent_logo} alt="logo" width="200px" />
@@ -69,7 +68,7 @@ class NavBar extends Component {
                           className="dropdown-button"
                         >
                           <li role="presentation" style={{ background: this.state.transparent ? 'transparent' : '#222' }}>
-                            <Link role="menuitem" tabindex="-1" to="/users/logout">Logout</Link>
+                            <Link role="menuitem" tabIndex="-1" to="/users/logout">Logout</Link>
                           </li>
                         </DropdownButton>
                     </li>
@@ -83,7 +82,6 @@ class NavBar extends Component {
               }
             </Navbar.Collapse>
         </Navbar>
-        {/* </nav> */}
         <style>{`
           .dropdown-menu {
             background: ${this.state.transparent ? 'transparent' : '#222'};

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 export class Navbar extends Component {
     render() {
@@ -6,7 +7,7 @@ export class Navbar extends Component {
             <nav className="navbar navbar-inverse">
                 <div className="container-fluid">
                     <div className="navbar-header">
-                        <a className="navbar-brand">Amicus</a>
+                        <Link to="/admin" className="navbar-brand" style={{ fontSize: '4rem' }}>Amicus</Link>
                     </div>
                     <ul className="nav navbar-nav navbar-right">
                         <li className='presentation login'><a href="/">View page as User</a></li>

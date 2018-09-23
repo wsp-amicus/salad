@@ -12,6 +12,7 @@ import Logout from './components/users/Logout'
 import Copyright from './components/Copyright'
 import adminRoutes from './admin/routes'
 import Admin from './admin/Index'
+import Loading from './components/Loading'
 import Cookies from 'js-cookie'
 
 class App extends Component {
@@ -62,7 +63,18 @@ class App extends Component {
     // console.log(this.state.height - height)
     // const remainSpace = this.state.height < height ? this.state.height - height - 190 : ''
     const adminRoute = adminRoutes.map((item, id) => {
-      return <Route key={`${id}-router`} exact={item.exact} path={item.path} component={() => <Admin user={this.state.user}>{item.component}</Admin>} />
+      let component = null
+      if(!this.state.user) {
+        // loading user or user is not log-in
+        component = Loading
+      } else if(this.state.user.permission < item.permission) {
+        // permission deny couldn't open page
+        component = NotFound
+      } else {
+        // you have authourize to access page
+        component = () => <Admin user={this.state.user}>{item.component}</Admin>
+      }
+      return <Route key={`${id}-router`} exact={item.exact} path={item.path} component={component} />
     })
     return (
       <Router>
