@@ -20,7 +20,6 @@ export class Admin extends Component {
                   <this.props.children />
                 </section>
             </div>
-
         </div>
       </div>
     )
