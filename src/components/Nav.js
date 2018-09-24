@@ -38,49 +38,49 @@ class NavBar extends Component {
     return (
       <div className='bar wrapper'>
         <Navbar inverse collapseOnSelect className={barColor}>
-            <Navbar.Header>
-              <Link to="/">
-                <img src={transparent_logo} alt="logo" width="200px" />
-              </Link>
-              <Navbar.Toggle />
-            </Navbar.Header>
-            <Navbar.Collapse>
-              {!this.props.user ?
-                <ul className="nav navbar-nav navbar-right">
-                  <li className="presentation login">
-                    <Link className={`${linkColor}`} to="/users/login">Login</Link>
-                  </li>
-                  <li className="presentation login">
-                    <Link className={`${linkColor}`} to="/users/register">Register</Link>
-                  </li>
-                </ul>
-                :
-                <ul className="nav navbar-nav navbar-right">
-                    <li className='presentation login d-none d-md-block'>
-                        <DropdownButton
-                          title={<div><Glyphicon glyph="user" style={{ marginRight: '10px' }} />{this.props.user.username}</div>}
-                          id="0"
-                          noCaret
-                          open={this.state.open}
-                          onToggle
-                          onMouseOver={() => this.setState({ open: true })}
-                          onMouseLeave={() => this.setState({ open: false })}
-                          className="dropdown-button"
-                        >
-                          <li role="presentation" style={{ background: this.state.transparent ? 'transparent' : '#222' }}>
-                            <Link role="menuitem" tabIndex="-1" to="/users/logout">Logout</Link>
-                          </li>
-                        </DropdownButton>
+          <Navbar.Header>
+            <Link to="/">
+              <img src={transparent_logo} alt="logo" width="200px" />
+            </Link>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            {!this.props.user ?
+              <ul className="nav navbar-nav navbar-right">
+                <li className="presentation login">
+                  <Link className={`${linkColor}`} to="/users/login">Login</Link>
+                </li>
+                <li className="presentation login">
+                  <Link className={`${linkColor}`} to="/users/register">Register</Link>
+                </li>
+              </ul>
+              :
+              <ul className="nav navbar-nav navbar-right">
+                <li className='presentation login d-none d-md-block'>
+                  <DropdownButton
+                    title={<div><Glyphicon glyph="user" style={{ marginRight: '10px' }} />{this.props.user.username}</div>}
+                    id="0"
+                    noCaret
+                    open={this.state.open}
+                    onToggle={() => { }}
+                    onMouseOver={() => this.setState({ open: true })}
+                    onMouseLeave={() => this.setState({ open: false })}
+                    className="dropdown-button"
+                  >
+                    <li role="presentation" style={{ background: this.state.transparent ? 'transparent' : '#222' }}>
+                      <Link role="menuitem" tabIndex="-1" to="/users/logout">Logout</Link>
                     </li>
-                    <li className='presentation login d-md-none'>
-                      <Link className={`${linkColor}`} to="/"><Glyphicon glyph="user" style={{ marginRight: '10px' }} />{this.props.user.username}</Link>
-                    </li>
-                    <li className="presentation login d-md-none">
-                      <Link className={`${linkColor}`} to="/users/logout">Logout</Link>
-                    </li>
-                </ul>
-              }
-            </Navbar.Collapse>
+                  </DropdownButton>
+                </li>
+                <li className='presentation login d-md-none'>
+                  <Link className={`${linkColor}`} to="/"><Glyphicon glyph="user" style={{ marginRight: '10px' }} />{this.props.user.username}</Link>
+                </li>
+                <li className="presentation login d-md-none">
+                  <Link className={`${linkColor}`} to="/users/logout">Logout</Link>
+                </li>
+              </ul>
+            }
+          </Navbar.Collapse>
         </Navbar>
         <style>{`
           .dropdown-menu {
