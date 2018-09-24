@@ -35,7 +35,7 @@ export class Login extends Component {
   }
 
   render() {
-    if (this.state.redirect) {
+    if (this.state.redirect && window.location.pathname === '/users/login') {
       return <Redirect to={'/'} />
     }
     const username = queryString.parse(window.location.search).username

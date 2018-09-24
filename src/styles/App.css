@@ -68,3 +68,27 @@ body {
     display: none !important;
   }
 }
+
+.center-on-screen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.loading-animate {
+  opacity: 0;
+  animation: 2s loading-blink infinite;
+}
+
+@keyframes loading-blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

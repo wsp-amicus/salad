@@ -18,7 +18,7 @@ import Cookies from 'js-cookie'
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { height: 0 };
+    this.state = { height: 0, loaded: false };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
     this.verifyLogin = this.verifyLogin.bind(this)
   }
@@ -42,31 +42,34 @@ class App extends Component {
       this.setState({ height: window.innerHeight });
   }
 
-  verifyLogin() {
-    const uid = Cookies.get('amicus-salad-uid')
-    if (uid) {
-      Axios.post('/users/verification', {
-        uid: uid
-      }).then((res) => {
-        this.setState({
-          user: res.data
-        })
-      }).catch((error) => console.log(error))
-    } else {
-      this.setState({ user: null })
+  async verifyLogin() {
+    try {
+      const uid = Cookies.get('amicus-salad-uid')
+      if (uid) {
+        await Axios.post('/users/verification', {
+          uid: uid
+        }).then((res) => {
+          this.setState({
+            user: res.data
+          })
+        }).catch((error) => console.log(error))
+      } else {
+        this.setState({ user: null })
+      }
+    } finally {
+      this.setState({loaded: true})
     }
   }
 
   render() {
-    // const body = document.body
-    // const height = Math.max(body.scrollHeight, body.offsetHeight)
-    // console.log(this.state.height - height)
-    // const remainSpace = this.state.height < height ? this.state.height - height - 190 : ''
     const adminRoute = adminRoutes.map((item, id) => {
       let component = null
-      if(!this.state.user) {
+      if(!this.state.loaded) {
         // loading user or user is not log-in
         component = Loading
+      } else if(!this.state.user) {
+        // user is not log in redirect to login
+        component = () => <Login verifyLogin={this.verifyLogin} />
       } else if(this.state.user.permission < item.permission) {
         // permission deny couldn't open page
         component = NotFound
