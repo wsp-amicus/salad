@@ -1,62 +1,50 @@
-import React, { Component } from 'react'
-import SortableTbl from 'react-sort-search-table'
+import React, { Component } from "react";
+import SortableTbl from "react-sort-search-table";
+import axios from "axios";
 
-let MyData = [
-  {
-    cat: 1,
-    _id: 'd-rhe-428-j',
-    imageUrl: 'img/products/rhe-428-j.png',
-    name: 'RHE-428-J (4ch Compact)',
-    brand: 'iCATCH',
-    type: 'HD-SDI',
-    channel: 4,
-    remote: 'LAN, ie, iPhone, iPad, Android, 3G mobile',
-    backup: 'USB, Network',
-    videoout: 'HDMI, VGA',
-  },
-  {
-    cat: 1,
-    _id: 'srd-482',
-    imageUrl: 'img/products/srd-482-2.jpg',
-    name: 'SRD-482 (4ch)',
-    brand: 'Samsung',
-    type: 'HD-SDI',
-    channel: 4,
-    remote: 'LAN, ie, iPhone, iPad, Android, 3G mobile',
-    backup: 'USB, Network',
-    videoout: 'HDMI, VGA',
-  },
-]
+const tHead = ["Name", "Price", "Type", "Action"];
 
-let tHead = [
-  'Image',
-  'Model',
-  'Brand',
-  'Type',
-  'Channel',
-  'Remote',
-  'Backup',
-  'HDD',
-  'Video output',
-  'Delete',
-  'Edit',
-]
+const col = ["name", "price", "type", "action"];
 
-let col = [
-  'imageUrl',
-  'name',
-  'brand',
-  'type',
-  'channel',
-  'remote',
-  'backup',
-  'HDD',
-  'videoout',
-  'delete',
-  'edit',
-]
+class Action extends Component {
+  constructor(props) {
+    super(props);
+    this.deleteItem = this.deleteItem.bind(this);
+  }
+
+  deleteItem() {
+    console.log("delete is not implemented");
+  }
+  
+  render() {
+    return (
+      <td>
+        {/* <Link to={`/admin/users/edit?_id=${this.props.rowData._id}`}> */}
+        <button className="btn btn-warning">Edit</button>
+        {/* </Link> */}
+        <button className="btn btn-danger" onClick={this.deleteItem}>
+          Delete
+        </button>
+      </td>
+    );
+  }
+}
 
 export class Product extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: []
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get("/product")
+      .then(res => this.setState({ products: res.data }))
+      .catch(err => console.log(err));
+  }
+
   render() {
     return (
       <div className="panel panel-primary">
@@ -64,24 +52,19 @@ export class Product extends Component {
           <span>Product</span>
         </div>
         <div className="panel-body">
-          <h1>TESTING MODULE</h1>
           List all the product
           <SortableTbl
-            tblData={MyData}
+            tblData={this.state.products}
             tHead={tHead}
-            // customTd={[
-            //       {custd: BaseProductTblImageComponent, keyItem: "imageUrl"},
-            //       {custd: BaseProductEditComponent, keyItem: "edit"},
-            //       {custd: BaseProductDeleteComponent, keyItem: "delete"}
-            //       ]}
+            customTd={[{ custd: Action, keyItem: "action" }]}
             dKey={col}
             search={true}
             defaultCSS={true}
           />
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Product
+export default Product;
