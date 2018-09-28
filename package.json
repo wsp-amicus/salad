@@ -40,6 +40,7 @@
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
+    "prettier": "^1.14.3",
     "promise": "8.0.1",
     "prop-types": "^15.6.2",
     "query-string": "^5.1.1",
@@ -71,7 +72,8 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "testcafe": "testcafe chrome test/AmicusTest.test.js",
-    "deploy": "deploy/deploy.sh"
+    "deploy": "deploy/deploy.sh",
+    "format": "prettier --print-width 80 --no-semi --single-quote --trailing-comma es5 --write src/**/*.js"
   },
   "jest": {
     "collectCoverageFrom": [
