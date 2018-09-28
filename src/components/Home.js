@@ -5,11 +5,7 @@ import { Fade } from 'react-bootstrap'
 import cover from '../static/cover.jpg'
 import '../styles/Home.css'
 
-const slogans = [
-  'Custom Your Owns.',
-  'More Than Just a Salad.',
-  'Salad Evolution.',
-]
+const slogans = ['Custom Your Owns.', 'More Than Just a Salad.', 'Salad Evolution.']
 
 export default class Home extends Component {
   constructor(props) {
@@ -22,10 +18,7 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    this.interval = setInterval(
-      () => this.setState({ open: !this.state.open }),
-      4000
-    )
+    this.interval = setInterval(() => this.setState({ open: !this.state.open }), 4000)
   }
 
   componentDidUpdate() {
@@ -48,11 +41,7 @@ export default class Home extends Component {
   render() {
     return (
       <div className="home">
-        <Parallax
-          bgImage={cover}
-          strength={500}
-          style={{ height: this.props.height * 0.85 }}
-        >
+        <Parallax bgImage={cover} strength={500} style={{ height: this.props.height * 0.85 }}>
           <div
             className="cover"
             style={{

@@ -33,6 +33,7 @@ app.get('/test', (req, res) => res.send('You are now connected with backend !'))
 // register route in app
 app.use('/users', require('./routes/users'))
 app.use('/dashboard', require('./routes/dashboard'))
+app.use('/product', require('./routes/product'))
 
 // use this in production only
 if(process.env.NODE_ENV === 'production') {

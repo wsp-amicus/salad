@@ -6,15 +6,8 @@ class Loading extends Component {
     return (
       <div style={{ backgroundColor: 'black', width: '100%', height: '100vh' }}>
         <div className="center-on-screen">
-          <img
-            src={transparent_logo}
-            alt="logo"
-            style={{ width: '100%', height: 'auto' }}
-          />
-          <div
-            className="text-center loading-animate"
-            style={{ color: 'white' }}
-          >
+          <img src={transparent_logo} alt="logo" style={{ width: '100%', height: 'auto' }} />
+          <div className="text-center loading-animate" style={{ color: 'white' }}>
             Loading . . .
           </div>
         </div>

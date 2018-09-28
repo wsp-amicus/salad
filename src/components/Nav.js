@@ -25,22 +25,14 @@ class NavBar extends Component {
 
   handelScroll() {
     const scroll = window.scrollY
-    if (scroll <= 200 && !this.state.transparent)
-      this.setState({ transparent: true })
-    else if (scroll > 200 && this.state.transparent)
-      this.setState({ transparent: false })
+    if (scroll <= 200 && !this.state.transparent) this.setState({ transparent: true })
+    else if (scroll > 200 && this.state.transparent) this.setState({ transparent: false })
   }
 
   render() {
     const currentURL = window.location.pathname
-    const barColor = `${
-      this.state.transparent && currentURL === '/'
-        ? 'transparent'
-        : 'non-transparent'
-    }`
-    const linkColor = `${
-      this.state.transparent && currentURL === '/' ? 'white' : ''
-    }`
+    const barColor = `${this.state.transparent && currentURL === '/' ? 'transparent' : 'non-transparent'}`
+    const linkColor = `${this.state.transparent && currentURL === '/' ? 'white' : ''}`
     return (
       <div className="bar wrapper">
         <Navbar inverse collapseOnSelect className={barColor}>
@@ -70,10 +62,7 @@ class NavBar extends Component {
                   <DropdownButton
                     title={
                       <div>
-                        <Glyphicon
-                          glyph="user"
-                          style={{ marginRight: '10px' }}
-                        />
+                        <Glyphicon glyph="user" style={{ marginRight: '10px' }} />
                         {this.props.user.username}
                       </div>
                     }
@@ -88,9 +77,7 @@ class NavBar extends Component {
                     <li
                       role="presentation"
                       style={{
-                        background: this.state.transparent
-                          ? 'transparent'
-                          : '#222',
+                        background: this.state.transparent ? 'transparent' : '#222',
                       }}
                     >
                       <Link role="menuitem" tabIndex="-1" to="/users/logout">

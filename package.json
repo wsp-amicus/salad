@@ -73,7 +73,7 @@
     "test": "node scripts/test.js --env=jsdom",
     "testcafe": "testcafe chrome test/AmicusTest.test.js",
     "deploy": "deploy/deploy.sh",
-    "format": "prettier --print-width 80 --no-semi --single-quote --trailing-comma es5 --write src/**/*.js"
+    "format": "prettier --print-width 120 --no-semi --single-quote --trailing-comma es5 --write src/**/*.js"
   },
   "jest": {
     "collectCoverageFrom": [
