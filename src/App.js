@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Axios from 'axios'
-import './styles/App.css';
+import './styles/App.css'
 import NotFound from './components/NotFound'
 import Home from './components/Home'
 import Footer from './components/Footer'
@@ -17,18 +17,18 @@ import Cookies from 'js-cookie'
 
 class App extends Component {
   constructor(props) {
-    super(props);
-    this.state = { height: 0, loaded: false };
+    super(props)
+    this.state = { height: 0, loaded: false }
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
     this.verifyLogin = this.verifyLogin.bind(this)
   }
 
   componentDidMount() {
-    this.updateWindowDimensions();
+    this.updateWindowDimensions()
     window.addEventListener('resize', this.updateWindowDimensions)
 
     // test api
-    Axios.get('/test').then((res) => console.log(res.data))
+    Axios.get('/test').then(res => console.log(res.data))
 
     this.verifyLogin()
   }
@@ -38,8 +38,7 @@ class App extends Component {
   }
 
   updateWindowDimensions() {
-    if (this.state.height === 0)
-      this.setState({ height: window.innerHeight });
+    if (this.state.height === 0) this.setState({ height: window.innerHeight })
   }
 
   async verifyLogin() {
@@ -47,55 +46,75 @@ class App extends Component {
       const uid = Cookies.get('amicus-salad-uid')
       if (uid) {
         await Axios.post('/users/verification', {
-          uid: uid
-        }).then((res) => {
-          this.setState({
-            user: res.data
+          uid: uid,
+        })
+          .then(res => {
+            this.setState({
+              user: res.data,
+            })
           })
-        }).catch((error) => console.log(error))
+          .catch(error => console.log(error))
       } else {
         this.setState({ user: null })
       }
     } finally {
-      this.setState({loaded: true})
+      this.setState({ loaded: true })
     }
   }
 
   render() {
     const adminRoute = adminRoutes.map((item, id) => {
       let component = null
-      if(!this.state.loaded) {
+      if (!this.state.loaded) {
         // loading user or user is not log-in
         component = Loading
-      } else if(!this.state.user) {
+      } else if (!this.state.user) {
         // user is not log in redirect to login
         component = () => <Login verifyLogin={this.verifyLogin} />
-      } else if(this.state.user.permission < item.permission) {
+      } else if (this.state.user.permission < item.permission) {
         // permission deny couldn't open page
         component = NotFound
       } else {
         // you have authourize to access page
         component = () => <Admin user={this.state.user}>{item.component}</Admin>
       }
-      return <Route key={`${id}-router`} exact={item.exact} path={item.path} component={component} />
+      return (
+        <Route
+          key={`${id}-router`}
+          exact={item.exact}
+          path={item.path}
+          component={component}
+        />
+      )
     })
     return (
       <Router>
         <div>
-          {
-            window.location.pathname.includes('/admin') ?
-            null
-            :
+          {window.location.pathname.includes('/admin') ? null : (
             <NavBar user={this.state.user} />
-          }
-          <div className={`${window.location.pathname.includes('/admin') ? '' : 'main'}`}>
+          )}
+          <div
+            className={`${
+              window.location.pathname.includes('/admin') ? '' : 'main'
+            }`}
+          >
             <Switch>
-              <Route exact path="/" component={() => <Home height={this.state.height} />} />
+              <Route
+                exact
+                path="/"
+                component={() => <Home height={this.state.height} />}
+              />
 
               {/* Users */}
               <Route path="/users/register" component={Register} />
-              <Route path="/users/login" component={() => <Login verifyLogin={this.verifyLogin} />} />
-              <Route path='/users/logout' component={() => <Logout verifyLogin={this.verifyLogin} />} />
+              <Route
+                path="/users/login"
+                component={() => <Login verifyLogin={this.verifyLogin} />}
+              />
+              <Route
+                path="/users/logout"
+                component={() => <Logout verifyLogin={this.verifyLogin} />}
+              />
 
               {/* Admin */}
               {adminRoute}
@@ -104,19 +123,16 @@ class App extends Component {
               <Route component={NotFound} />
             </Switch>
           </div>
-          {
-            window.location.pathname.includes('/admin') ?
-              null
-              :
-              <div>
-                <Footer />
-                <Copyright />
-              </div>
-          }
+          {window.location.pathname.includes('/admin') ? null : (
+            <div>
+              <Footer />
+              <Copyright />
+            </div>
+          )}
         </div>
-      </Router >
-    );
+      </Router>
+    )
   }
 }
 
-export default App;
+export default App

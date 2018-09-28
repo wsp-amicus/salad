@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 
 export class Create extends Component {
   render() {
-    return (
-      <div>
-        Create product
-      </div>
-    )
+    return <div>Create product</div>
   }
 }
 

@@ -20,18 +20,20 @@ export class Login extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
     this.setState({ loading: true })
     Axios.post('/users/login', {
       username: this.state.username,
-      password: this.state.password
-    }).then((res) => {
-      Cookies.set('amicus-salad-uid', res.data._id, { expires: 1 })
-      this.setState({ redirect: true, loading: false })
-      this.props.verifyLogin()
-    }).catch((err) => {
-      this.setState({ error: err.response.data, loading: false })
+      password: this.state.password,
     })
+      .then(res => {
+        Cookies.set('amicus-salad-uid', res.data._id, { expires: 1 })
+        this.setState({ redirect: true, loading: false })
+        this.props.verifyLogin()
+      })
+      .catch(err => {
+        this.setState({ error: err.response.data, loading: false })
+      })
   }
 
   render() {
@@ -40,32 +42,58 @@ export class Login extends Component {
     }
     const username = queryString.parse(window.location.search).username
     return (
-      <div className='container'>
-        {
-          username ?
-            <div className="alert alert-success text-center">You have successfully registered</div>
-            :
-            null
-        }
-        <h1 className='text-center login-header'>Login</h1>
+      <div className="container">
+        {username ? (
+          <div className="alert alert-success text-center">
+            You have successfully registered
+          </div>
+        ) : null}
+        <h1 className="text-center login-header">Login</h1>
         <div id="login-form">
-          {
-            !this.state.error ?
-              null
-              :
-              <div className={`alert alert-danger warning`}>{this.state.error}</div>
-          }
+          {!this.state.error ? null : (
+            <div className={`alert alert-danger warning`}>
+              {this.state.error}
+            </div>
+          )}
           <form>
             <div className="form-group">
               <label>Username</label>
-              <input type="text" className="form-control" id="username" placeholder="example" autoComplete="username" value={this.state.username} name="username" onChange={this.handleInputChange.bind(this)} />
+              <input
+                type="text"
+                className="form-control"
+                id="username"
+                placeholder="example"
+                autoComplete="username"
+                value={this.state.username}
+                name="username"
+                onChange={this.handleInputChange.bind(this)}
+              />
             </div>
 
             <div className="form-group">
               <label>Password</label>
-              <input type="password" className="form-control" id="password" placeholder="......" autoComplete="new-password" value={this.state.password} name="password" onChange={this.handleInputChange.bind(this)} />
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                placeholder="......"
+                autoComplete="new-password"
+                value={this.state.password}
+                name="password"
+                onChange={this.handleInputChange.bind(this)}
+              />
             </div>
-            {!this.state.loading ? <button type="submit" className="btn btn-primary" onClick={this.handleSubmit.bind(this)}>Submit</button> : <div className="loader"></div>}
+            {!this.state.loading ? (
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={this.handleSubmit.bind(this)}
+              >
+                Submit
+              </button>
+            ) : (
+              <div className="loader" />
+            )}
           </form>
         </div>
         <hr />
