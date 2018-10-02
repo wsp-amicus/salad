@@ -37,3 +37,9 @@ to start back-end
 to run whole server
 
 ``` npm run start ```
+
+# Contributors
+- Thitiwat Thongbor 5910546384
+- Chawakorn Suphepre 5910545671
+- Patcharapol Nirunpornputta 5910545761
+- Jirayu Laungwilawan 5910546635

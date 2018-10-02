@@ -8,7 +8,6 @@ echo '${USERNAME}: git pull';
 git pull;
 echo '${USERNAME}: npm install';
 npm install;
-echo '${USERNAME}: kill old process, sudo kill \$(sudo lsof -t -i :5555 & 5556)';
 sudo kill \$(sudo lsof -t -i :5555);
 sudo kill \$(sudo lsof -t -i :5556);
 echo '${USERNAME}: building production file'
