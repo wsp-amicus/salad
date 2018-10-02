@@ -1,6 +1,6 @@
 #!/bin/bash
 USERNAME=wsp
-HOSTS="wsp.thitgorn.com"
+HOSTS="wsp2.thitgorn.com"
 SCRIPT="
 echo '${USERNAME}: cd salad';
 cd salad;
@@ -18,5 +18,5 @@ PORT=5555 NODE_ENV='production' node server/app.js;
 "
 
 echo "you are about to deploy app to ${USERNAME}@${HOSTS}"
-ssh -l ${USERNAME} ${HOSTS} "${SCRIPT}"
+ssh -p 2920 -l ${USERNAME} ${HOSTS} "${SCRIPT}"
 
