@@ -24,6 +24,9 @@ export default [
     permission: 100,
   },
   {
-    path: '/admin/products/edit', component: EditProduct, exact: false, permission: 100
-  }
+    path: '/admin/products/edit',
+    component: EditProduct,
+    exact: false,
+    permission: 100,
+  },
 ]
