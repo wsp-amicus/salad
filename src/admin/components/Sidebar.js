@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import MetisMenu from 'react-metismenu';
-import RouterLink from 'react-metismenu-router-link';
+import MetisMenu from 'react-metismenu'
+import RouterLink from 'react-metismenu-router-link'
 import 'react-metismenu/dist/react-metismenu-standart.min.css'
 
 const content = [
@@ -15,27 +15,33 @@ const content = [
     to: '/admin/users',
   },
   {
-      icon: 'shopping-basket',
-      label: 'Product',
-      content: [
-        {
-          icon: 'eye',
-          label: 'View',
-          to: '/admin/products'
-        },
-        {
-          icon: 'plus',
-          label: 'Add',
-          to: '/admin/products/create',
-        },
-      ]
-  }
-];
+    icon: 'shopping-basket',
+    label: 'Product',
+    content: [
+      {
+        icon: 'eye',
+        label: 'View',
+        to: '/admin/products',
+      },
+      {
+        icon: 'plus',
+        label: 'Add',
+        to: '/admin/products/create',
+      },
+    ],
+  },
+]
 
 export class Sidebar extends Component {
   render() {
     return (
-        <div><MetisMenu content={content} LinkComponent={RouterLink} activeLinkFromLocation/></div>
+      <div>
+        <MetisMenu
+          content={content}
+          LinkComponent={RouterLink}
+          activeLinkFromLocation
+        />
+      </div>
     )
   }
 }

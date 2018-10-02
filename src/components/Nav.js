@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import transparent_logo from '../static/small_transparent_logo.png'
 import { Link } from 'react-router-dom'
 import { DropdownButton, Glyphicon, Navbar } from 'react-bootstrap'
@@ -25,10 +25,8 @@ class NavBar extends Component {
 
   handelScroll() {
     const scroll = window.scrollY
-    if (scroll <= 200 && !this.state.transparent)
-      this.setState({ transparent: true })
-    else if (scroll > 200 && this.state.transparent)
-      this.setState({ transparent: false })
+    if (scroll <= 200 && !this.state.transparent) this.setState({ transparent: true })
+    else if (scroll > 200 && this.state.transparent) this.setState({ transparent: false })
   }
 
   render() {
@@ -36,7 +34,7 @@ class NavBar extends Component {
     const barColor = `${this.state.transparent && currentURL === '/' ? 'transparent' : 'non-transparent'}`
     const linkColor = `${this.state.transparent && currentURL === '/' ? 'white' : ''}`
     return (
-      <div className='bar wrapper'>
+      <div className="bar wrapper">
         <Navbar inverse collapseOnSelect className={barColor}>
           <Navbar.Header>
             <Link to="/">
@@ -45,41 +43,62 @@ class NavBar extends Component {
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
-            {!this.props.user ?
+            {!this.props.user ? (
               <ul className="nav navbar-nav navbar-right">
                 <li className="presentation login">
-                  <Link className={`${linkColor}`} to="/users/login">Login</Link>
+                  <Link className={`${linkColor}`} to="/users/login">
+                    Login
+                  </Link>
                 </li>
                 <li className="presentation login">
-                  <Link className={`${linkColor}`} to="/users/register">Register</Link>
+                  <Link className={`${linkColor}`} to="/users/register">
+                    Register
+                  </Link>
                 </li>
               </ul>
-              :
+            ) : (
               <ul className="nav navbar-nav navbar-right">
-                <li className='presentation login d-none d-md-block'>
+                <li className="presentation login d-none d-md-block">
                   <DropdownButton
-                    title={<div><Glyphicon glyph="user" style={{ marginRight: '10px' }} />{this.props.user.username}</div>}
+                    title={
+                      <div>
+                        <Glyphicon glyph="user" style={{ marginRight: '10px' }} />
+                        {this.props.user.username}
+                      </div>
+                    }
                     id="0"
                     noCaret
                     open={this.state.open}
-                    onToggle={() => { }}
+                    onToggle={() => {}}
                     onMouseOver={() => this.setState({ open: true })}
                     onMouseLeave={() => this.setState({ open: false })}
                     className="dropdown-button"
                   >
-                    <li role="presentation" style={{ background: this.state.transparent ? 'transparent' : '#222' }}>
-                      <Link role="menuitem" tabIndex="-1" to="/users/logout">Logout</Link>
+                    <li
+                      role="presentation"
+                      style={{
+                        background: this.state.transparent ? 'transparent' : '#222',
+                      }}
+                    >
+                      <Link role="menuitem" tabIndex="-1" to="/users/logout">
+                        Logout
+                      </Link>
                     </li>
                   </DropdownButton>
                 </li>
-                <li className='presentation login d-md-none'>
-                  <Link className={`${linkColor}`} to="/"><Glyphicon glyph="user" style={{ marginRight: '10px' }} />{this.props.user.username}</Link>
+                <li className="presentation login d-md-none">
+                  <Link className={`${linkColor}`} to="/">
+                    <Glyphicon glyph="user" style={{ marginRight: '10px' }} />
+                    {this.props.user.username}
+                  </Link>
                 </li>
                 <li className="presentation login d-md-none">
-                  <Link className={`${linkColor}`} to="/users/logout">Logout</Link>
+                  <Link className={`${linkColor}`} to="/users/logout">
+                    Logout
+                  </Link>
                 </li>
               </ul>
-            }
+            )}
           </Navbar.Collapse>
         </Navbar>
         <style>{`

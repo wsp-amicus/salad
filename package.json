@@ -29,6 +29,7 @@
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.4.0",
     "express": "^4.16.3",
+    "express-fileupload": "^1.0.0-alpha.1",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
     "fs-extra": "3.0.1",
@@ -36,10 +37,12 @@
     "jest": "20.0.4",
     "js-cookie": "^2.2.0",
     "mdbreact": "^4.7.1",
+    "moment": "^2.22.2",
     "mongoose": "^5.2.14",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
+    "prettier": "^1.14.3",
     "promise": "8.0.1",
     "prop-types": "^15.6.2",
     "query-string": "^5.1.1",
@@ -48,6 +51,7 @@
     "react-bootstrap": "^0.32.4",
     "react-dev-utils": "^5.0.2",
     "react-dom": "^16.5.0",
+    "react-images-upload": "^1.2.3",
     "react-metismenu": "^1.4.0",
     "react-metismenu-router-link": "^2.1.0",
     "react-parallax": "^1.8.0",
@@ -71,7 +75,8 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "testcafe": "testcafe chrome test/AmicusTest.test.js",
-    "deploy": "deploy/deploy.sh"
+    "deploy": "deploy/deploy.sh",
+    "format": "prettier --print-width 120 --no-semi --single-quote --trailing-comma es5 --write src/**/*.js"
   },
   "jest": {
     "collectCoverageFrom": [

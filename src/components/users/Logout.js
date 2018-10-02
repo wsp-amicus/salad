@@ -4,14 +4,12 @@ import Cookies from 'js-cookie'
 
 export class Logout extends Component {
   componentDidMount() {
-    Cookies.remove('amicus-salad-uid');
+    Cookies.remove('amicus-salad-uid')
     this.props.verifyLogin()
   }
 
   render() {
-    return (
-        <Redirect to="/" />
-    )
+    return <Redirect to="/" />
   }
 }
 
