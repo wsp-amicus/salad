@@ -17,3 +17,10 @@ sudo apt-get install certbot;
 
 # register ssl certificate
 sudo certbot certonly --manual
+
+# $[HTTP]
+# sudo iptables -t nat -I OUTPUT -p tcp -d 127.0.0.1 --dport 80 -j REDIRECT --to-ports 5555
+# sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 5555
+# $[HTTPS]
+# sudo iptables -t nat -I OUTPUT -p tcp -d 127.0.0.1 --dport 443 -j REDIRECT --to-ports 5556
+# sudo iptables -t nat -I PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 5556
