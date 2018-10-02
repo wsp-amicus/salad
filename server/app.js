@@ -59,8 +59,8 @@ if(process.env.NODE_ENV === 'production') {
         res.sendFile(path.join(__dirname + '/../build/index.html'))
     })
 
-    # certificate part HTTPS
-    Certificate
+    // # certificate part HTTPS
+    // Certificate
     const privateKey = fs.readFileSync('/etc/letsencrypt/live/wsp.thitgorn.com/privkey.pem', 'utf8')
     const certificate = fs.readFileSync('/etc/letsencrypt/live/wsp.thitgorn.com/cert.pem', 'utf8')
     const ca = fs.readFileSync('/etc/letsencrypt/live/wsp.thitgorn.com/chain.pem', 'utf8')
