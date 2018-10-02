@@ -54,6 +54,12 @@ const productController = {
         })
 
         return pathUrl
+    },
+    delete(req,res) {
+        Product.deleteOne(req.query, (err) => {
+            if(err) throw err
+            res.status(200).send('done')
+        })
     }
 }
 
