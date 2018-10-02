@@ -24,3 +24,6 @@ sudo certbot certonly --manual
 # $[HTTPS]
 # sudo iptables -t nat -I OUTPUT -p tcp -d 127.0.0.1 --dport 443 -j REDIRECT --to-ports 5556
 # sudo iptables -t nat -I PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 5556
+
+# chmod 755 /etc/letsencrypt/live/
+# chmod 755 /etc/letsencrypt/archive/
