@@ -13,7 +13,6 @@ test('RegisterTest', async t => {
         .typeText(Selector('div').withText('Password').nth(5).find('.form-control'), '1234')
         .typeText(Selector('div').withText('Confirm password').nth(5).find('.form-control'), '1234')
         .click(Selector('button').withText('Submit'))
-        .typeText(Selector('#username'), 'test1')
         .typeText(Selector('#password'), '1234')
         .click(Selector('button').withText('Submit'))
         .expect(Selector('a').withText('test1').textContent).eql("test1");
