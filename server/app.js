@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const config = require('../config/database')
 const app = express()
+const fileUpload = require('express-fileupload');
 
 let port = process.env.PORT || 5000
 
@@ -28,10 +29,15 @@ app.use(bodyParser.json())
 //support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use(fileUpload())
+
 app.get('/test', (req, res) => res.send('You are now connected with backend !'))
 
 // register route in app
 app.use('/users', require('./routes/users'))
+app.use('/dashboard', require('./routes/dashboard'))
+app.use('/product', require('./routes/product'))
+app.use('/storage', require('./routes/storage'))
 
 // use this in production only
 if(process.env.NODE_ENV === 'production') {

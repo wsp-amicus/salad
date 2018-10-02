@@ -6,8 +6,8 @@ export default class Home extends Component {
   render() {
     const line = (
       <Col md={12}>
-        <div className="outset"></div>
-       </Col>
+        <div className="outset" />
+      </Col>
     )
     return (
       <div className="container font textcolor bgcolor padding">
@@ -15,20 +15,16 @@ export default class Home extends Component {
           <Row className="show-grid">
             <Col md={3}>
               <strong>Amicus</strong>
-              <Row>
-                {line}
-              </Row>
+              <Row>{line}</Row>
               <Row>
                 <Col md={12}>
-                <p>For salad lover from salad lover</p>
+                  <p>For salad lover from salad lover</p>
                 </Col>
               </Row>
             </Col>
             <Col md={3}>
               <strong>Product</strong>
-              <Row>
-                {line}
-              </Row>
+              <Row>{line}</Row>
               <Row>
                 <Col md={12}>
                   <p>Salad</p>
@@ -37,9 +33,7 @@ export default class Home extends Component {
             </Col>
             <Col md={3}>
               <strong>Useful Link</strong>
-              <Row>
-                {line}
-              </Row>
+              <Row>{line}</Row>
               <Row>
                 <Col md={12}>
                   <p>Test</p>
@@ -48,9 +42,7 @@ export default class Home extends Component {
             </Col>
             <Col md={3}>
               <strong>Contact</strong>
-              <Row>
-                {line}
-              </Row>
+              <Row>{line}</Row>
               <Row>
                 <Col md={12}>
                   <p>gear2727@gmail.com</p>

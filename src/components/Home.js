@@ -5,35 +5,32 @@ import { Fade } from 'react-bootstrap'
 import cover from '../static/cover.jpg'
 import '../styles/Home.css'
 
-const slogans = [
-  'Custom Your Owns.', 'More Than Just a Salad.', 'Salad Evolution.'
-]
+const slogans = ['Custom Your Owns.', 'More Than Just a Salad.', 'Salad Evolution.']
 
 export default class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
       open: true,
-      slogan: slogans[0]
+      slogan: slogans[0],
     }
     this.changeSlogan = this.changeSlogan.bind(this)
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => this.setState({ open: !this.state.open }), 4000);
+    this.interval = setInterval(() => this.setState({ open: !this.state.open }), 4000)
   }
 
   componentDidUpdate() {
-    clearInterval(this.interval);
+    clearInterval(this.interval)
     this.interval = setInterval(() => {
-      if (!this.state.open)
-        this.changeSlogan()
+      if (!this.state.open) this.changeSlogan()
       this.setState({ open: !this.state.open })
     }, this.state.open ? 4000 : 500)
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    clearInterval(this.interval)
   }
 
   changeSlogan() {
@@ -45,7 +42,13 @@ export default class Home extends Component {
     return (
       <div className="home">
         <Parallax bgImage={cover} strength={500} style={{ height: this.props.height * 0.85 }}>
-          <div className="cover" style={{ paddingTop: this.props.height * 0.3, paddingBottom: this.props.height * 0.4 }}>
+          <div
+            className="cover"
+            style={{
+              paddingTop: this.props.height * 0.3,
+              paddingBottom: this.props.height * 0.4,
+            }}
+          >
             <h1>Amicus</h1>
             <Fade in={this.state.open}>
               <p>{this.state.slogan}</p>

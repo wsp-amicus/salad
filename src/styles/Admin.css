@@ -1,0 +1,27 @@
+#admin {
+    margin: 0;
+    background-color:rgb(48,51,54);
+    color: black;
+    overflow: hidden;
+}
+
+#admin .navbar {
+    border-radius: 0;
+    background-color: rgb(48,51,54);
+    border: 1px solid black;
+    margin: 0;
+}
+
+@media (min-width:992px) {
+    .metismenu {
+        min-height: 100vh;
+    }
+}
+
+.content {
+    margin-top: 20px;
+}
+
+.sortable-table .table tbody tr td {
+    text-align: center;
+}

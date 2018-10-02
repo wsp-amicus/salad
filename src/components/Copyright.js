@@ -7,9 +7,10 @@ export default class Home extends Component {
     return (
       <div className="container font copyright">
         <Grid>
-        <Row className="show-grid">
+          <Row className="show-grid">
             <div className="center">
-              &copy;{(new Date().getFullYear())} copyright: Amicus 
+              &copy;
+              {new Date().getFullYear()} copyright: Amicus
             </div>
           </Row>
         </Grid>
