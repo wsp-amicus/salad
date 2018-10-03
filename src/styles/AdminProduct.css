@@ -1,0 +1,17 @@
+#product-admin .product-image {
+    border: 1px solid red;
+    margin: auto;
+    margin-top: 2rem;
+    width: 150px;
+    height: auto;
+    position: relative;
+}
+
+#product-admin .x{
+    position: absolute;
+    right: -1.5rem;
+    top: -2rem;
+    font-size: 3rem;
+    color: red;
+    cursor: pointer;
+}

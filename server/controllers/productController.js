@@ -1,5 +1,5 @@
 const Product = require('../models/product')
-const fs = require('fs');
+const fs = require('fs')
 const moment = require('moment')
 
 const productController = {
@@ -31,28 +31,27 @@ const productController = {
         res.status(200).send('success')
     },
     upload(files) {
-        var keys = Object.keys(files);
+        var keys = Object.keys(files)
 
-        const dir = 'storage/image'
+        var dir = 'storage/image'
         if (!fs.existsSync('storage')) {
-            fs.mkdirSync('storage');
+            fs.mkdirSync('storage')
         }
 
         if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir);
+            fs.mkdirSync(dir)
         }
 
         let pathUrl = []
 
         keys.forEach((key) => {
-            const filename = (dir + '/' +  moment().format('MMMM-Do-YYYY-h:mm:ss[-]') + files[key].name).trim()
+            var filename = dir + '/' +  moment().format('MMMM-Do-YYYY-h:mm:ss[-]') + files[key].name
             fs.writeFile(filename, files[key].data, (err) => {
-                if (err) throw err;
-                console.log(files[key].name + ' has been saved!');
+                if (err) throw err
+                console.log(filename + ' has been saved!')
             })
             pathUrl.push(filename)
         })
-
         return pathUrl
     },
     delete(req,res) {
@@ -60,6 +59,21 @@ const productController = {
             if(err) throw err
             res.status(200).send('done')
         })
+    },
+    find(req,res) {
+        Product.findOne(req.query, (err, product) => {
+            if(err) {
+                res.status(500).send('Error on query.')
+            }
+            if(!product) {
+                res.status(404).send('Product is not found')
+            }
+            res.status(200).send(product)
+        })
+    },
+    edit(req,res) {
+        console.log(req.body);
+        res.send('done')
     }
 }
 
