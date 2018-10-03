@@ -42,6 +42,9 @@ export class Create extends Component {
   }
 
   handleSubmit(e) {
+    if(this.state.selectedOption===null || this.state.name === '' || this.state.price === '') {
+      return
+    }
     e.preventDefault()
     let formData = new FormData()
     formData.append('name', this.state.name)
@@ -89,6 +92,7 @@ export class Create extends Component {
           </div>
           <div className="row">
             <div className="col-md-6">
+              <label>Image</label>
               <ImageUploader
                 withIcon
                 buttonText="Choose images"
@@ -99,6 +103,7 @@ export class Create extends Component {
                 singleImage
                 label="Max file size: 5mb, accepted jpg png jpeg"
               />
+              <small>Warning: space on file name is not allowed</small>
             </div>
           </div>
         </div>
