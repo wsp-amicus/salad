@@ -72,8 +72,25 @@ const productController = {
         })
     },
     edit(req,res) {
-        console.log(req.body);
-        res.send('done')
+        let name = req.body.name
+        let price = parseInt(req.body.price,10)
+        let type = req.body.type
+        let imageUrl = req.files
+        if(imageUrl) {
+            imageUrl = productController.upload(imageUrl)
+        }
+        imageUrl = [ ...imageUrl, req.body.oldPictures ]
+        
+        Product.findOne({_id: req.body._id}, (err, product) => {
+            if(err) throw err
+            product.name = name
+            product.price = price
+            product.type = type
+            product.imageUrl = imageUrl
+            product.save()
+        })
+        
+        res.status(200).send('success')
     }
 }
 
