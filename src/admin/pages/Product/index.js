@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import SortableTbl from "react-sort-search-table";
 import axios from "axios";
+import { Link } from 'react-router-dom'
+import { Modal, Button } from 'react-bootstrap'
 
 const tHead = ["Name", "Price", "Type", "Action"];
 
@@ -13,15 +15,15 @@ class Action extends Component {
   }
 
   deleteItem() {
-    console.log("delete is not implemented");
+    this.props.show(this.props.rowData._id)
   }
   
   render() {
     return (
       <td>
-        {/* <Link to={`/admin/users/edit?_id=${this.props.rowData._id}`}> */}
-        <button className="btn btn-warning">Edit</button>
-        {/* </Link> */}
+        <Link to={`/admin/products/edit?_id=${this.props.rowData._id}`}>
+          <button className="btn btn-warning">Edit</button>
+        </Link>
         <button className="btn btn-danger" onClick={this.deleteItem}>
           Delete
         </button>
@@ -34,8 +36,30 @@ export class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: []
+      products: [],
+      deleteModal: false,
+      deleteId: ''
     };
+
+    this.handleClose = this.handleClose.bind(this)
+    this.handleShow = this.handleShow.bind(this)
+    this.deleteItem = this.deleteItem.bind(this)
+  }
+
+  handleClose() {
+    this.setState({ deleteModal: false });
+  }
+
+  handleShow(id) {
+    this.setState({ deleteModal: true, deleteId: id });
+  }
+
+  deleteItem() {
+    axios
+      .delete('/product/delete?_id=' + this.state.deleteId)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+    window.location.reload()
   }
 
   componentDidMount() {
@@ -48,6 +72,16 @@ export class Product extends Component {
   render() {
     return (
       <div className="panel panel-primary">
+        <Modal show={this.state.deleteModal} onHide={this.handleClose}>
+            <Modal.Header>
+              <Modal.Title>Confirmation</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Are you sure to delete ?</Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.handleClose}>Close</Button>
+              <Button bsStyle="danger" onClick={this.deleteItem}>Delete</Button>
+            </Modal.Footer>
+        </Modal>
         <div className="panel-heading">
           <span>Product</span>
         </div>
@@ -56,7 +90,7 @@ export class Product extends Component {
           <SortableTbl
             tblData={this.state.products}
             tHead={tHead}
-            customTd={[{ custd: Action, keyItem: "action" }]}
+            customTd={[{ custd: (props) => <Action rowData={props.rowData} show={this.handleShow}/> , keyItem: "action" }]}
             dKey={col}
             search={true}
             defaultCSS={true}

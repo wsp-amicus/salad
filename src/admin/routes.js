@@ -3,6 +3,7 @@ import User from './pages/User'
 import UpdateUser from './pages/User/Update'
 import Product from './pages/Product'
 import CreateProduct from './pages/Product/Create'
+import EditProduct from './pages/Product/Edit'
 
 export default [
   { path: '/admin', component: Dashboard, exact: true, permission: 0 },
@@ -20,6 +21,12 @@ export default [
     path: '/admin/products/create',
     component: CreateProduct,
     exact: true,
+    permission: 100,
+  },
+  {
+    path: '/admin/products/edit',
+    component: EditProduct,
+    exact: false,
     permission: 100,
   },
 ]
