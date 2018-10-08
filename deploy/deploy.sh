@@ -6,8 +6,8 @@ echo '${USERNAME}: cd salad';
 cd salad;
 echo '${USERNAME}: git pull';
 git pull;
-echo '${USERNAME}: npm install';
-npm install;
+echo '${USERNAME}: npm install --only=prod';
+npm install --only=prod;
 sudo kill \$(sudo lsof -t -i :5555);
 sudo kill \$(sudo lsof -t -i :5556);
 echo '${USERNAME}: building production file'
