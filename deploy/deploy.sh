@@ -12,9 +12,9 @@ sudo kill \$(sudo lsof -t -i :5555);
 sudo kill \$(sudo lsof -t -i :5556);
 echo '${USERNAME}: building production file'
 npm run build;
+../sshalert.sh;
 echo '${USERNAME}: Server is started CTRL + C to leave';
 PORT=5555 NODE_ENV='production' node server/app.js;
-../sshalert.sh;
 "
 
 echo "you are about to deploy app to ${USERNAME}@${HOSTS}"
