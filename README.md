@@ -14,7 +14,7 @@
 - Mongo
 
 ### tools
-- Asana
+- Github project
 
 ### setup
 
@@ -25,6 +25,10 @@ To install dependency
 To run test
 
 ``` npm run test ```
+
+To run e2e test
+
+``` npm run testcafe ```
 
 To start front-end
 
