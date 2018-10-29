@@ -1,4 +1,4 @@
-#product-admin .product-image {
+#ingredient-admin .ingredient-image {
     margin: auto;
     margin-top: 2rem;
     width: 150px;
@@ -6,7 +6,7 @@
     position: relative;
 }
 
-#product-admin .x{
+#ingredient-admin .x{
     position: absolute;
     right: -1.5rem;
     top: -2rem;

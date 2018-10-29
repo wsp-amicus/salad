@@ -49,24 +49,24 @@ test('ChangeUserToAdmin', async t => {
         .click(Selector('button').withText('Edit'));
 });
 
-test('AddProductAndDelete', async t => {
+test('AddIngredientAndDelete', async t => {
     await t
         .typeText(Selector('#username'), 'pawan1234')
         .typeText(Selector('#password'), '123456789')
         .click(Selector('button').withText('Submit'))
-        .click(Selector('a').withText('Product'))
+        .click(Selector('a').withText('Ingredient'))
         .click(Selector('a').withText('Add'))
-        .typeText(Selector('[name="name"].form-control'), 'testProduct')
+        .typeText(Selector('[name="name"].form-control'), 'testIngredient')
         .click(Selector('.css-1rtrksz'))
         .click(Selector('#react-select-2-option-0'))
         .typeText(Selector('[name="price"].form-control'), '123')
         .click(Selector('button').withText('Submit'))
-        .typeText(Selector('.search'), 'testProduct')
+        .typeText(Selector('.search'), 'testIngredient')
         .pressKey('enter')
         .expect(Selector('.desc.col-sm-5.col-xs-12').find('div').withText('Page 1 of totals 1').textContent).eql("Page 1 of totals 1, totals 1 rows")
         .click(Selector('button').withText('Delete'))
         .click(Selector('.modal-footer').find('button').withText('Delete'))
-        .typeText(Selector('.search'), 'testProduct')
+        .typeText(Selector('.search'), 'testIngredient')
         .pressKey('enter')
         .expect(Selector('.desc.col-sm-5.col-xs-12').find('div').withText('Page 1 of totals 0').textContent).eql("Page 1 of totals 0, totals 0 rows");
 });

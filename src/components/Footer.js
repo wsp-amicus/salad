@@ -23,7 +23,7 @@ export default class Home extends Component {
               </Row>
             </Col>
             <Col md={3}>
-              <strong>Product</strong>
+              <strong>Ingredient</strong>
               <Row>{line}</Row>
               <Row>
                 <Col md={12}>

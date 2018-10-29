@@ -1,9 +1,9 @@
 import Dashboard from './pages/Dashboard'
 import User from './pages/User'
 import UpdateUser from './pages/User/Update'
-import Product from './pages/Product'
-import CreateProduct from './pages/Product/Create'
-import EditProduct from './pages/Product/Edit'
+import Ingredient from './pages/Ingredient'
+import CreateIngredient from './pages/Ingredient/Create'
+import EditIngredient from './pages/Ingredient/Edit'
 
 export default [
   { path: '/admin', component: Dashboard, exact: true, permission: 0 },
@@ -16,16 +16,16 @@ export default [
     permission: 0,
   },
 
-  { path: '/admin/products', component: Product, exact: true, permission: 50 },
+  { path: '/admin/ingredients', component: Ingredient, exact: true, permission: 50 },
   {
-    path: '/admin/products/create',
-    component: CreateProduct,
+    path: '/admin/ingredients/create',
+    component: CreateIngredient,
     exact: true,
     permission: 100,
   },
   {
-    path: '/admin/products/edit',
-    component: EditProduct,
+    path: '/admin/ingredients/edit',
+    component: EditIngredient,
     exact: false,
     permission: 100,
   },

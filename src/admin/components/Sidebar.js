@@ -16,17 +16,17 @@ const content = [
   },
   {
     icon: 'shopping-basket',
-    label: 'Product',
+    label: 'Ingredient',
     content: [
       {
         icon: 'eye',
         label: 'View',
-        to: '/admin/products',
+        to: '/admin/ingredients',
       },
       {
         icon: 'plus',
         label: 'Add',
-        to: '/admin/products/create',
+        to: '/admin/ingredients/create',
       },
     ],
   },

@@ -21,7 +21,7 @@ class Action extends Component {
   render() {
     return (
       <td>
-        <Link to={`/admin/products/edit?_id=${this.props.rowData._id}`}>
+        <Link to={`/admin/ingredients/edit?_id=${this.props.rowData._id}`}>
           <button className="btn btn-warning">Edit</button>
         </Link>
         <button className="btn btn-danger" onClick={this.deleteItem}>
@@ -32,11 +32,11 @@ class Action extends Component {
   }
 }
 
-export class Product extends Component {
+export class Ingredient extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: [],
+      ingredients: [],
       deleteModal: false,
       deleteId: ''
     };
@@ -56,7 +56,7 @@ export class Product extends Component {
 
   deleteItem() {
     axios
-      .delete('/product/delete?_id=' + this.state.deleteId)
+      .delete('/ingredient/delete?_id=' + this.state.deleteId)
       .then(res => console.log(res))
       .catch(err => console.log(err))
     window.location.reload()
@@ -64,8 +64,8 @@ export class Product extends Component {
 
   componentDidMount() {
     axios
-      .get("/product")
-      .then(res => this.setState({ products: res.data }))
+      .get("/ingredient")
+      .then(res => this.setState({ ingredients: res.data }))
       .catch(err => console.log(err));
   }
 
@@ -83,12 +83,12 @@ export class Product extends Component {
             </Modal.Footer>
         </Modal>
         <div className="panel-heading">
-          <span>Product</span>
+          <span>Ingredient</span>
         </div>
         <div className="panel-body">
-          List all the product
+          List all the ingredient
           <SortableTbl
-            tblData={this.state.products}
+            tblData={this.state.ingredients}
             tHead={tHead}
             customTd={[{ custd: (props) => <Action rowData={props.rowData} show={this.handleShow}/> , keyItem: "action" }]}
             dKey={col}
@@ -101,4 +101,4 @@ export class Product extends Component {
   }
 }
 
-export default Product;
+export default Ingredient;
