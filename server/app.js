@@ -38,7 +38,7 @@ app.get("/test", (req, res) =>
 // register route in app
 app.use("/users", require("./routes/users"));
 app.use("/dashboard", require("./routes/dashboard"));
-app.use("/ingredient", require("./routes/ingredient"));
+app.use("/ingredients", require("./routes/ingredient"));
 app.use("/storage", require("./routes/storage"));
 
 // use this in production only

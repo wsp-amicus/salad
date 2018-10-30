@@ -53,7 +53,7 @@ export class Create extends Component {
     this.state.pictures.forEach( (picture,index) => {
       formData.append('picture-' + index, picture)
     })
-    axios.post('/ingredient/create',
+    axios.post('/ingredients/create',
       formData
     ).then(res => this.setState({redirect: true})).catch(err => console.log(err))
   }
