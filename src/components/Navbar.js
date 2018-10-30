@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import transparent_logo from '../static/small_transparent_logo.png'
 import { Link } from 'react-router-dom'
-import { DropdownButton, Glyphicon, Navbar } from 'react-bootstrap'
-import '../styles/Nav.css'
+import {
+  DropdownButton,
+  Glyphicon,
+  Navbar,
+  Nav,
+  NavItem,
+  NavDropdown,
+  MenuItem
+} from 'react-bootstrap'
+import '../styles/Navbar.css'
 
 class NavBar extends Component {
   constructor(props) {
@@ -10,7 +18,8 @@ class NavBar extends Component {
     this.state = {
       transparent: true,
       redirect: '',
-      open: false,
+      userOpen: false,
+      menuOpen: false,
     }
     this.handleScroll = this.handelScroll.bind(this)
   }
@@ -43,22 +52,33 @@ class NavBar extends Component {
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
+            <Nav>
+              <NavItem>
+                <Link className={`${linkColor}`} to="/">
+                  Menu
+                </Link>
+              </NavItem>
+              <NavItem>
+                <Link className={`${linkColor}`} to="/">
+                  Custom
+                </Link>
+              </NavItem>
+            </Nav>
             {!this.props.user ? (
-              <ul className="nav navbar-nav navbar-right">
-                <li className="presentation login">
+              <Nav className="navbar-right">
+                <NavItem>
                   <Link className={`${linkColor}`} to="/users/login">
                     Login
                   </Link>
-                </li>
-                <li className="presentation login">
+                </NavItem>
+                <NavItem>
                   <Link className={`${linkColor}`} to="/users/register">
                     Register
                   </Link>
-                </li>
-              </ul>
+                </NavItem>
+              </Nav>
             ) : (
-              <ul className="nav navbar-nav navbar-right">
-                <li className="presentation login d-none d-md-block">
+                <Nav className="navbar-right">
                   <DropdownButton
                     title={
                       <div>
@@ -68,10 +88,10 @@ class NavBar extends Component {
                     }
                     id="0"
                     noCaret
-                    open={this.state.open}
-                    onToggle={() => {}}
-                    onMouseOver={() => this.setState({ open: true })}
-                    onMouseLeave={() => this.setState({ open: false })}
+                    open={this.state.userOpen}
+                    onToggle={() => { }}
+                    onMouseOver={() => this.setState({ userOpen: true })}
+                    onMouseLeave={() => this.setState({ userOpen: false })}
                     className="dropdown-button"
                   >
                     <li
@@ -85,20 +105,8 @@ class NavBar extends Component {
                       </Link>
                     </li>
                   </DropdownButton>
-                </li>
-                <li className="presentation login d-md-none">
-                  <Link className={`${linkColor}`} to="/">
-                    <Glyphicon glyph="user" style={{ marginRight: '10px' }} />
-                    {this.props.user.username}
-                  </Link>
-                </li>
-                <li className="presentation login d-md-none">
-                  <Link className={`${linkColor}`} to="/users/logout">
-                    Logout
-                  </Link>
-                </li>
-              </ul>
-            )}
+                </Nav>
+              )}
           </Navbar.Collapse>
         </Navbar>
         <style>{`
@@ -106,7 +114,7 @@ class NavBar extends Component {
             background: ${this.state.transparent ? 'transparent' : '#222'};
           }
         `}</style>
-      </div>
+      </div >
     )
   }
 }
