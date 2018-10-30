@@ -14,6 +14,7 @@ import adminRoutes from './admin/routes'
 import Admin from './admin/Index'
 import Loading from './components/Loading'
 import Cookies from 'js-cookie'
+import Ingredients from './components/Ingredients'
 
 class App extends Component {
   constructor(props) {
@@ -46,11 +47,11 @@ class App extends Component {
       const uid = Cookies.get('amicus-salad-uid')
       if (uid) {
         await Axios.post('/users/verification', {
-          uid: uid,
+          uid: uid
         })
           .then(res => {
             this.setState({
-              user: res.data,
+              user: res.data
             })
           })
           .catch(error => console.log(error))
@@ -107,6 +108,7 @@ class App extends Component {
 
               {/* Users */}
               <Route path="/users/register" component={Register} />
+              <Route path="/Ingredients" component={Ingredients} />
               <Route
                 path="/users/login"
                 component={() => <Login verifyLogin={this.verifyLogin} />}

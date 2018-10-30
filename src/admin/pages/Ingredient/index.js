@@ -56,7 +56,7 @@ export class Ingredient extends Component {
 
   deleteItem() {
     axios
-      .delete('/ingredient/delete?_id=' + this.state.deleteId)
+      .delete('/ingredients/delete?_id=' + this.state.deleteId)
       .then(res => console.log(res))
       .catch(err => console.log(err))
     window.location.reload()
@@ -64,7 +64,7 @@ export class Ingredient extends Component {
 
   componentDidMount() {
     axios
-      .get("/ingredient")
+      .get("/ingredients")
       .then(res => this.setState({ ingredients: res.data }))
       .catch(err => console.log(err));
   }
