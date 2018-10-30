@@ -17,7 +17,7 @@ class Action extends Component {
   deleteItem() {
     this.props.show(this.props.rowData._id)
   }
-  
+
   render() {
     return (
       <td>
@@ -41,12 +41,12 @@ export class Product extends Component {
       deleteId: ''
     };
 
-    this.handleClose = this.handleClose.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
     this.handleShow = this.handleShow.bind(this)
     this.deleteItem = this.deleteItem.bind(this)
   }
 
-  handleClose() {
+  handleCancel() {
     this.setState({ deleteModal: false });
   }
 
@@ -72,15 +72,15 @@ export class Product extends Component {
   render() {
     return (
       <div className="panel panel-primary">
-        <Modal show={this.state.deleteModal} onHide={this.handleClose}>
-            <Modal.Header>
-              <Modal.Title>Confirmation</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Are you sure to delete ?</Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.handleClose}>Close</Button>
-              <Button bsStyle="danger" onClick={this.deleteItem}>Delete</Button>
-            </Modal.Footer>
+        <Modal show={this.state.deleteModal} onHide={this.handleCancel}>
+          <Modal.Header>
+            <Modal.Title>Confirmation</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Are you sure to delete ?</Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.handleCancel}>Cancel</Button>
+            <Button bsStyle="danger" onClick={this.deleteItem}>Delete</Button>
+          </Modal.Footer>
         </Modal>
         <div className="panel-heading">
           <span>Product</span>
@@ -90,7 +90,7 @@ export class Product extends Component {
           <SortableTbl
             tblData={this.state.products}
             tHead={tHead}
-            customTd={[{ custd: (props) => <Action rowData={props.rowData} show={this.handleShow}/> , keyItem: "action" }]}
+            customTd={[{ custd: (props) => <Action rowData={props.rowData} show={this.handleShow} />, keyItem: "action" }]}
             dKey={col}
             search={true}
             defaultCSS={true}
