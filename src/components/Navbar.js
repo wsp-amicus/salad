@@ -6,9 +6,6 @@ import {
   Glyphicon,
   Navbar,
   Nav,
-  NavItem,
-  NavDropdown,
-  MenuItem
 } from 'react-bootstrap'
 import '../styles/Navbar.css'
 
@@ -20,6 +17,7 @@ class NavBar extends Component {
       redirect: '',
       userOpen: false,
       menuOpen: false,
+      expanded: false,
     }
     this.handleScroll = this.handelScroll.bind(this)
   }
@@ -34,17 +32,34 @@ class NavBar extends Component {
 
   handelScroll() {
     const scroll = window.scrollY
-    if (scroll <= 200 && !this.state.transparent) this.setState({ transparent: true })
-    else if (scroll > 200 && this.state.transparent) this.setState({ transparent: false })
+    const { transparent } = this.state
+    if (scroll <= 200 && !transparent) this.setState({ transparent: true })
+    else if (scroll > 200 && transparent) this.setState({ transparent: false })
+  }
+
+  getNavLink(to, label, linkColor) {
+    return (
+      <div>
+        <Link className={`${linkColor}`} to={to} onClick={() => this.expand()}>
+          {label}
+        </Link>
+      </div>
+    )
+  }
+
+  expand() {
+    if (this.props.width < 768)
+      this.setState({ expanded: !this.state.expanded })
   }
 
   render() {
     const currentURL = window.location.pathname
-    const barColor = `${this.state.transparent && currentURL === '/' ? 'transparent' : 'non-transparent'}`
-    const linkColor = `${this.state.transparent && currentURL === '/' ? 'white' : ''}`
+    const { transparent } = this.state
+    const barColor = `${transparent && currentURL === '/' ? 'transparent' : 'non-transparent'}`
+    const linkColor = `${transparent && currentURL === '/' ? 'white' : ''}`
     return (
-      <div className="bar wrapper">
-        <Navbar inverse collapseOnSelect className={barColor}>
+      <div className="bar wrapper" onClick={() => this.expand()}>
+        <Navbar inverse expanded={this.state.expanded} onToggle={() => { }} className={barColor}>
           <Navbar.Header>
             <Link to="/">
               <img src={transparent_logo} alt="logo" width="200px" />
@@ -53,29 +68,13 @@ class NavBar extends Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
-              <NavItem>
-                <Link className={`${linkColor}`} to="/">
-                  Menu
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link className={`${linkColor}`} to="/">
-                  Custom
-                </Link>
-              </NavItem>
+              {this.getNavLink('/menu', 'Menu', linkColor)}
+              {this.getNavLink('/custom', 'Custom', linkColor)}
             </Nav>
             {!this.props.user ? (
               <Nav className="navbar-right">
-                <NavItem>
-                  <Link className={`${linkColor}`} to="/users/login">
-                    Login
-                  </Link>
-                </NavItem>
-                <NavItem>
-                  <Link className={`${linkColor}`} to="/users/register">
-                    Register
-                  </Link>
-                </NavItem>
+                {this.getNavLink('/users/login', 'Login', linkColor)}
+                {this.getNavLink('/users/register', 'Register', linkColor)}
               </Nav>
             ) : (
                 <Nav className="navbar-right">
@@ -97,7 +96,7 @@ class NavBar extends Component {
                     <li
                       role="presentation"
                       style={{
-                        background: this.state.transparent ? 'transparent' : '#222',
+                        background: transparent ? 'transparent' : '#222',
                       }}
                     >
                       <Link role="menuitem" tabIndex="-1" to="/users/logout">
@@ -111,7 +110,7 @@ class NavBar extends Component {
         </Navbar>
         <style>{`
           .dropdown-menu {
-            background: ${this.state.transparent ? 'transparent' : '#222'};
+            background: ${transparent ? 'transparent' : '#222'};
           }
         `}</style>
       </div >

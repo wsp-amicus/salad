@@ -18,7 +18,7 @@ import Cookies from 'js-cookie'
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { height: 0, loaded: false }
+    this.state = { height: 0, width: 0, loaded: false }
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
     this.verifyLogin = this.verifyLogin.bind(this)
   }
@@ -39,6 +39,7 @@ class App extends Component {
 
   updateWindowDimensions() {
     if (this.state.height === 0) this.setState({ height: window.innerHeight })
+    if (this.state.width === 0) this.setState({ width: window.innerWidth })
   }
 
   async verifyLogin() {
@@ -91,7 +92,7 @@ class App extends Component {
       <Router>
         <div>
           {window.location.pathname.includes('/admin') ? null : (
-            <NavBar user={this.state.user} />
+            <NavBar user={this.state.user} width={this.state.width} />
           )}
           <div
             className={`${
