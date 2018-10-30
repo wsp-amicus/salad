@@ -5,7 +5,7 @@ import './styles/App.css'
 import NotFound from './components/NotFound'
 import Home from './components/Home'
 import Footer from './components/Footer'
-import NavBar from './components/Nav'
+import NavBar from './components/Navbar'
 import Register from './components/users/Register'
 import Login from './components/users/Login'
 import Logout from './components/users/Logout'
@@ -96,7 +96,7 @@ class App extends Component {
           <div
             className={`${
               window.location.pathname.includes('/admin') ? '' : 'main'
-            }`}
+              }`}
           >
             <Switch>
               <Route
