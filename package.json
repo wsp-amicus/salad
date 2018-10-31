@@ -51,6 +51,7 @@
     "react-dev-utils": "^5.0.2",
     "react-dom": "^16.5.0",
     "react-images-upload": "^1.2.3",
+    "react-loader-spinner": "^2.0.6",
     "react-metismenu": "^1.4.0",
     "react-metismenu-router-link": "^2.1.0",
     "react-parallax": "^1.8.0",
@@ -67,8 +68,8 @@
     "webpack-manifest-plugin": "1.3.2"
   },
   "devDependencies": {
-    "testcafe": "^0.22.0",
-    "jest": "20.0.4"
+    "jest": "20.0.4",
+    "testcafe": "^0.22.0"
   },
   "scripts": {
     "start": "nodemon server/app.js & npm run frontend",

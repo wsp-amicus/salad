@@ -3,6 +3,7 @@ import Axios from 'axios'
 import Cookies from 'js-cookie'
 import { Redirect } from 'react-router-dom'
 import queryString from 'query-string'
+import Loader from 'react-loader-spinner'
 import '../../styles/Login.css'
 
 export class Login extends Component {
@@ -92,8 +93,10 @@ export class Login extends Component {
                 Submit
               </button>
             ) : (
-              <div className="loader" />
-            )}
+                <div className="center">
+                  <Loader type="ThreeDots" color="#11ad3d" height={80} width={80} />
+                </div>
+              )}
           </form>
         </div>
         <hr />
