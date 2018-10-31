@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Select from "react-select";
 import ImageUploader from "react-images-upload";
-import axios from 'axios'
-import { Redirect } from 'react-router-dom'
+import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 const options = [
   { value: "vegetable", label: "Vegetable" },
@@ -16,12 +16,13 @@ export class Create extends Component {
     this.state = {
       selectedOption: null,
       pictures: [],
-      name: '',
-      price: '',
+      name: "",
+      price: "",
+      description: "",
       redirect: false
     };
     this.onDrop = this.onDrop.bind(this);
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleSelected = selectedOption => {
@@ -37,30 +38,36 @@ export class Create extends Component {
   }
 
   handleChange(e) {
-    const { name, value } = e.target
-    this.setState({ [name]: value })
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
   }
 
   handleSubmit(e) {
-    if(this.state.selectedOption===null || this.state.name === '' || this.state.price === '') {
-      return
+    if (
+      this.state.selectedOption === null ||
+      this.state.name === "" ||
+      this.state.price === ""
+    ) {
+      return;
     }
-    e.preventDefault()
-    let formData = new FormData()
-    formData.append('name', this.state.name)
-    formData.append('price', this.state.price)
-    formData.append('type', this.state.selectedOption.value)
-    this.state.pictures.forEach( (picture,index) => {
-      formData.append('picture-' + index, picture)
-    })
-    axios.post('/ingredients/create',
-      formData
-    ).then(res => this.setState({redirect: true})).catch(err => console.log(err))
+    e.preventDefault();
+    let formData = new FormData();
+    formData.append("name", this.state.name);
+    formData.append("price", this.state.price);
+    formData.append("description", this.state.description);
+    formData.append("type", this.state.selectedOption.value);
+    this.state.pictures.forEach((picture, index) => {
+      formData.append("picture-" + index, picture);
+    });
+    axios
+      .post("/ingredients/create", formData)
+      .then(res => this.setState({ redirect: true }))
+      .catch(err => console.log(err));
   }
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to="/admin/ingredients" />
+      return <Redirect to="/admin/ingredients" />;
     }
     return (
       <div className="panel panel-warning">
@@ -71,7 +78,12 @@ export class Create extends Component {
           <div className="row">
             <div className="col-md-6">
               <label>Name</label>
-              <input name="name" className="form-control" value={this.state.name} onChange={this.handleChange}/>
+              <input
+                name="name"
+                className="form-control"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
             </div>
           </div>
 
@@ -84,10 +96,26 @@ export class Create extends Component {
                 options={options}
               />
             </div>
-
             <div className="col-md-6">
               <label>Price - THB</label>
-              <input name="price" className="form-control" value={this.state.price} onChange={this.handleChange}/>
+              <input
+                name="price"
+                className="form-control"
+                value={this.state.price}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md-6">
+              <label>Description</label>
+              <textArea
+                name="description"
+                className="form-control"
+                value={this.state.description}
+                onChange={this.handleChange}
+              />
             </div>
           </div>
           <div className="row">
@@ -109,7 +137,12 @@ export class Create extends Component {
         </div>
 
         <div className="panel-footer">
-          <button className="btn btn-primary" onClick={this.handleSubmit.bind(this)}>Submit</button>
+          <button
+            className="btn btn-primary"
+            onClick={this.handleSubmit.bind(this)}
+          >
+            Submit
+          </button>
         </div>
       </div>
     );

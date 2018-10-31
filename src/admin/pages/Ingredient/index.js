@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import SortableTbl from "react-sort-search-table";
 import axios from "axios";
-import { Link } from 'react-router-dom'
-import { Modal, Button } from 'react-bootstrap'
+import { Link } from "react-router-dom";
+import { Modal, Button } from "react-bootstrap";
 
-const tHead = ["Name", "Price", "Type", "Action"];
+const tHead = ["Name", "Description", "Price", "Type", "Action"];
 
-const col = ["name", "price", "type", "action"];
+const col = ["name", "description", "price", "type", "action"];
 
 class Action extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class Action extends Component {
   }
 
   deleteItem() {
-    this.props.show(this.props.rowData._id)
+    this.props.show(this.props.rowData._id);
   }
 
   render() {
@@ -38,12 +38,12 @@ export class Ingredient extends Component {
     this.state = {
       ingredients: [],
       deleteModal: false,
-      deleteId: ''
+      deleteId: ""
     };
 
-    this.handleCancel = this.handleCancel.bind(this)
-    this.handleShow = this.handleShow.bind(this)
-    this.deleteItem = this.deleteItem.bind(this)
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleShow = this.handleShow.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   handleCancel() {
@@ -56,10 +56,10 @@ export class Ingredient extends Component {
 
   deleteItem() {
     axios
-      .delete('/ingredients/delete?_id=' + this.state.deleteId)
+      .delete("/ingredients/delete?_id=" + this.state.deleteId)
       .then(res => console.log(res))
-      .catch(err => console.log(err))
-    window.location.reload()
+      .catch(err => console.log(err));
+    window.location.reload();
   }
 
   componentDidMount() {
@@ -79,7 +79,9 @@ export class Ingredient extends Component {
           <Modal.Body>Are you sure to delete ?</Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleCancel}>Cancel</Button>
-            <Button bsStyle="danger" onClick={this.deleteItem}>Delete</Button>
+            <Button bsStyle="danger" onClick={this.deleteItem}>
+              Delete
+            </Button>
           </Modal.Footer>
         </Modal>
         <div className="panel-heading">
@@ -90,7 +92,14 @@ export class Ingredient extends Component {
           <SortableTbl
             tblData={this.state.ingredients}
             tHead={tHead}
-            customTd={[{ custd: (props) => <Action rowData={props.rowData} show={this.handleShow} />, keyItem: "action" }]}
+            customTd={[
+              {
+                custd: props => (
+                  <Action rowData={props.rowData} show={this.handleShow} />
+                ),
+                keyItem: "action"
+              }
+            ]}
             dKey={col}
             search={true}
             defaultCSS={true}

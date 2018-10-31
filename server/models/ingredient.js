@@ -5,6 +5,9 @@ const ingredient = mongoose.Schema({
     type: String,
     require: true
   },
+  description: {
+    type: String
+  },
   imageUrl: {
     type: []
   },
