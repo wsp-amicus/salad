@@ -110,7 +110,7 @@ export class Create extends Component {
           <div className="row">
             <div className="col-md-6">
               <label>Description</label>
-              <textArea
+              <textarea
                 name="description"
                 className="form-control"
                 value={this.state.description}
