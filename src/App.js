@@ -15,6 +15,7 @@ import Admin from './admin/Index'
 import Loading from './components/Loading'
 import Cookies from 'js-cookie'
 import Ingredients from './components/Ingredients'
+import Custom from './components/Custom'
 
 class App extends Component {
   constructor(props) {
@@ -107,9 +108,12 @@ class App extends Component {
                 component={() => <Home height={this.state.height} />}
               />
 
+              <Route path="/ingredients" component={Ingredients} />
+
+              <Route path="/custom" component={Custom} />
+
               {/* Users */}
               <Route path="/users/register" component={Register} />
-              <Route path="/Ingredients" component={Ingredients} />
               <Route
                 path="/users/login"
                 component={() => <Login verifyLogin={this.verifyLogin} />}
