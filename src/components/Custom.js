@@ -12,20 +12,8 @@ export default class Custom extends Component {
         <h1>Create your own salad!</h1>
         <div className="bowl" id="bowl">
           <Image className="bowl" src={bowl} responsive width="700px" />
-          <Image
-            className="ingredient"
-            src={lettuce}
-            responsive
-            width="70%"
-            style={{ bottom: `15%`, left: `15%` }}
-          />
-          <Image
-            className="ingredient"
-            src={carrot}
-            responsive
-            width="40%"
-            style={{ bottom: `10%`, left: `30%` }}
-          />
+          <Image className="ingredient" src={lettuce} responsive width="70%" style={{ bottom: `15%`, left: `15%` }} />
+          <Image className="ingredient" src={carrot} responsive width="40%" style={{ bottom: `10%`, left: `30%` }} />
         </div>
       </div>
     )

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import transparent_logo from "../static/small_transparent_logo.png";
 import { Link } from "react-router-dom";
 import { DropdownButton, Glyphicon, Navbar, Nav } from "react-bootstrap";
-import "../styles/Navbar.css";
+import Cart from './cart'
+import transparent_logo from "../../static/small_transparent_logo.png";
+import "../../styles/Navbar.css";
 
 class NavBar extends Component {
   constructor(props) {
@@ -80,24 +81,7 @@ class NavBar extends Component {
               </Nav>
             ) : (
               <Nav className="navbar-right">
-                <DropdownButton title="Cart" className="dropdown-button">
-                  <li
-                    role="presentation"
-                    style={{
-                      background: transparent ? "transparent" : "#222"
-                    }}
-                  >
-                    Example cart list
-                  </li>
-                  <li
-                    role="presentation"
-                    style={{
-                      background: transparent ? "transparent" : "#222"
-                    }}
-                  >
-                    <Link to="/">Check out</Link>
-                  </li>
-                </DropdownButton>
+                <Cart transparent={transparent}/>
                 <DropdownButton
                   title={
                     <div>

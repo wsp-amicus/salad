@@ -8,7 +8,7 @@ class Ingredients extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      ingre: []
+      ingre: [],
     }
   }
   componentDidMount() {
@@ -29,9 +29,7 @@ class Ingredients extends Component {
                   return (
                     <Col xs={6} md={3}>
                       <Thumbnail id="box" src={item.imageUrl}>
-                        <h3>
-                        {item.name}
-                        </h3>
+                        <h3>{item.name}</h3>
                         <p>Description</p>
                         <p>
                           <h4>{item.price}฿</h4>
