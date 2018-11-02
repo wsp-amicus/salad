@@ -1,22 +1,21 @@
 import React, { Component } from "react";
-import { addProduct } from "../../store/product";
-import { observer } from "mobx-react";
+import { addProduct2Cart } from "../../store/product";
 
 class Menu extends Component {
-  addProduct() {
+  addProduct2Cart() {
     const product = {
       name: "hello"
     };
-    addProduct(product);
+    addProduct2Cart(product);
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.addProduct}>Add to cart</button>
+        <button onClick={this.addProduct2Cart}>Add to cart</button>
       </div>
     );
   }
 }
 
-export default observer(Menu);
+export default Menu

@@ -27,6 +27,6 @@ export const Store = (function() {
 
 const _store = Store.getInstance();
 
-export const addProduct = product => {
+export const addProduct2Cart = product => {
   _store.addProduct(product);
 };
