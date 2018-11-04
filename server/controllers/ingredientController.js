@@ -21,7 +21,7 @@ const ingredientController = {
     if (imageUrl) {
       imageUrl = ingredientController.upload(imageUrl);
     } else {
-      imageUrl = req.body.imageUrl
+      imageUrl = req.body.imageUrl;
     }
 
     let ingredient = new Ingredient({
@@ -87,9 +87,12 @@ const ingredientController = {
     let type = req.body.type;
     let description = req.body.description;
     let imageUrl = req.files;
+    let oldImages = req.body.oldPictures;
     if (imageUrl) {
       imageUrl = ingredientController.upload(imageUrl);
-      imageUrl = [...imageUrl, req.body.oldPictures];
+      imageUrl = [...imageUrl, oldImages];
+    } else {
+      imageUrl = oldImages;
     }
 
     Ingredient.findOne({ _id: req.body._id }, (err, ingredient) => {

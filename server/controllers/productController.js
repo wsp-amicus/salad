@@ -86,10 +86,14 @@ const productController = {
     let ingredients = req.body.ingredients;
     let description = req.body.description;
     let imageUrl = req.files;
+    let oldImages = req.body.oldPictures;
     if (imageUrl) {
       imageUrl = productController.upload(imageUrl);
-      imageUrl = [...imageUrl, req.body.oldPictures];
+      imageUrl = [...imageUrl, oldImages];
+    } else {
+      imageUrl = oldImages;
     }
+
 
     Product.findOne({ _id: req.body._id }, (err, product) => {
       if (err) throw err;
