@@ -1,0 +1,31 @@
+.blackground {
+   background-color: black;
+   border: 2px solid green;
+  }
+
+.text{
+    color: white;
+    text-align: left
+}
+.center {
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.picture {
+    padding: 3%;
+}
