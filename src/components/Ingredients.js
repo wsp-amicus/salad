@@ -21,7 +21,7 @@ class Ingredients extends Component {
 
   render() {
     return (
-      <div className="content">
+      <div className="ingredient-content">
         <div className="ingreMenu">
           {this.state.ingre && this.state.ingre.length > 0
             ? this.state.ingre
