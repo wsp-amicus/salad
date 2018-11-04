@@ -23,9 +23,10 @@ export class Create extends Component {
     };
     this.onDrop = this.onDrop.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSelected = this.handleSelected.bind(this);
   }
 
-  handleSelected = selectedOption => {
+  handleSelected(selectedOption) {
     this.setState({
       selectedOption
     });

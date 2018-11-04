@@ -27,6 +27,7 @@ export class Edit extends Component {
     this.onDrop = this.onDrop.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleOldDelete = this.handleOldDelete.bind(this);
+    this.handleSelected = this.handleSelected.bind(this);
   }
 
   componentDidMount() {
@@ -56,7 +57,7 @@ export class Edit extends Component {
     this.setState({ oldPictures: deleted });
   }
 
-  handleSelected = selectedOption => {
+  handleSelected(selectedOption) {
     this.setState({
       selectedOption
     });

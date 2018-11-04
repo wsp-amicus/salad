@@ -15,13 +15,14 @@ export class Create extends Component {
     };
     this.onDrop = this.onDrop.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSelected = this.handleSelected.bind(this);
   }
 
-  handleSelected = selectedOption => {
+  handleSelected(selectedOption) {
     this.setState({
       selectedOption
     });
-  };
+  }
 
   onDrop(pictureFiles, pictureDataURLs) {
     this.setState({
@@ -35,10 +36,7 @@ export class Create extends Component {
   }
 
   handleSubmit(e) {
-    if (
-      this.state.name === "" ||
-      this.state.price === ""
-    ) {
+    if (this.state.name === "" || this.state.price === "") {
       return;
     }
     e.preventDefault();
