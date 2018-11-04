@@ -28,7 +28,7 @@ export default class Custom extends Component {
         <div style={{ minHeight: '430px' }}>
           {this.state.loading ? (
             <div style={{ paddingTop: '120px' }}>
-              <Loader type="ThreeDots" color="#11ad3d" height={140} width={140} />``
+              <Loader type="ThreeDots" color="#11ad3d" height={140} width={140} />
             </div>
           ) :
             <div className="bowl fadeIn" id="bowl">
@@ -50,7 +50,7 @@ export default class Custom extends Component {
             </div>
           }
         </div>
-        <Ingredient />
+        <Ingredient loading={this.state.loading} />
       </div>
     )
   }

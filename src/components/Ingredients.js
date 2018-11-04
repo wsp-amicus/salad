@@ -2,6 +2,7 @@ import Axios from 'axios'
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 import '../styles/Ingredients.css'
+import Loader from 'react-loader-spinner'
 import CartImage from '../static/cart.png'
 
 class Ingredients extends Component {
@@ -32,12 +33,19 @@ class Ingredients extends Component {
                 return (
                   <div className="box-container">
                     <div className="image-container">
-                      <img
-                        id="box"
-                        src={item.imageUrl.length > 1 ? item.imageUrl : item.imageUrl[0]}
-                        alt="ingredients"
-                        height="200px"
-                      />
+                      {this.props.loading ?
+                        <div style={{ minHeight: '200px', minWidth: '200px' }}>
+                          <Loader type="TailSpin" color="#11ad3d" height={80} width={80} />
+                        </div>
+                        :
+                        <img
+                          className="fadeIn"
+                          id="box"
+                          src={item.imageUrl.length > 1 ? item.imageUrl : item.imageUrl[0]}
+                          alt="ingredients"
+                          height="200px"
+                        />
+                      }
                       <div className="button-container">
                         <Button id="add-button" bsStyle="success">
                           <img id="cart" src={CartImage} alt="cart" />
