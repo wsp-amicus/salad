@@ -42,7 +42,8 @@ class Ingredients extends Component {
                       </div>
                       <hr />
                       <h3>{item.name}</h3>
-                      <p>{item.type}</p>
+                      <h4>{item.type}</h4>
+                      <p>{item.description}</p>
                       <p>
                         <h4>{item.price}฿</h4>
                       </p>
