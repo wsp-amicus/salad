@@ -1,36 +1,36 @@
-const Ingredient = require("../models/ingredient");
+const Product = require("../models/product");
 const fs = require("fs");
 const moment = require("moment");
 
-const ingredientController = {
+const productController = {
   index(req, res) {
-    Ingredient.find({}, (err, ingredients) => {
+    Product.find({}, (err, products) => {
       if (err) {
         res.status(500).send("Error on query.");
       }
-      if (!ingredients) res.status(404).send("Not found");
-      res.status(200).send(ingredients);
+      if (!products) res.status(404).send("Not found");
+      res.status(200).send(products);
     });
   },
   create(req, res) {
     let name = req.body.name;
     let price = parseInt(req.body.price, 10);
-    let type = req.body.type;
+    let ingredients = req.body.ingredients;
     let description = req.body.description;
     let imageUrl = req.files;
     if (imageUrl) {
-      imageUrl = ingredientController.upload(imageUrl);
+      imageUrl = productController.upload(imageUrl);
     }
 
-    let ingredient = new Ingredient({
+    let product = new Product({
       name,
       imageUrl,
-      type,
+      ingredients,
       price,
       description
     });
 
-    ingredient.save();
+    product.save();
     res.status(200).send("success");
   },
   upload(files) {
@@ -63,41 +63,41 @@ const ingredientController = {
   },
   delete(req, res) {
     // TODO delete image storage
-    Ingredient.deleteOne(req.query, err => {
+    Product.deleteOne(req.query, err => {
       if (err) throw err;
       res.status(200).send("done");
     });
   },
   find(req, res) {
-    Ingredient.findOne(req.query, (err, ingredient) => {
+    Product.findOne(req.query, (err, product) => {
       if (err) {
         res.status(500).send("Error on query.");
       }
-      if (!ingredient) {
-        res.status(404).send("Ingredient is not found");
+      if (!product) {
+        res.status(404).send("Product is not found");
       }
-      res.status(200).send(ingredient);
+      res.status(200).send(product);
     });
   },
   edit(req, res) {
     let name = req.body.name;
     let price = parseInt(req.body.price, 10);
-    let type = req.body.type;
+    let ingredients = req.body.ingredients;
     let description = req.body.description;
     let imageUrl = req.files;
     if (imageUrl) {
-      imageUrl = ingredientController.upload(imageUrl);
+      imageUrl = productController.upload(imageUrl);
       imageUrl = [...imageUrl, req.body.oldPictures];
     }
 
-    Ingredient.findOne({ _id: req.body._id }, (err, ingredient) => {
+    Product.findOne({ _id: req.body._id }, (err, product) => {
       if (err) throw err;
-      ingredient.name = name;
-      ingredient.price = price;
-      ingredient.type = type;
-      ingredient.imageUrl = imageUrl;
-      ingredient.description = description;
-      ingredient.save();
+      product.name = name;
+      product.price = price;
+      product.ingredients = ingredients;
+      product.imageUrl = imageUrl;
+      product.description = description;
+      product.save();
     });
 
     res.status(200).send("success");
@@ -105,5 +105,5 @@ const ingredientController = {
 };
 
 module.exports = {
-  ingredientController
+  productController
 };

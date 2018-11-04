@@ -39,6 +39,7 @@ app.get("/test", (req, res) =>
 app.use("/users", require("./routes/users"));
 app.use("/dashboard", require("./routes/dashboard"));
 app.use("/ingredients", require("./routes/ingredient"));
+app.use("/products", require("./routes/product"));
 app.use("/storage", require("./routes/storage"));
 
 // use this in production only

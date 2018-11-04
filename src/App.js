@@ -5,7 +5,7 @@ import './styles/App.css'
 import NotFound from './components/NotFound'
 import Home from './components/Home'
 import Footer from './components/Footer'
-import NavBar from './components/Navbar'
+import NavBar from './components/navbar'
 import Register from './components/users/Register'
 import Login from './components/users/Login'
 import Logout from './components/users/Logout'
@@ -15,11 +15,13 @@ import Admin from './admin/Index'
 import Loading from './components/Loading'
 import Cookies from 'js-cookie'
 import Ingredients from './components/Ingredients'
+import Custom from './components/Custom'
+import Menu from './components/menu/Menu'
 
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { height: 0, loaded: false }
+    this.state = { height: 0, width: 0, loaded: false }
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
     this.verifyLogin = this.verifyLogin.bind(this)
   }
@@ -40,6 +42,7 @@ class App extends Component {
 
   updateWindowDimensions() {
     if (this.state.height === 0) this.setState({ height: window.innerHeight })
+    if (this.state.width === 0) this.setState({ width: window.innerWidth })
   }
 
   async verifyLogin() {
@@ -92,7 +95,7 @@ class App extends Component {
       <Router>
         <div>
           {window.location.pathname.includes('/admin') ? null : (
-            <NavBar user={this.state.user} />
+            <NavBar user={this.state.user} width={this.state.width} />
           )}
           <div
             className={`${
@@ -106,9 +109,14 @@ class App extends Component {
                 component={() => <Home height={this.state.height} />}
               />
 
+              <Route path="/ingredients" component={Ingredients} />
+
+              <Route path="/custom" component={Custom} />
+
+              <Route path="/menu" component={Menu} />
+
               {/* Users */}
               <Route path="/users/register" component={Register} />
-              <Route path="/Ingredients" component={Ingredients} />
               <Route
                 path="/users/login"
                 component={() => <Login verifyLogin={this.verifyLogin} />}

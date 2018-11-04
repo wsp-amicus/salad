@@ -22,23 +22,23 @@
 }
 
 .nav {
+    margin-top: 13px;
     display: flex;
 }
 
-/* .nav li {
-    width: 80px;
-} */
-
-.nav a a {
+.nav > div > a {
     font-size: 18px;
-    padding: 5px;
-    color: white;
-    text-decoration: none;
     border-radius: 5px;
     padding: 8px 16px;
+    margin-top: 20px;
+    color: white;
 }
 
-.nav a a.active {
+.nav div a:hover, .nav div a:focus {
+    text-decoration: none;
+}
+
+.nav div a:hover {
     color: rgb(48,147,64);
     text-decoration: none;
 }
@@ -49,6 +49,7 @@
 
 .white:hover {
     border: solid white 0.5px;
+    color: white !important;
 }
 
 .transparent {
@@ -93,8 +94,8 @@
     background: transparent;
     color: white;
     border: 1px solid transparent;
-    margin-top: 5px;
     font-size: 18px;
+    margin-top: -5px;
 }
 
 .dropdown-button:hover {
@@ -109,11 +110,7 @@
     font-size: 15px;
 }
 
-.dropdown-menu li a {
-    color: white;
-}
-
-.dropdown-menu li a:hover{
+.dropdown-menu div a:hover{
     color: white;
     background: rgba(255,255,255,0.3);
 }
@@ -124,25 +121,22 @@
     }
 
     .nav {
-        display: block;
+        display: block !important;
         margin: 0 !important;
     }
 
-    .nav a  {
-        border: 0 !important;
-    }
-
-    .nav li {
-        width: auto;
+    .nav div {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
     }
 
     .navbar-collapse.collapsing {
         animation: fade-navitem-in 1s;
     }
 
-    .navbar-collapse li{
+    .navbar-collapse div a{
         margin: 5px 10px;
-        border: 1px solid rgba(255,255,255,0.5);
         border-radius: 5px;
     }
 

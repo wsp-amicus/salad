@@ -1,20 +1,12 @@
 import React, { Component } from "react";
-import Select from "react-select";
 import ImageUploader from "react-images-upload";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-
-const options = [
-  { value: "vegetable", label: "Vegetable" },
-  { value: "meat", label: "Meat" },
-  { value: "dressing", label: "Dressing" }
-];
 
 export class Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedOption: null,
       pictures: [],
       name: "",
       price: "",
@@ -44,7 +36,6 @@ export class Create extends Component {
 
   handleSubmit(e) {
     if (
-      this.state.selectedOption === null ||
       this.state.name === "" ||
       this.state.price === ""
     ) {
@@ -55,7 +46,6 @@ export class Create extends Component {
     formData.append("name", this.state.name);
     formData.append("price", this.state.price);
     formData.append("description", this.state.description);
-    formData.append("type", this.state.selectedOption.value);
     this.state.pictures.forEach((picture, index) => {
       formData.append("picture-" + index, picture);
     });
@@ -88,14 +78,6 @@ export class Create extends Component {
           </div>
 
           <div className="row">
-            <div className="col-md-6">
-              <label>Category</label>
-              <Select
-                value={this.state.selectedOption}
-                onChange={this.handleSelected}
-                options={options}
-              />
-            </div>
             <div className="col-md-6">
               <label>Price - THB</label>
               <input

@@ -4,9 +4,9 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 
-const tHead = ["Name", "Description", "Price", "Type", "Action"];
+const tHead = ["Name", "Description", "Price", "Ingredients", "Action"];
 
-const col = ["name", "description", "price", "type", "action"];
+const col = ["name", "description", "price", "ingredients", "action"];
 
 class Action extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class Action extends Component {
   render() {
     return (
       <td>
-        <Link to={`/admin/ingredients/edit?_id=${this.props.rowData._id}`}>
+        <Link to={`/admin/products/edit?_id=${this.props.rowData._id}`}>
           <button className="btn btn-warning">Edit</button>
         </Link>
         <button className="btn btn-danger" onClick={this.deleteItem}>
@@ -36,7 +36,7 @@ export class Ingredient extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ingredients: [],
+      products: [],
       deleteModal: false,
       deleteId: ""
     };
@@ -56,7 +56,7 @@ export class Ingredient extends Component {
 
   deleteItem() {
     axios
-      .delete("/ingredients/delete?_id=" + this.state.deleteId)
+      .delete("/products/delete?_id=" + this.state.deleteId)
       .then(res => console.log(res))
       .catch(err => console.log(err));
     window.location.reload();
@@ -64,8 +64,8 @@ export class Ingredient extends Component {
 
   componentDidMount() {
     axios
-      .get("/ingredients")
-      .then(res => this.setState({ ingredients: res.data }))
+      .get("/products")
+      .then(res => this.setState({ products: res.data }))
       .catch(err => console.log(err));
   }
 
@@ -85,12 +85,12 @@ export class Ingredient extends Component {
           </Modal.Footer>
         </Modal>
         <div className="panel-heading">
-          <span>Ingredient</span>
+          <span>Products</span>
         </div>
         <div className="panel-body">
-          List all the ingredient
+          List all the products
           <SortableTbl
-            tblData={this.state.ingredients}
+            tblData={this.state.products}
             tHead={tHead}
             customTd={[
               {

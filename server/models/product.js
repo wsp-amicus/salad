@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ingredient = mongoose.Schema({
+const product = mongoose.Schema({
   name: {
     type: String,
     require: true
@@ -11,8 +11,8 @@ const ingredient = mongoose.Schema({
   imageUrl: {
     type: []
   },
-  type: {
-    type: String,
+  ingredients: {
+    type: [],
     require: true
   },
   price: {
@@ -21,4 +21,4 @@ const ingredient = mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("ingredient", ingredient);
+module.exports = mongoose.model("product", product);

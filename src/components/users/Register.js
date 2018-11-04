@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { genSalt, hash } from 'bcryptjs'
 import { Redirect } from 'react-router-dom'
+import Loader from 'react-loader-spinner'
 import Axios from 'axios'
 
 export class Register extends Component {
@@ -15,6 +16,7 @@ export class Register extends Component {
       email: '',
       username: '',
       avaliable: false,
+      loading: false,
     }
   }
 
@@ -39,6 +41,7 @@ export class Register extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    this.setState({ loading: true })
     Axios.post('/users/register', {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -47,10 +50,10 @@ export class Register extends Component {
       password: this.state.hashPassword,
     })
       .then(res => {
-        this.setState({ redirect: true })
+        this.setState({ redirect: true, loading: false })
       })
       .catch(err => {
-        this.setState({ errormsg: err.response.data })
+        this.setState({ errormsg: err.response.data, loading: false })
       })
   }
 
@@ -157,14 +160,19 @@ export class Register extends Component {
               />
             </div>
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onClick={this.handleSubmit.bind(this)}
-            disabled={!this.state.avaliable}
-          >
-            Submit
+          <div style={{ height: '70px' }}>
+            {!this.state.loading ?
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={this.handleSubmit.bind(this)}
+                disabled={!this.state.avaliable}
+              >
+                Submit
           </button>
+              : <Loader type="Triangle" color="#11ad3d" height={70} width={70} />
+            }
+          </div>
         </form>
         <hr />
       </div>

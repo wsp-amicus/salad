@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import React, { Component } from 'react'
-import { Button, DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap'
+import { Button} from 'react-bootstrap'
 import '../styles/Ingredients.css'
 import CartImage from '../static/cart.png'
 
@@ -8,7 +8,7 @@ class Ingredients extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      ingre: []
+      ingre: [],
     }
   }
   componentDidMount() {

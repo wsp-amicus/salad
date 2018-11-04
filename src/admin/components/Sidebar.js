@@ -30,6 +30,22 @@ const content = [
       },
     ],
   },
+  {
+    icon: 'shopping-basket',
+    label: 'Products',
+    content: [
+      {
+        icon: 'eye',
+        label: 'View',
+        to: '/admin/products',
+      },
+      {
+        icon: 'plus',
+        label: 'Add',
+        to: '/admin/products/create',
+      },
+    ],
+  },
 ]
 
 export class Sidebar extends Component {
