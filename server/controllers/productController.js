@@ -15,7 +15,7 @@ const productController = {
   create(req, res) {
     let name = req.body.name;
     let price = parseInt(req.body.price, 10);
-    let ingredients = req.body.ingredients;
+    let ingredients = JSON.parse(req.body.ingredients);
     let description = req.body.description;
     let imageUrl = req.files;
     if (imageUrl) {
@@ -29,6 +29,7 @@ const productController = {
       price,
       description
     });
+
 
     product.save();
     res.status(200).send("success");

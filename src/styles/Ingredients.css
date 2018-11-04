@@ -1,10 +1,11 @@
 #box {
   width: 220px;
 }
-.content{
-  font-family: 'Work Sans', sans-serif;
+.ingredient-content {
+  font-family: "Work Sans", sans-serif;
   padding-left: 10%;
   padding-right: 10%;
+  display: flex;
 }
 
 .image-container {
@@ -15,7 +16,7 @@
   display: flex;
 }
 
-.box-container:hover .image-container >img{
+.box-container:hover .image-container > img {
   opacity: 0.5;
 }
 
@@ -39,25 +40,21 @@
 #add-button {
   margin-top: 50px;
 }
-#menuItem{
+#menuItem {
   color: black;
 }
 .box-container {
-  margin:10px;
+  margin: 10px;
   padding: 20px;
 }
 
 .box-container:hover {
   border-width: 1px;
   border-color: lightgrey;
-  border-style: solid; 
+  border-style: solid;
 }
 .checkbox label {
   margin: 5px;
-}
-
-.content {
-  display: flex;
 }
 
 .ingreMenu {

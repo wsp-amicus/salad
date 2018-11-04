@@ -29,6 +29,7 @@ export class Update extends Component {
       passwordEdited: false,
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSelected = this.handleSelected.bind(this)
   }
 
   componentDidMount() {
@@ -52,7 +53,7 @@ export class Update extends Component {
     }
   }
 
-  handleSelected = selectedOption => {
+  handleSelected(selectedOption) {
     this.setState({
       selectedOption,
       user: { ...this.state.user, permission: selectedOption.value },

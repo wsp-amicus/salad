@@ -70,6 +70,11 @@ export class Ingredient extends Component {
   }
 
   render() {
+    console.log(this.state.products);
+    const _products = this.state.products;
+    this.state.products.forEach((product, index) => {
+      _products[index].ingredients = JSON.stringify(product.ingredients);
+    });
     return (
       <div className="panel panel-primary">
         <Modal show={this.state.deleteModal} onHide={this.handleCancel}>
@@ -90,7 +95,7 @@ export class Ingredient extends Component {
         <div className="panel-body">
           List all the products
           <SortableTbl
-            tblData={this.state.products}
+            tblData={_products}
             tHead={tHead}
             customTd={[
               {
