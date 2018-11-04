@@ -5,7 +5,7 @@ import './styles/App.css'
 import NotFound from './components/NotFound'
 import Home from './components/Home'
 import Footer from './components/Footer'
-import NavBar from './components/Navbar'
+import NavBar from './components/navbar'
 import Register from './components/users/Register'
 import Login from './components/users/Login'
 import Logout from './components/users/Logout'
@@ -16,6 +16,7 @@ import Loading from './components/Loading'
 import Cookies from 'js-cookie'
 import Ingredients from './components/Ingredients'
 import Custom from './components/Custom'
+import Menu from './components/menu/Menu'
 
 class App extends Component {
   constructor(props) {
@@ -111,6 +112,8 @@ class App extends Component {
               <Route path="/ingredients" component={Ingredients} />
 
               <Route path="/custom" component={Custom} />
+
+              <Route path="/menu" component={Menu} />
 
               {/* Users */}
               <Route path="/users/register" component={Register} />

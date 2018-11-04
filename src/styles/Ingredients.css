@@ -1,9 +1,68 @@
-#box:hover{
-  border-color: green;
+#box {
+  width: 220px;
+}
+.content{
+  font-family: 'Work Sans', sans-serif;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
-#cart{
+.image-container {
+  position: relative;
+}
+
+.box-container:hover .button-container {
+  display: flex;
+}
+
+.box-container:hover .image-container >img{
+  opacity: 0.5;
+}
+
+#cart {
   width: 15px;
   height: 15px;
   margin-right: 5px;
+}
+
+.button-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#add-button {
+  margin-top: 50px;
+}
+#menuItem{
+  color: black;
+}
+.box-container {
+  margin:10px;
+  padding: 20px;
+}
+
+.box-container:hover {
+  border-width: 1px;
+  border-color: lightgrey;
+  border-style: solid; 
+}
+.checkbox label {
+  margin: 5px;
+}
+
+.content {
+  display: flex;
+}
+
+.ingreMenu {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
