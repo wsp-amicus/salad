@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import React, { Component } from 'react'
-import { Grid, Thumbnail, Button, Row, Col } from 'react-bootstrap'
+import { Button, DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap'
 import '../styles/Ingredients.css'
 import CartImage from '../static/cart.png'
 
@@ -21,33 +21,36 @@ class Ingredients extends Component {
 
   render() {
     return (
-      <div>
-        <Grid>
-          <Row>
-            {this.state.ingre && this.state.ingre.length > 0
-              ? this.state.ingre.map(item => {
+      <div className="content">
+        <div className="ingreMenu">
+          {this.state.ingre && this.state.ingre.length > 0
+            ? this.state.ingre
+                .sort(
+                  (a, b) => (a.type > b.type ? -1 : b.type > a.type ? 1 : 0)
+                )
+                .map(item => {
                   return (
-                    <Col xs={6} md={3}>
-                      <Thumbnail id="box" src={item.imageUrl}>
-                        <h3>
-                        {item.name}
-                        </h3>
-                        <p>Description</p>
-                        <p>
-                          <h4>{item.price}฿</h4>
-                          <Button id="add" bsStyle="success">
+                    <div className="box-container">
+                      <div className="image-container">
+                        <img id="box" src={item.imageUrl} alt="ingredients" />
+                        <div className="button-container">
+                          <Button id="add-button" bsStyle="success">
                             <img id="cart" src={CartImage} alt="cart" />
                             Add to cart
                           </Button>
-                        </p>
-                      </Thumbnail>
-                    </Col>
+                        </div>
+                      </div>
+                      <hr />
+                      <h3>{item.name}</h3>
+                      <p>{item.type}</p>
+                      <p>
+                        <h4>{item.price}฿</h4>
+                      </p>
+                    </div>
                   )
                 })
-              : ''}
-          </Row>
-        </Grid>
-        ;
+            : ''}
+        </div>
       </div>
     )
   }
