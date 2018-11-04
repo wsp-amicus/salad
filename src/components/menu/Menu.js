@@ -1,72 +1,79 @@
 import React, { Component } from "react";
-import { addProduct2Cart } from "../../store/product";
-import { Grid, Row, Col } from 'react-bootstrap'
+import { Grid, Row, Col, Button, Image } from "react-bootstrap";
+import Loader from "react-loader-spinner";
 import axios from "axios";
-import '../../styles/Menu.css'
-
-
+import { addProduct2Cart } from "../../store/product";
+import "../../styles/Menu.css";
+import CartImage from "../../static/cart.png";
 
 class Menu extends Component {
-
   constructor(props) {
-    super(props)
-    this.state = { products: [] }
+    super(props);
+    this.state = { products: [], loading: true };
   }
 
-  addProduct2Cart() {
-    const product = {
-      name: "hello"
-    };
-    addProduct2Cart(product);
-  }
   componentWillMount() {
-    axios.get("/products")
-      .then(res => this.setState({ products: res.data }))
+    axios
+      .get("/products")
+      .then(res => this.setState({ products: res.data, loading: false }))
       .catch(err => console.log(err));
   }
 
+  addProduct2Cart(product) {
+    addProduct2Cart(product);
+  }
 
   render() {
     let _products = this.state.products.map(product => {
-      console.log(product)
-      return  (
-        <div className="blackground product-center">
-          <Grid>
-            <Row className="show-grid">
-              <Col md={5}>
-                <div>
-                  <img className="picture" alt="demo" src="" />
-                </div>
-              </Col>
-              <Col md={7} >
-                <Row className="text">
-                  <h2>{product.name}</h2>
-                </Row>
-                <Row className="text">
-                  <ul>
-                    <li>Fired Chicken</li>
-                    <li>Lettuce</li>
-                    <li>Carrot</li>
-                    <li>Tomato</li>
-                  </ul>
-                </Row>
-                <Row>
-                  <div>
-                    <button className="button" onClick={this.addProduct2Cart}>Add to cart</button>
-                  </div>
-                </Row>
-              </Col>
-            </Row>
-          </Grid>
+      const _ingredients = product.ingredients.map(ing => <li>{ing.label}</li>);
+      return (
+        <div className="blackground product-center fadeIn">
+          <Row className="show-grid">
+            <Col md={5}>
+              <div>
+                <Image
+                  src={product.imageUrl ? product.imageUrl[0] : ""}
+                  rounded
+                  responsive
+                />
+              </div>
+            </Col>
+            <Col md={7}>
+              <Row className="text">
+                <h1>{product.name}</h1>
+              </Row>
+              <Row className="text">
+                <h4>{product.description}</h4>
+              </Row>
+              <Row className="text">
+                <ul>{_ingredients}</ul>
+              </Row>
+              <Row>
+                <Button
+                  bsStyle="success"
+                  className="button"
+                  onClick={() => this.addProduct2Cart(product)}
+                >
+                  <img id="cart" src={CartImage} alt="cart" />
+                  {product.price} ฿
+                </Button>
+              </Row>
+            </Col>
+          </Row>
         </div>
-    )
-    })
-    return (
-      <div >
-        {_products}
+      );
+    });
+    return this.state.loading ? (
+      <div
+        style={{ textAlign: "center", minHeight: "200px", minWidth: "200px" }}
+      >
+        <Loader type="ThreeDots" color="#11ad3d" height={140} width={140} />
+        <h3>Amicus Loading...</h3>
       </div>
+    ) : (
+      <div>{_products}</div>
     );
   }
 }
 
-export default Menu
+export default Menu;

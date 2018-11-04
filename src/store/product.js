@@ -8,7 +8,7 @@ export const Store = (function() {
     var store = {
       products: observable([]),
       addProduct: product => {
-        store.products.push(product);
+        store.products.push({ product, count: 1 });
       }
     };
     return store;

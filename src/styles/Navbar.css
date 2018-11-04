@@ -110,6 +110,14 @@
     font-size: 15px;
 }
 
+.dropdown-menu > li > a {
+    color: white !important;
+}
+
+.dropdown-menu > li > a:hover {
+    color: #222 !important;
+}
+
 .dropdown-menu div a:hover{
     color: white;
     background: rgba(255,255,255,0.3);

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { DropdownButton } from "react-bootstrap";
+import { DropdownButton, Image, Button } from "react-bootstrap";
 import { observer } from "mobx-react";
 import { Link } from "react-router-dom";
 import { Store } from "../../../store/product";
@@ -7,17 +7,33 @@ import { Store } from "../../../store/product";
 const _store = Store.getInstance();
 
 class Cart extends Component {
-  getComponent(products, transparent) {
-    return products.map(product => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cartOpen: false
+    };
+  }
+  getComponent(products) {
+    return products.map(_product => {
+      const { product, count } = _product;
       return (
-        <li
-          role="presentation"
+        <div
           style={{
-            background: transparent ? "transparent" : "#222"
+            width: "300px",
+            background: "white",
+            color: "black",
+            padding: "5px"
           }}
         >
-          {product.name}
-        </li>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Image
+              style={{ width: "75px", height: "75px" }}
+              src={product.imageUrl}
+            />
+            <h3>{product.name}</h3>
+            <h3>{product.price * count}</h3>
+          </div>
+        </div>
       );
     });
   }
@@ -25,16 +41,25 @@ class Cart extends Component {
   render() {
     const { transparent } = this.props;
     return (
-      <DropdownButton title="Cart" className="dropdown-button">
+      <DropdownButton
+        title="Cart"
+        className="dropdown-button"
+        open={this.state.cartOpen}
+        onToggle={() => {}}
+        onMouseOver={() => this.setState({ cartOpen: true })}
+        onMouseLeave={() => this.setState({ cartOpen: false })}
+      >
         {this.getComponent(_store.products, transparent)}
-        <li
-          role="presentation"
-          style={{
-            background: transparent ? "transparent" : "#222"
-          }}
-        >
-          <Link to="/">Check out</Link>
-        </li>
+
+        <Link to="/">
+          <Button
+            bsStyle="danger"
+            style={{ width: "100%" }}
+            disabled={_store.products.length === 0}
+          >
+            Check out
+          </Button>
+        </Link>
       </DropdownButton>
     );
   }
