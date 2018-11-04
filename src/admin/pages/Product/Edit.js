@@ -25,7 +25,7 @@ export class Edit extends Component {
     const id = queryString.parse(window.location.search)._id;
     if (!this.state.loaded) {
       axios
-        .get("/ingredients/find?_id=" + id)
+        .get("/products/find?_id=" + id)
         .then(res => {
           this.setState({
             oldPictures: res.data.imageUrl ? res.data.imageUrl : [],
@@ -73,14 +73,14 @@ export class Edit extends Component {
     });
     formData.append("oldPictures", this.state.oldPictures);
     axios
-      .put("/ingredients/edit", formData)
+      .put("/products/edit", formData)
       .then(res => this.setState({ redirect: true }))
       .catch(err => console.log(err));
   }
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to="/admin/ingredients" />;
+      return <Redirect to="/admin/products" />;
     }
     const images = this.state.oldPictures.map(picture => {
       return (
@@ -88,7 +88,7 @@ export class Edit extends Component {
           <img
             src={`/${picture}`}
             className="img-responsive"
-            alt="ingredient"
+            alt="products"
           />
         </ImageWrapper>
       );
@@ -96,7 +96,7 @@ export class Edit extends Component {
     return (
       <div className="panel panel-warning">
         <div className="panel-heading">
-          <div>Edit ingredient</div>
+          <div>Edit products</div>
         </div>
         <div className="panel-body">
           <div className="row">

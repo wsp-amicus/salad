@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ImageUploader from "react-images-upload";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import CreatableSelect from "react-select/lib/Creatable";
 
 export class Create extends Component {
   constructor(props) {
@@ -11,11 +12,35 @@ export class Create extends Component {
       name: "",
       price: "",
       description: "",
-      redirect: false
+      redirect: false,
+      ingredients: [],
+      options: []
     };
     this.onDrop = this.onDrop.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSelected = this.handleSelected.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+  }
+
+  componentWillMount() {
+    axios.get("/ingredients").then(res => {
+      const { data } = res;
+      const _data = [];
+      data.forEach(d => {
+        const value = d.name;
+        const label = d.name;
+        _data.push({ value, label });
+      });
+      this.setState({ options: _data });
+    });
+  }
+
+  handleSelectChange(newValue: any, actionMeta: any) {
+    console.group("Value Changed");
+    console.log(newValue);
+    this.setState({ ingredients: newValue });
+    console.log(`action: ${actionMeta.action}`);
+    console.groupEnd();
   }
 
   handleSelected(selectedOption) {
@@ -44,18 +69,19 @@ export class Create extends Component {
     formData.append("name", this.state.name);
     formData.append("price", this.state.price);
     formData.append("description", this.state.description);
+    formData.append("ingredients", JSON.stringify(this.state.ingredients));
     this.state.pictures.forEach((picture, index) => {
       formData.append("picture-" + index, picture);
     });
     axios
-      .post("/ingredients/create", formData)
+      .post("/products/create", formData)
       .then(res => this.setState({ redirect: true }))
       .catch(err => console.log(err));
   }
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to="/admin/ingredients" />;
+      return <Redirect to="/admin/products" />;
     }
     return (
       <div className="panel panel-warning">
@@ -95,6 +121,15 @@ export class Create extends Component {
                 className="form-control"
                 value={this.state.description}
                 onChange={this.handleChange}
+              />
+            </div>
+            <div className="col-md-6">
+              <label>Ingredient</label>
+              <CreatableSelect
+                isMulti
+                onChange={this.handleSelectChange}
+                // onInputChange={this.handleSelectInputChange}
+                options={this.state.options}
               />
             </div>
           </div>
