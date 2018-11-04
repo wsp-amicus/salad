@@ -14,7 +14,6 @@ import adminRoutes from './admin/routes'
 import Admin from './admin/Index'
 import Loading from './components/Loading'
 import Cookies from 'js-cookie'
-import Ingredients from './components/Ingredients'
 import Custom from './components/Custom'
 import Menu from './components/menu/Menu'
 
@@ -108,8 +107,6 @@ class App extends Component {
                 path="/"
                 component={() => <Home height={this.state.height} />}
               />
-
-              <Route path="/ingredients" component={Ingredients} />
 
               <Route path="/custom" component={Custom} />
 

@@ -12,20 +12,20 @@ const validateEmail = (req, res, next) => {
 }
 
 const userController = {
-  index(req,res) {
+  index(req, res) {
     User.find({}, (err, users) => {
-      if(err) {
+      if (err) {
         res.status(500).send('Error on query.')
       }
       res.send(users)
     })
   },
-  find(req,res) {
+  find(req, res) {
     User.findOne(req.query, (err, users) => {
-      if(err) {
+      if (err) {
         res.status(500).send('Error on query.')
       }
-      if(!users) {
+      if (!users) {
         res.status(404).send('User is not found')
       }
       res.send(users)
@@ -97,7 +97,7 @@ const userController = {
       res.send(user)
     })
   },
-  update(req,res) {
+  update(req, res) {
     User.findOne({ _id: req.body._id }, (err, user) => {
       if (err) throw err
       user.firstName = req.body.firstName
@@ -108,9 +108,9 @@ const userController = {
       res.status(200).send('done')
     })
   },
-  delete(req,res) {
+  delete(req, res) {
     User.deleteOne(req.query, (err) => {
-      if(err) throw err
+      if (err) throw err
       res.status(200).send('done')
     })
   }
