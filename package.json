@@ -81,7 +81,7 @@
     "testcafe": "^0.22.0"
   },
   "scripts": {
-    "start": "nodemon server/app.js & npm run frontend",
+    "start": "nodemon backend & npm run frontend",
     "backend": "nodemon --exec babel-node server/app.js",
     "frontend": "node scripts/start.js",
     "build": "node scripts/build.js",
