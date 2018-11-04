@@ -24,7 +24,7 @@ export default class Custom extends Component {
             src={carrot}
             responsive
             width="40%"
-            style={{ bottom: `10%`, left: `30%` }}
+            style={{ bottom: `15%`, left: `30%` }}
           />
         </div>
       </div>
