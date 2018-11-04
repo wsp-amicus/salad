@@ -4,6 +4,7 @@ import { Image } from 'react-bootstrap'
 import bowl from '../static/bowl.png'
 import lettuce from '../static/lettuce.png'
 import carrot from '../static/carrot.png'
+import Ingredient from '../components/Ingredients'
 
 export default class Custom extends Component {
   render() {
@@ -27,6 +28,7 @@ export default class Custom extends Component {
             style={{ bottom: `15%`, left: `30%` }}
           />
         </div>
+        <Ingredient />
       </div>
     )
   }
