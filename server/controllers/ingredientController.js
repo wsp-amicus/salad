@@ -20,6 +20,8 @@ const ingredientController = {
     let imageUrl = req.files;
     if (imageUrl) {
       imageUrl = ingredientController.upload(imageUrl);
+    } else {
+      imageUrl = req.body.imageUrl
     }
 
     let ingredient = new Ingredient({
