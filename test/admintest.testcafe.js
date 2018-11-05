@@ -92,16 +92,16 @@ test('AddProduct', async t => {
         .click(Selector('a').withText('Products'))
         .click(Selector('.metismenu-item').nth(7).find('a').withText('Add'))
         .typeText(Selector('[name="name"].form-control'), 'product1')
-        .typeText(Selector('[name="price"].form-control'), '1')
-        .typeText(Selector('[name="description"].form-control'), 'product1')
-        .click(Selector('.css-1492t68'))
-        .click(Selector('.css-1492t68'))
+        .typeText(Selector('[name="price"].form-control'), '123')
+        .typeText(Selector('[name="description"].form-control'), 'producc')
+        .pressKey('backspace')
+        .typeText(Selector('[name="description"].form-control'), 't1')
         .click(Selector('button').withText('Submit'))
         .typeText(Selector('.search'), 'product1')
         .expect(Selector('td').withText('product1').nth(0).textContent).eql("product1")
         .expect(Selector('td').withText('product1').nth(1).textContent).eql("product1")
-        .expect(Selector('td').withText('1').nth(2).textContent).eql("1")
-        .expect(Selector('.table.table-hover.table-striped').find('tbody').find('tr').find('td').nth(3).textContent).eql("[]");
+        .expect(Selector('td').withText('123').textContent).eql("123")
+        .expect(Selector('.table.table-hover.table-striped').find('tbody').find('tr').find('td').nth(3).textContent).eql("[\"[]\"]");
 });
 
 test('DeleteProduct', async t => {

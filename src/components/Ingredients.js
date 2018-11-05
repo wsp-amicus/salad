@@ -28,10 +28,14 @@ class Ingredients extends Component {
 
   render() {
     return (
-      <div className="ingredient-content">
-        <div className="ingreMenu">
-          {this.state.ingre && this.state.ingre.length > 0
-            ? this.state.ingre.map(item => {
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <div className="custom-list">
+
+        </div>
+        <div className="ingredient-content">
+          <div className="ingreMenu">
+            {this.state.ingre && this.state.ingre.length > 0
+              ? this.state.ingre.map(item => {
                 return (
                   <div className="box-container" key={item.name}>
                     <div className="image-container">
@@ -45,18 +49,18 @@ class Ingredients extends Component {
                           />
                         </div>
                       ) : (
-                        <img
-                          className="fadeIn"
-                          id="box"
-                          src={
-                            item.imageUrl.length > 1
-                              ? item.imageUrl
-                              : item.imageUrl[0]
-                          }
-                          alt="ingredients"
-                          height="200px"
-                        />
-                      )}
+                          <img
+                            className="fadeIn"
+                            id="box"
+                            src={
+                              item.imageUrl.length > 1
+                                ? item.imageUrl
+                                : item.imageUrl[0]
+                            }
+                            alt="ingredients"
+                            height="200px"
+                          />
+                        )}
                       <div className="button-container">
                         <Button id="add-button" bsStyle="success">
                           <img id="cart" src={CartImage} alt="cart" />
@@ -72,8 +76,10 @@ class Ingredients extends Component {
                   </div>
                 )
               })
-            : 'No ingredient'}
+              : 'No ingredient'}
+          </div>
         </div>
+
       </div>
     )
   }
