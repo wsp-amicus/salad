@@ -61,3 +61,13 @@
     top: auto !important;
     left: auto !important;
 }
+
+.gear {
+  margin-left: auto;
+}
+
+@media screen and (max-width: 652px) {
+  .gear {
+    margin-left: 0;
+  }
+}
