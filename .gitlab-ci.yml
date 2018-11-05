@@ -1,14 +1,43 @@
-image: node:4.2.2
+image: node:latest
 
 cache:
+  key: node_modules
   paths:
-  - node_modules/
+    - node_modules
 
 stages:
-  - production
+  - install
+  - build
+  - deploy
 
-deploy:
-  stage: production
-  script: npm run deploy
+install:
+  stage: install
   only:
     - master
+  script:
+    - yarn install
+  artifacts:
+    paths:
+      - node_modules
+
+build:
+  stage: build
+  only:
+    - master
+  script:
+    - yarn run build
+  dependencies:
+    - install
+  artifacts:
+    paths:
+      - build
+
+deploy:
+  stage: deploy
+  only:
+    - master
+  script:
+    - ssh wsp@wsp.thitgorn.com
+  dependencies:
+    - install
+    - build
