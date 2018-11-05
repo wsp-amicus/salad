@@ -1,23 +1,29 @@
-import Axios from "axios";
-import React, { Component } from "react";
-import { Button } from "react-bootstrap";
-import "../styles/Ingredients.css";
-import Loader from "react-loader-spinner";
-import CartImage from "../static/cart.png";
+import Axios from 'axios'
+import React, { Component } from 'react'
+import { Button } from 'react-bootstrap'
+import '../styles/Ingredients.css'
+import Loader from 'react-loader-spinner'
+import CartImage from '../static/cart.png'
 
 class Ingredients extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       ingre: []
-    };
+    }
   }
   componentDidMount() {
-    Axios.get("/ingredients")
+    Axios.get('/ingredients')
       .then(res => {
-        this.setState({ ingre: res.data });
+        this.setState({ ingre: res.data })
+        this.state.ingre.sort(
+          (a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0)
+        )
+        this.state.ingre.sort(
+          (a, b) => (a.type > b.type ? -1 : b.type > a.type ? 1 : 0)
+        )
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
   }
 
   render() {
@@ -25,18 +31,12 @@ class Ingredients extends Component {
       <div className="ingredient-content">
         <div className="ingreMenu">
           {this.state.ingre && this.state.ingre.length > 0
-            ? this.state.ingre
-              .sort(
-                (a, b) => (a.type > b.type ? -1 : b.type > a.type ? 1 : 0)
-              )
-              .map(item => {
+            ? this.state.ingre.map(item => {
                 return (
                   <div className="box-container" key={item.name}>
                     <div className="image-container">
                       {this.props.loading ? (
-                        <div
-                          style={{ minHeight: "200px", minWidth: "200px" }}
-                        >
+                        <div style={{ minHeight: '200px', minWidth: '200px' }}>
                           <Loader
                             type="TailSpin"
                             color="#11ad3d"
@@ -45,23 +45,23 @@ class Ingredients extends Component {
                           />
                         </div>
                       ) : (
-                          <img
-                            className="fadeIn"
-                            id="box"
-                            src={
-                              item.imageUrl.length > 1
-                                ? item.imageUrl
-                                : item.imageUrl[0]
-                            }
-                            alt="ingredients"
-                            height="200px"
-                          />
-                        )}
+                        <img
+                          className="fadeIn"
+                          id="box"
+                          src={
+                            item.imageUrl.length > 1
+                              ? item.imageUrl
+                              : item.imageUrl[0]
+                          }
+                          alt="ingredients"
+                          height="200px"
+                        />
+                      )}
                       <div className="button-container">
                         <Button id="add-button" bsStyle="success">
                           <img id="cart" src={CartImage} alt="cart" />
                           Add
-                          </Button>
+                        </Button>
                       </div>
                     </div>
                     <hr />
@@ -70,13 +70,13 @@ class Ingredients extends Component {
                     <p>{item.description}</p>
                     <h4>{item.price}฿</h4>
                   </div>
-                );
+                )
               })
-            : "No ingredient"}
+            : 'No ingredient'}
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Ingredients;
+export default Ingredients
