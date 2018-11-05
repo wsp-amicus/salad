@@ -15,8 +15,7 @@ class Cart extends Component {
     };
   }
   getComponent(products) {
-    return products.map(_product => {
-      const { product, count } = _product;
+    return products.map(product => {
       return (
         <div
           style={{
@@ -32,7 +31,7 @@ class Cart extends Component {
               src={product.imageUrl}
             />
             <h3>{product.name}</h3>
-            <h3>{product.price * count}</h3>
+            <h3>{product.price} ฿</h3>
           </div>
         </div>
       );
@@ -54,7 +53,7 @@ class Cart extends Component {
           {this.getComponent(_store.products, transparent)}
         </div>
 
-        <Link to="/">
+        <Link to="/checkout">
           <Button
             bsStyle="danger"
             style={{ width: "100%" }}

@@ -4587,6 +4587,11 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
+hoist-non-react-statics@^1.0.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
+  integrity sha1-qkSM8JhtVcxAdzsXF0t90GbLfPs=
+
 hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
@@ -5617,6 +5622,11 @@ jest@20.0.4:
   integrity sha1-PdJgwpidba1nix6cxNkZRPbWAqw=
   dependencies:
     jest-cli "^20.0.4"
+
+jqljs@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/jqljs/-/jqljs-0.3.2.tgz#61b99ea4c468f3bc438bda457d7af6458f315e3f"
+  integrity sha512-mxdgHyk07woO0usYJri4Jj6hsDXlBSkYxE04Yu9uDB28tvzS7m3mIvn7/7hAKP04WW2wCvjNMZFm/netXwnVLA==
 
 js-base64@^2.1.9:
   version "2.4.9"
@@ -8272,6 +8282,14 @@ react-text-mask@=5.4.1:
   dependencies:
     prop-types "^15.5.6"
 
+react-thailand-address-typeahead@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-thailand-address-typeahead/-/react-thailand-address-typeahead-1.0.1.tgz#415f578dc5dd606062a0ed49a05b5d15aabf8451"
+  integrity sha512-pyimz0IldGGE2uX7/NsK5ssQGAFFSiacj3/HkmM22BfmSKdWAPH8pPYq7XPc4LbqPv5JbsA/+jto6qf4oOWqrg==
+  dependencies:
+    jqljs "^0.3.2"
+    recompose "0.23.0"
+
 react-themeable@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-themeable/-/react-themeable-1.1.0.tgz#7d4466dd9b2b5fa75058727825e9f152ba379a0e"
@@ -8412,6 +8430,16 @@ readdirp@^2.0.0:
     minimatch "^3.0.2"
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
+
+recompose@0.23.0:
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.23.0.tgz#604840c3b75517cf57cf48d395c22fc7301820be"
+  integrity sha1-YEhAw7dVF89Xz0jTlcIvxzAYIL4=
+  dependencies:
+    change-emitter "^0.1.2"
+    fbjs "^0.8.1"
+    hoist-non-react-statics "^1.0.0"
+    symbol-observable "^1.0.4"
 
 recompose@^0.28.0:
   version "0.28.2"
