@@ -1,34 +1,34 @@
-import React, { Component } from 'react'
-import { observer } from 'mobx-react'
-import { FormGroup, FormControl, Button } from 'react-bootstrap'
-import InputAddress from 'react-thailand-address-autocomplete'
-import { Store } from '../../store/product'
-import CartImage from '../../static/cart.png'
-import { addProduct2Cart } from '../../store/product'
-import '../../styles/Ingredients.css'
-import './checkout.css'
-import axios from 'axios'
-const _store = Store.getInstance()
+import React, { Component } from "react";
+import { observer } from "mobx-react";
+import { FormGroup, FormControl, Button } from "react-bootstrap";
+import InputAddress from "react-thailand-address-autocomplete";
+import { Store } from "../../store/product";
+import CartImage from "../../static/cart.png";
+import { addProduct2Cart } from "../../store/product";
+import "../../styles/Ingredients.css";
+import "./checkout.css";
+import axios from "axios";
+const _store = Store.getInstance();
 
 class Checkout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      subdistrict: '',
-      district: '',
-      province: '',
-      zipcode: '',
+      subdistrict: "",
+      district: "",
+      province: "",
+      zipcode: "",
       products: []
-    }
-    this.onChange = this.onChange.bind(this)
-    this.onSelect = this.onSelect.bind(this)
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSelect = this.onSelect.bind(this);
   }
 
   componentWillMount() {
     axios
-      .get('/products')
+      .get("/products")
       .then(res => this.setState({ products: res.data, loading: false }))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   }
 
   onChange(e) {
@@ -38,7 +38,7 @@ class Checkout extends Component {
   }
 
   addProduct2Cart(product) {
-    addProduct2Cart(product)
+    addProduct2Cart(product);
   }
 
   onSelect(fullAddress) {
@@ -52,9 +52,9 @@ class Checkout extends Component {
   }
 
   getTotal(products) {
-    let price = 0
-    products.forEach(product => (price += product.price))
-    return price
+    let price = 0;
+    products.forEach(product => (price += product.price));
+    return price;
   }
 
   getListComponent(products) {
@@ -72,18 +72,54 @@ class Checkout extends Component {
         >
           <img
             src={product.imageUrl}
-            style={{ width: '100px', height: '100%' }}
+            style={{ width: "100px", height: "100%" }}
             alt="product"
           />
-          <h4 style={{ marginTop: '25px' }}>{product.name}</h4>
-          <h4 style={{ marginTop: '25px' }}>{product.price} ฿</h4>
+          <h4 style={{ marginTop: "25px" }}>{product.name}</h4>
+          <h4 style={{ marginTop: "25px" }}>{product.price} ฿</h4>
         </div>
-      )
-    })
+      );
+    });
+  }
+
+  getSuggestProduct(products) {
+    return products.map(product => {
+      return (
+        <div
+          key={product.name}
+          className="box-container"
+          style={{ width: "250px" }}
+        >
+          <div className="image-container">
+            <img
+              className="fadeIn"
+              id="box"
+              src={product.imageUrl[0]}
+              alt="ingredients"
+              height="auto"
+              width="auto"
+            />
+            <div className="button-container">
+              <Button
+                id="add-button"
+                bsStyle="success"
+                onClick={() => this.addProduct2Cart(product)}
+              >
+                <img id="cart" src={CartImage} alt="cart" />
+                Add
+              </Button>
+            </div>
+          </div>
+          <hr />
+          <h3>{product.name}</h3>
+          <h4>{product.price} ฿</h4>
+        </div>
+      );
+    });
   }
 
   render() {
-    const _products = this.state.products.splice(0, 3)
+    const _products = this.state.products.slice(0, 3);
     return (
       <div>
         <div style={{ textAlign: "center", marginTop: "130px" }}>
@@ -93,13 +129,13 @@ class Checkout extends Component {
           <h2>Order Review</h2>
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              border: '1px solid black',
-              padding: '0px 20px',
-              margin: '10px',
-              background: 'rgba(0,0,0,0.8)',
-              color: 'white'
+              display: "flex",
+              justifyContent: "space-between",
+              border: "1px solid black",
+              padding: "0px 20px",
+              margin: "10px",
+              background: "rgba(0,0,0,0.8)",
+              color: "white"
             }}
           >
             <h4>Image</h4>
@@ -109,7 +145,7 @@ class Checkout extends Component {
             <h4>TotalPrice</h4>
           </div>
           {this.getListComponent(_store.products)}
-          <div style={{ textAlign: 'right' }}>
+          <div style={{ textAlign: "right" }}>
             <h3>Total</h3>
             <h3>{this.getTotal(_store.products)} ฿</h3>
           </div>
@@ -126,7 +162,7 @@ class Checkout extends Component {
               type="text"
               style={{ height: "37px", color: "black" }}
             />
-            <div style={{ display: "flex", flexWrap: "wrap"  }}>
+            <div style={{ display: "flex", flexWrap: "wrap" }}>
               <div>
                 <label>Sub-district</label>
                 <InputAddress
@@ -172,46 +208,20 @@ class Checkout extends Component {
             </div>
           </FormGroup>
         </div>
-        <div style={{ textAlign: 'center', margin: '40px' }}>
-          <Button bsStyle="primary" bsSize="large" style={{ width: '200px' }}>
+        <div style={{ textAlign: "center", margin: "40px" }}>
+          <Button bsStyle="primary" bsSize="large" style={{ width: "200px" }}>
             Order
           </Button>
         </div>
-        <div style={{ textAlign: 'center', marginTop: '50px' }}>
+        <div style={{ textAlign: "center", marginTop: "50px" }}>
           <h1>Would you like anything else?</h1>
-          <div style={{ display: 'flex', width: '80%', margin: 'auto' }}>
-            {_products.map(product => (
-              <div className="box-container" style={{ width: '250px' }}>
-                <div className="image-container">
-                  <img
-                    className="fadeIn"
-                    id="box"
-                    src={product.imageUrl[0]}
-                    alt="ingredients"
-                    height="auto"
-                    width="auto"
-                  />
-                  <div className="button-container">
-                    <Button
-                      id="add-button"
-                      bsStyle="success"
-                      onClick={() => this.addProduct2Cart(product)}
-                    >
-                      <img id="cart" src={CartImage} alt="cart" />
-                      Add
-                    </Button>
-                  </div>
-                </div>
-                <hr />
-                <h3>{product.name}</h3>
-                <h4>{product.price} ฿</h4>
-              </div>
-            ))}
+          <div style={{ display: "flex", width: "80%", margin: "auto" }}>
+            {this.getSuggestProduct(_products)}
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default observer(Checkout)
+export default observer(Checkout);
