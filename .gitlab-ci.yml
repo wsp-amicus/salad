@@ -37,7 +37,7 @@ deploy:
   only:
     - master
   script:
-    - ssh wsp@wsp.thitgorn.com
+    - curl $hooks_URL
   dependencies:
     - install
     - build
