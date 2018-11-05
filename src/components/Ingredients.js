@@ -4,12 +4,14 @@ import { Button } from 'react-bootstrap'
 import '../styles/Ingredients.css'
 import Loader from 'react-loader-spinner'
 import CartImage from '../static/cart.png'
+import { addProduct2Cart } from '../store/product';
 
 class Ingredients extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      ingre: []
+      ingre: [],
+      selected: []
     }
   }
   componentDidMount() {
@@ -26,11 +28,62 @@ class Ingredients extends Component {
       .catch(err => console.log(err))
   }
 
+  getTotalPrice(ingredients) {
+    let price = 0
+    ingredients.forEach(product => price += product.price)
+    return price
+  }
+
+  // getCustomIngredients(ingredients) {
+  //   const counts = {}
+  //   ingredients.forEach(item => {
+  //     if (!counts[item.name]) counts[item.name] = 0
+  //     counts[item.name] += 1
+  //   })
+  //   console.log(counts)
+  //   const 
+  // }
+
   render() {
     return (
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         <div className="custom-list">
-
+          <h2 style={{ marginBottom: '50px' }}>Ingredients</h2>
+          <h4 style={{ display: 'flex' }}>Total price: <p style={{ color: 'red', marginLeft: 'auto', marginRight: '0', fontSize: '22px' }}>{this.getTotalPrice(this.state.selected)} ฿</p></h4>
+          <Button
+            onClick={() => addProduct2Cart({
+              name: 'Custom',
+              ingredients: this.state.selected,
+              price: this.getTotalPrice(this.state.selected),
+              description: '',
+              imageUrl: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2IJmKt8z72wzaYgCmlhlmdcW-4dKtoqtUE8qDM_9PjVIj1kby'],
+            })}
+            bsStyle="primary"
+            style={{ background: 'green' }}
+          >
+            <img src={CartImage} alt="cart" height="20px" style={{ marginRight: '10px' }} />
+            Add to cart
+          </Button>
+          <hr />
+          {this.state.selected.length > 0 ? this.state.selected.map(item => (
+            <div style={{ display: 'flex' }}>
+              <img src={item.imageUrl.length > 1
+                ? item.imageUrl
+                : item.imageUrl[0]
+              }
+                alt="selected"
+                height="100px"
+              />
+              <h4 style={{ margin: 'auto', padding: '0 10px 0 0' }}>{item.name}</h4>
+              <Button
+                bsStyle="danger"
+                style={{ height: '35px', margin: 'auto', marginRight: '0' }}
+                onClick={() => this.setState({ selected: this.state.selected.filter(i => i.id !== item.id) })}
+              >
+                X
+              </Button>
+            </div>
+          )) : <h4>No ingredient selected</h4>}
         </div>
         <div className="ingredient-content">
           <div className="ingreMenu">
@@ -62,7 +115,7 @@ class Ingredients extends Component {
                           />
                         )}
                       <div className="button-container">
-                        <Button id="add-button" bsStyle="success">
+                        <Button id="add-button" bsStyle="success" onClick={() => this.setState({ selected: [...this.state.selected, { ...item, id: this.state.selected.length }] })}>
                           <img id="cart" src={CartImage} alt="cart" />
                           Add
                         </Button>
@@ -76,11 +129,11 @@ class Ingredients extends Component {
                   </div>
                 )
               })
-              : 'No ingredient'}
+              : <h4>No ingredient</h4>}
           </div>
         </div>
 
-      </div>
+      </div >
     )
   }
 }
