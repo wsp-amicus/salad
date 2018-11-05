@@ -1,0 +1,6 @@
+stages:
+  - production
+
+deploy:
+  stage: production
+  script: npm run deploy
