@@ -26,11 +26,7 @@ class Menu extends Component {
   render() {
     let _products = this.state.products.map(product => {
       const _ingredients = product.ingredients ? product.ingredients.reduce(
-<<<<<<< HEAD
-        (prev, cur) => `${prev}, ${cur}`) : ''
-=======
         (prev, cur) => prev ? `${prev}, ${cur}` : cur, '') : ''
->>>>>>> 2f5e6b691bb509d7dadca9c0612abe4c5cc31877
       return (
         <div className="background product-center fadeIn">
           <div className="MenuImage">
