@@ -28,7 +28,7 @@ class Menu extends Component {
       <Col md={12}>
         <div className="outset" />
       </Col>
-    )
+    );
     let _products = this.state.products.map(product => {
       const _ingredients = product.ingredients.map(ing => <li>{ing.label}</li>);
       return (
@@ -47,9 +47,7 @@ class Menu extends Component {
               <Row className="text">
                 <h1>{product.name}</h1>
               </Row>
-              <Row>
-                  {line}
-              </Row>
+              <Row>{line}</Row>
               <Row className="text">
                 <h4>{product.description}</h4>
               </Row>
@@ -71,15 +69,26 @@ class Menu extends Component {
         </div>
       );
     });
-    return this.state.loading ? (
-      <div
-        style={{ textAlign: "center", minHeight: "200px", minWidth: "200px" }}
-      >
-        <Loader type="ThreeDots" color="#11ad3d" height={140} width={140} />
-        <h3>Amicus Loading...</h3>
+    return (
+      <div>
+        <div style={{ textAlign: 'center' }}>
+          <h3>Products</h3>
+        </div>
+        {this.state.loading ? (
+          <div
+            style={{
+              textAlign: "center",
+              minHeight: "200px",
+              minWidth: "200px"
+            }}
+          >
+            <Loader type="ThreeDots" color="#11ad3d" height={140} width={140} />
+            <h3>Amicus Loading...</h3>
+          </div>
+        ) : (
+          <div>{_products}</div>
+        )}
       </div>
-    ) : (
-      <div>{_products}</div>
     );
   }
 }

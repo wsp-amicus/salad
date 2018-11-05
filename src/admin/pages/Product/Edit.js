@@ -4,6 +4,7 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import queryString from "query-string";
 import ImageWrapper from "./ImageWrapper";
+import CreatableSelect from "react-select/lib/Creatable";
 
 export class Edit extends Component {
   constructor(props) {
@@ -14,14 +15,17 @@ export class Edit extends Component {
       name: "",
       price: "",
       description: "",
-      redirect: false
+      redirect: false,
+      ingredients: [],
+      options: []
     };
     this.onDrop = this.onDrop.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleOldDelete = this.handleOldDelete.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this)
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const id = queryString.parse(window.location.search)._id;
     if (!this.state.loaded) {
       axios
@@ -33,10 +37,30 @@ export class Edit extends Component {
             price: res.data.price,
             description: res.data.description,
             loaded: true,
+            ingredients: res.data.ingredients
           });
         })
         .catch(err => console.log(err));
     }
+
+    axios.get("/ingredients").then(res => {
+      const { data } = res;
+      const _data = [];
+      data.forEach(d => {
+        const value = d.name;
+        const label = d.name;
+        _data.push({ value, label });
+      });
+      this.setState({ options: _data });
+    });
+  }
+
+  handleSelectChange(newValue: any, actionMeta: any) {
+    console.group("Value Changed");
+    console.log(newValue);
+    this.setState({ ingredients: newValue });
+    console.log(`action: ${actionMeta.action}`);
+    console.groupEnd();
   }
 
   handleOldDelete(url) {
@@ -56,10 +80,7 @@ export class Edit extends Component {
   }
 
   handleSubmit(e) {
-    if (
-      this.state.name === "" ||
-      this.state.price === ""
-    ) {
+    if (this.state.name === "" || this.state.price === "") {
       return;
     }
     e.preventDefault();
@@ -68,6 +89,7 @@ export class Edit extends Component {
     formData.append("name", this.state.name);
     formData.append("price", this.state.price);
     formData.append("description", this.state.description);
+    formData.append("ingredients", JSON.stringify(this.state.ingredients));
     this.state.pictures.forEach((picture, index) => {
       formData.append("picture-" + index, picture);
     });
@@ -85,11 +107,7 @@ export class Edit extends Component {
     const images = this.state.oldPictures.map(picture => {
       return (
         <ImageWrapper url={picture} onRemove={this.handleOldDelete}>
-          <img
-            src={`/${picture}`}
-            className="img-responsive"
-            alt="products"
-          />
+          <img src={`/${picture}`} className="img-responsive" alt="products" />
         </ImageWrapper>
       );
     });
@@ -130,6 +148,17 @@ export class Edit extends Component {
                 className="form-control"
                 value={this.state.description}
                 onChange={this.handleChange}
+              />
+            </div>
+
+            <div className="col-md-6">
+              <label>Ingredient</label>
+              <CreatableSelect
+                isMulti
+                onChange={this.handleSelectChange}
+                // onInputChange={this.handleSelectInputChange}
+                value={this.state.ingredients}
+                options={this.state.options}
               />
             </div>
           </div>
