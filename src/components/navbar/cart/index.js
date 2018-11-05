@@ -3,6 +3,7 @@ import { DropdownButton, Image, Button } from "react-bootstrap";
 import { observer } from "mobx-react";
 import { Link } from "react-router-dom";
 import { Store } from "../../../store/product";
+import "../../../styles/Cart.css";
 
 const _store = Store.getInstance();
 
@@ -49,7 +50,9 @@ class Cart extends Component {
         onMouseOver={() => this.setState({ cartOpen: true })}
         onMouseLeave={() => this.setState({ cartOpen: false })}
       >
+      <div className="scroll">
         {this.getComponent(_store.products, transparent)}
+        </div>
 
         <Link to="/">
           <Button

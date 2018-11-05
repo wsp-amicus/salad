@@ -24,6 +24,11 @@ class Menu extends Component {
   }
 
   render() {
+    const line = (
+      <Col md={12}>
+        <div className="outset" />
+      </Col>
+    )
     let _products = this.state.products.map(product => {
       const _ingredients = product.ingredients.map(ing => <li>{ing.label}</li>);
       return (
@@ -41,6 +46,9 @@ class Menu extends Component {
             <Col md={7}>
               <Row className="text">
                 <h1>{product.name}</h1>
+              </Row>
+              <Row>
+                  {line}
               </Row>
               <Row className="text">
                 <h4>{product.description}</h4>
