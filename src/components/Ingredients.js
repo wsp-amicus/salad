@@ -34,16 +34,6 @@ class Ingredients extends Component {
     return price
   }
 
-  // getCustomIngredients(ingredients) {
-  //   const counts = {}
-  //   ingredients.forEach(item => {
-  //     if (!counts[item.name]) counts[item.name] = 0
-  //     counts[item.name] += 1
-  //   })
-  //   console.log(counts)
-  //   const 
-  // }
-
   render() {
     return (
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
