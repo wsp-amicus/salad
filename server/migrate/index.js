@@ -178,6 +178,46 @@ function up() {
     imageUrl: 'https://www.madgreens.com/sites/default/files/styles/adaptive/public/dressing-creamy-ginger_thumb.png?itok=r-oYJqEA'
   }
 
+  const ceasarSalad = {
+    name : 'Autumn caesar salad',
+    imageUrl: 'https://media.justsalad.com/assets/Fall_Autumn_Caesar.png',
+    ingredients: ['Green oak','Green coral','Chicken','Mozzarella Cheese','Ceasar dressing'],
+    price : 100,
+    description : '410 CAL'
+  }
+
+  const pestoSalad = {
+    name : 'Pesto chicken paradise',
+    imageUrl: 'https://media.justsalad.com/assets/Fall_Pesto_Chicken_Paradise.png',
+    ingredients: ['Green oak','Red oak','Tomatoes','Chicken','Mozzarella Cheese','Pesto dressing'],
+    price : 120,
+    description : '560 CAL'
+  }
+
+  const california = {
+    name : 'The California',
+    imageUrl: 'https://media.justsalad.com/assets/img/pages/menu/salads/the-california.png',
+    ingredients: ['Green coral','Red oak','Tomatoes','Chicken','Roast almonds','Eggs','Balsamic dressing'],
+    price : 120,
+    description : '310 CAL'
+  }
+
+  const salmonSalad = {
+    name : 'Salmon ranch salad',
+    imageUrl: 'https://media.justsalad.com/assets/JS_Menu_Salads_Buffalo_Chicken_Salad.png',
+    ingredients: ['Green oak','carrot','salmon','Pepper Jack cheese','Chips','Ranch dressing'],
+    price : 180,
+    description : '320 CAL'
+  }
+
+  const sweetValley = {
+    name : 'Sweet Valley',
+    imageUrl: 'https://media.justsalad.com/assets/JS_Menu_Salads_Modern_Greek.png',
+    ingredients: ['Green oak','carrot','pork','Goat Cheese','Eggs','Agave dressing'],
+    price : 180,
+    description : '320 CAL'
+  }
+
   fetchAPI('ingredients/create', 'POST', JSON.stringify(greenOak))
   fetchAPI('ingredients/create', 'POST', JSON.stringify(redOak))
   fetchAPI('ingredients/create', 'POST', JSON.stringify(greenCoral))
@@ -198,10 +238,16 @@ function up() {
   fetchAPI('ingredients/create', 'POST', JSON.stringify(sesame))
   fetchAPI('ingredients/create', 'POST', JSON.stringify(thousandIsland))
   fetchAPI('ingredients/create', 'POST', JSON.stringify(cream))
+  fetchAPI('products/create', 'POST', JSON.stringify(ceasarSalad))
+  fetchAPI('products/create', 'POST', JSON.stringify(pestoSalad))
+  fetchAPI('products/create', 'POST', JSON.stringify(california))
+  fetchAPI('products/create', 'POST', JSON.stringify(salmonSalad))
+  fetchAPI('products/create', 'POST', JSON.stringify(sweetValley))
 }
 
 function down() {
   fetchAPI('ingredients/delete', 'DELETE')
+  fetchAPI('products/delete', 'DELETE')
 }
 
 if (require.main === module) {
