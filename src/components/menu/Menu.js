@@ -25,8 +25,8 @@ class Menu extends Component {
 
   render() {
     let _products = this.state.products.map(product => {
-      const _ingredients = product.ingredients ? product.ingredients.reduce(
-        (prev, cur) => `${prev}, ${cur}`) : ''
+      // const _ingredients = product.ingredients ? product.ingredients.reduce(
+      //   (prev, cur) => `${prev}, ${cur}`) : ''
       return (
         <div className="background product-center fadeIn">
           <div className="MenuImage">
@@ -44,7 +44,7 @@ class Menu extends Component {
             <h4>{product.description}</h4>
           </Row>
           <Row className="text">
-            <p>{_ingredients}</p>
+            {/* <p>{_ingredients}</p> */}
           </Row>
           <Row>
             <Button
