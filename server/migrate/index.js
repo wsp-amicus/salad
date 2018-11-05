@@ -119,7 +119,7 @@ function up() {
     price: 20,
     type: 'Meat',
     description: 'Fresh chicken breast',
-    imageUrl: 'https://farm2go.thinklabs.vn/wp-content/uploads/2017/10/719JxkiwTVL._SL1500_.jpg'
+    imageUrl: 'https://mbtskoudsalg.com/images/chicken-breast-png-7.png'
   }
 
   const pork = {
@@ -127,7 +127,7 @@ function up() {
     price: 30,
     type: 'Meat',
     description: 'High quality pork',
-    imageUrl: 'https://amishhealthyfoods.com/wp-content/uploads/2018/03/pork_chop_20170820151944.png'
+    imageUrl: 'https://png2.kisspng.com/sh/d27fefcb7b7cd342b04447721b929b27/L0KzQYm3U8I6N5VriZH0aYP2gLBuTfJmbZd4jNdqaz3qgrrzjPlvb154iNtsZT3ldbbtTgRmdpVqit54aX6wg8XsgfsuPZJnfNM6NHPkSIa6WMYvPGg7TaU5MkK0RYO5U8c4OGQ7TqoENT7zfri=/kisspng-beefsteak-grilling-spice-beef-tenderloin-steak-5abda14ca85386.4765302215223770366895.png'
   }
 
   const ham = {
