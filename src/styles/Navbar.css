@@ -1,3 +1,6 @@
+body{
+    font-family: "Work Sans", sans-serif;
+}
 .bar{
     background: transparent;
     position: fixed;
