@@ -89,12 +89,7 @@ class Checkout extends Component {
         <div style={{ textAlign: "center", marginTop: "130px" }}>
           <h1>Checkout</h1>
         </div>
-        <div
-          style={{
-            margin: "20px",
-            padding: "20px"
-          }}
-        >
+        <div style={{ margin: "20px", padding: "20px" }}>
           <h2>Order Review</h2>
           <div
             style={{
@@ -109,7 +104,9 @@ class Checkout extends Component {
           >
             <h4>Image</h4>
             <h4>Name</h4>
+            <h4>Qty</h4>
             <h4>Price</h4>
+            <h4>TotalPrice</h4>
           </div>
           {this.getListComponent(_store.products)}
           <div style={{ textAlign: 'right' }}>
@@ -117,13 +114,7 @@ class Checkout extends Component {
             <h3>{this.getTotal(_store.products)} ฿</h3>
           </div>
         </div>
-        <div
-          style={{
-            margin: "20px",
-            padding: "20px",
-            borderRadius: "25px"
-          }}
-        >
+        <div style={{ margin: "20px", padding: "20px", borderRadius: "25px" }}>
           <h2>Derivery address</h2>
           <FormGroup
             bsSize="large"
@@ -135,7 +126,7 @@ class Checkout extends Component {
               type="text"
               style={{ height: "37px", color: "black" }}
             />
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", flexWrap: "wrap"  }}>
               <div>
                 <label>Sub-district</label>
                 <InputAddress
@@ -146,7 +137,7 @@ class Checkout extends Component {
                   style={{ width: "100%" }}
                 />
               </div>
-              <div style={{ margin: "auto" }}>
+              <div className="gear">
                 <label>District</label>
                 <InputAddress
                   address="district"
@@ -157,7 +148,7 @@ class Checkout extends Component {
                 />
               </div>
             </div>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", flexWrap: "wrap" }}>
               <div>
                 <label>Province</label>
                 <InputAddress
@@ -168,7 +159,7 @@ class Checkout extends Component {
                   style={{ width: "100%" }}
                 />
               </div>
-              <div style={{ margin: "auto" }}>
+              <div className="gear">
                 <label>Postal code</label>
                 <InputAddress
                   address="zipcode"
