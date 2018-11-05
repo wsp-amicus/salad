@@ -65,7 +65,7 @@ const ingredientController = {
   },
   delete(req, res) {
     // TODO delete image storage
-    Ingredient.deleteOne(req.query, err => {
+    Ingredient.deleteMany(req.query, err => {
       if (err) throw err;
       res.status(200).send("done");
     });
