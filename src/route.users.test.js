@@ -5,10 +5,10 @@ import server from '../server/app'
 const randomString =
   Math.random()
     .toString(36)
-    .substring(2, 15) +
+    .substring(2, 7) +
   Math.random()
     .toString(36)
-    .substring(2, 15);
+    .substring(2, 7);
 
 const user = {
   firstName: randomString,
@@ -35,11 +35,11 @@ describe("POST /users/login",()=>{
     const res = await request(server)
       .post("/users/login")
       .set("Content-Type","application/json")
-      .send(JSON.stringify({username:user.username,password:user.password}))
+      .send(JSON.stringify({username:"pawan1234",password:"123456789"}))
       .expect(200)
-      .expect(function(res) {
+      // .expect(function(res) {
         expect(res).toBe(user);
-      });
+      // });
     done();
   })
 })
