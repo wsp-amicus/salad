@@ -25,9 +25,9 @@ export default class Custom extends Component {
     return (
       <div className="custom-container">
         <h1>Create your own salad!</h1>
-        <div style={{ minHeight: '430px' }}>
+        <div style={{ minHeight: `30vh` }}>
           {this.state.loading ? (
-            <div style={{ paddingTop: '120px' }}>
+            <div style={{ paddingTop: `5%` }}>
               <Loader type="ThreeDots" color="#11ad3d" height={140} width={140} />
             </div>
           ) :

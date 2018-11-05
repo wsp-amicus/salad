@@ -26,25 +26,25 @@ class Ingredients extends Component {
         <div className="ingreMenu">
           {this.state.ingre && this.state.ingre.length > 0
             ? this.state.ingre
-                .sort(
-                  (a, b) => (a.type > b.type ? -1 : b.type > a.type ? 1 : 0)
-                )
-                .map(item => {
-                  return (
-                    <div className="box-container">
-                      <div className="image-container">
-                        {this.props.loading ? (
-                          <div
-                            style={{ minHeight: "200px", minWidth: "200px" }}
-                          >
-                            <Loader
-                              type="TailSpin"
-                              color="#11ad3d"
-                              height={80}
-                              width={80}
-                            />
-                          </div>
-                        ) : (
+              .sort(
+                (a, b) => (a.type > b.type ? -1 : b.type > a.type ? 1 : 0)
+              )
+              .map(item => {
+                return (
+                  <div className="box-container" key={item.name}>
+                    <div className="image-container">
+                      {this.props.loading ? (
+                        <div
+                          style={{ minHeight: "200px", minWidth: "200px" }}
+                        >
+                          <Loader
+                            type="TailSpin"
+                            color="#11ad3d"
+                            height={80}
+                            width={80}
+                          />
+                        </div>
+                      ) : (
                           <img
                             className="fadeIn"
                             id="box"
@@ -57,23 +57,21 @@ class Ingredients extends Component {
                             height="200px"
                           />
                         )}
-                        <div className="button-container">
-                          <Button id="add-button" bsStyle="success">
-                            <img id="cart" src={CartImage} alt="cart" />
-                            Add
+                      <div className="button-container">
+                        <Button id="add-button" bsStyle="success">
+                          <img id="cart" src={CartImage} alt="cart" />
+                          Add
                           </Button>
-                        </div>
                       </div>
-                      <hr />
-                      <h3>{item.name}</h3>
-                      <h4>{item.type}</h4>
-                      <p>{item.description}</p>
-                      <p>
-                        <h4>{item.price}฿</h4>
-                      </p>
                     </div>
-                  );
-                })
+                    <hr />
+                    <h3>{item.name}</h3>
+                    <h4>{item.type}</h4>
+                    <p>{item.description}</p>
+                    <h4>{item.price}฿</h4>
+                  </div>
+                );
+              })
             : "No ingredient"}
         </div>
       </div>

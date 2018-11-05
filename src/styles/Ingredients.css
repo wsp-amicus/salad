@@ -44,8 +44,8 @@
   color: black;
 }
 .box-container {
-  margin: 10px;
-  padding: 20px;
+  margin: auto;
+  padding: 10px;
 }
 
 .box-container:hover {
