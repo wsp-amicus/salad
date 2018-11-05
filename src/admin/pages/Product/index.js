@@ -72,11 +72,11 @@ export class Ingredient extends Component {
   render() {
     const _products = this.state.products;
     this.state.products.forEach((product, index) => {
-      const ingredientJson = JSON.parse(product.ingredients);
-      const _ingredient = ingredientJson.map(ingredient => {
-        return ingredient.label;
-      });
-      _products[index].ingredients = JSON.stringify(_ingredient);
+      // const ingredientJson = JSON.parse(product.ingredients);
+      // const _ingredient = ingredientJson.map(ingredient => {
+      //   return ingredient.label;
+      // });
+      _products[index].ingredients = JSON.stringify(product.ingredients);
     });
 
     return (

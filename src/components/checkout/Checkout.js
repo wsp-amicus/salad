@@ -11,35 +11,37 @@ const _store = Store.getInstance();
 
 class Checkout extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      subdistrict: '',
-      district: '',
-      province: '',
-      zipcode: '',
-    }
-    this.onChange = this.onChange.bind(this)
-    this.onSelect = this.onSelect.bind(this)
+      subdistrict: "",
+      district: "",
+      province: "",
+      zipcode: ""
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSelect = this.onSelect.bind(this);
   }
 
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
-    })
+    });
   }
 
   onSelect(fullAddress) {
-    const { subdistrict, district, province, zipcode } = fullAddress
+    const { subdistrict, district, province, zipcode } = fullAddress;
     this.setState({
       subdistrict,
       district,
       province,
       zipcode
-    })
+    });
   }
 
   getTotal(products) {
-    return products.reduce((prev, cur) => prev.price + cur.price, 0)
+    let price = 0
+    products.forEach(product => price += product.price)
+    return price
   }
 
   getListComponent(products) {
@@ -100,19 +102,13 @@ class Checkout extends Component {
   render() {
     return (
       <div>
-        <div style={{ textAlign: "center", marginTop: '130px' }}>
-          <h1>Would you like anything else?</h1>
-
-          <div style={{ display: "flex", width: "80%", margin: "auto" }}>
-            {this.getMockSuggestion([{}, {}, {}])}
-          </div>
+        <div style={{ textAlign: "center", marginTop: "130px" }}>
+          <h1>Checkout</h1>
         </div>
         <div
           style={{
             margin: "20px",
-            padding: "20px",
-            border: "1px solid black",
-            borderRadius: "25px"
+            padding: "20px"
           }}
         >
           <h2>Order Review</h2>
@@ -130,7 +126,9 @@ class Checkout extends Component {
           >
             <h4>Image</h4>
             <h4>Name</h4>
+            <h4>Qty.</h4>
             <h4>Price</h4>
+            <h4>TotalPrice</h4>
           </div>
           {this.getListComponent([..._store.products])}
           <div style={{ textAlign: "right" }}>
@@ -142,43 +140,71 @@ class Checkout extends Component {
           style={{
             margin: "20px",
             padding: "20px",
-            border: "1px solid black",
             borderRadius: "25px"
           }}
         >
           <h2>Derivery address</h2>
-          <label>ที่อยู่</label>
-          <FormGroup bsSize="large" className="address">
-            <FormControl type="text" style={{ height: '37px', color: 'black' }} />
-            <label>แขวง/ตำบล</label>
-            <InputAddress
-              address="subdistrict"
-              value={this.state.subdistrict}
-              onChange={this.onChange}
-              onSelect={this.onSelect}
+          <FormGroup
+            bsSize="large"
+            className="address"
+            style={{ margin: "0 20% 0 20%" }}
+          >
+            <label>Address</label>
+            <FormControl
+              type="text"
+              style={{ height: "37px", color: "black" }}
             />
-            <label>เขต/อำเภอ</label>
-            <InputAddress
-              address="district"
-              value={this.state.district}
-              onChange={this.onChange}
-              onSelect={this.onSelect}
-            />
-            <label>จังหวัด</label>
-            <InputAddress
-              address="province"
-              value={this.state.province}
-              onChange={this.onChange}
-              onSelect={this.onSelect}
-            />
-            <label>รหัสไปรษณีย์</label>
-            <InputAddress
-              address="zipcode"
-              value={this.state.zipcode}
-              onChange={this.onChange}
-              onSelect={this.onSelect}
-            />
+            <div style={{ display: "flex" }}>
+              <div>
+                <label>Sub-district</label>
+                <InputAddress
+                  address="subdistrict"
+                  value={this.state.subdistrict}
+                  onChange={this.onChange}
+                  onSelect={this.onSelect}
+                  style={{ width: "100%" }}
+                />
+              </div>
+              <div style={{ margin: "auto" }}>
+                <label>District</label>
+                <InputAddress
+                  address="district"
+                  value={this.state.district}
+                  onChange={this.onChange}
+                  onSelect={this.onSelect}
+                  style={{ width: "100%" }}
+                />
+              </div>
+            </div>
+            <div style={{ display: "flex" }}>
+              <div>
+                <label>Province</label>
+                <InputAddress
+                  address="province"
+                  value={this.state.province}
+                  onChange={this.onChange}
+                  onSelect={this.onSelect}
+                  style={{ width: "100%" }}
+                />
+              </div>
+              <div style={{ margin: "auto" }}>
+                <label>Postal code</label>
+                <InputAddress
+                  address="zipcode"
+                  value={this.state.zipcode}
+                  onChange={this.onChange}
+                  onSelect={this.onSelect}
+                  style={{ width: "100" }}
+                />
+              </div>
+            </div>
           </FormGroup>
+        </div>
+        <div style={{ textAlign: "center", marginTop: "130px" }}>
+          <h1>Would you like anything else?</h1>
+        </div>
+        <div style={{ display: "flex", width: "80%", margin: "auto" }}>
+          {this.getMockSuggestion([{}, {}, {}])}
         </div>
         <div style={{ textAlign: "center", margin: "40px" }}>
           <Button bsStyle="primary" bsSize="large" style={{ width: "200px" }}>
