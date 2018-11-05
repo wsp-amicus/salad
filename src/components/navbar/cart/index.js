@@ -23,10 +23,15 @@ class Listproducts extends Component {
     this.setState({ products: products });
   }
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.setState({ products: nextProps.products });
+  }
+
   render() {
     const _products = this.state.products.map(product => {
       return (
         <div
+          key={product.name}
           style={{
             width: "400px",
             background: "white",
@@ -41,7 +46,10 @@ class Listproducts extends Component {
             />
             <h3>{product.name}</h3>
             <h3>{product.price} ฿</h3>
-            <Button bsStyle="danger" onClick={() => this.removeProduct(product)}>
+            <Button
+              bsStyle="danger"
+              onClick={() => this.removeProduct(product)}
+            >
               <i className="fa fa-minus" aria-hidden="true" />
             </Button>
           </div>
@@ -73,6 +81,7 @@ class Cart extends Component {
             Cart
           </p>
         }
+        id="1"
         className="dropdown-button"
         open={this.state.cartOpen}
         noCaret
@@ -80,9 +89,9 @@ class Cart extends Component {
         onMouseOver={() => this.setState({ cartOpen: true })}
         onMouseLeave={() => this.setState({ cartOpen: false })}
       >
-        <div className="scroll">
+        <li className="scroll">
           {this.getComponent(_store.products, transparent)}
-        </div>
+        </li>
 
         <Link to="/checkout">
           <Button
