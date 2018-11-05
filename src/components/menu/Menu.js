@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Button, Image } from 'react-bootstrap'
+import { Row, Button, Image } from 'react-bootstrap'
 import Loader from 'react-loader-spinner'
 import axios from 'axios'
 import { addProduct2Cart } from '../../store/product'

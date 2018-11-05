@@ -1,0 +1,43 @@
+image: node:latest
+
+cache:
+  key: node_modules
+  paths:
+    - node_modules
+
+stages:
+  - install
+  - build
+  - deploy
+
+install:
+  stage: install
+  only:
+    - master
+  script:
+    - npm install --only=prod
+  artifacts:
+    paths:
+      - node_modules
+
+build:
+  stage: build
+  only:
+    - master
+  script:
+    - npm run build
+  dependencies:
+    - install
+  artifacts:
+    paths:
+      - build
+
+deploy:
+  stage: deploy
+  only:
+    - master
+  script:
+    - curl $hooks_URL
+  dependencies:
+    - install
+    - build
