@@ -47,3 +47,17 @@
     user-select: none;
     pointer-events: none;
 }
+
+.address > * {
+    margin: 5px 0;
+}
+
+.address > input {
+    font-size: 16px;
+}
+
+.address > div > div > div {
+    /* position: unset !important; */
+    top: auto !important;
+    left: auto !important;
+}

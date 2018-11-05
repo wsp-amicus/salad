@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
 import { FormGroup, FormControl, Button } from "react-bootstrap";
-import AddressFormTypeahead from "react-thailand-address-typeahead";
+import InputAddress from "react-thailand-address-autocomplete";
 import { Store } from "../../store/product";
 import CartImage from "../../static/cart.png";
 import SalmonImage from "../../static/Salmon.jpg";
@@ -10,18 +10,43 @@ import "./checkout.css";
 const _store = Store.getInstance();
 
 class Checkout extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      subdistrict: '',
+      district: '',
+      province: '',
+      zipcode: '',
+    }
+    this.onChange = this.onChange.bind(this)
+    this.onSelect = this.onSelect.bind(this)
+  }
+
+  onChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  onSelect(fullAddress) {
+    const { subdistrict, district, province, zipcode } = fullAddress
+    this.setState({
+      subdistrict,
+      district,
+      province,
+      zipcode
+    })
+  }
+
   getTotal(products) {
-    let total = 0;
-    products.forEach(product => {
-      total += product.price;
-    });
-    return total;
+    return products.reduce((prev, cur) => prev.price + cur.price, 0)
   }
 
   getListComponent(products) {
     return products.map(product => {
       return (
         <div
+          key={product.name}
           style={{
             display: "flex",
             justifyContent: "space-between",
@@ -75,7 +100,7 @@ class Checkout extends Component {
   render() {
     return (
       <div>
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: "center", marginTop: '130px' }}>
           <h1>Would you like anything else?</h1>
 
           <div style={{ display: "flex", width: "80%", margin: "auto" }}>
@@ -123,12 +148,37 @@ class Checkout extends Component {
         >
           <h2>Derivery address</h2>
           <label>ที่อยู่</label>
-          <FormGroup bsSize="large">
+          <FormGroup bsSize="large" className="address">
             <FormControl type="text" />
+            <label>แขวง/ตำบล</label>
+            <InputAddress
+              address="subdistrict"
+              value={this.state.subdistrict}
+              onChange={this.onChange}
+              onSelect={this.onSelect}
+            />
+            <label>เขต/อำเภอ</label>
+            <InputAddress
+              address="district"
+              value={this.state.district}
+              onChange={this.onChange}
+              onSelect={this.onSelect}
+            />
+            <label>จังหวัด</label>
+            <InputAddress
+              address="province"
+              value={this.state.province}
+              onChange={this.onChange}
+              onSelect={this.onSelect}
+            />
+            <label>รหัสไปรษณีย์</label>
+            <InputAddress
+              address="zipcode"
+              value={this.state.zipcode}
+              onChange={this.onChange}
+              onSelect={this.onSelect}
+            />
           </FormGroup>
-          <AddressFormTypeahead
-            onAddressSelected={addressObject => console.log(addressObject)}
-          />
         </div>
         <div style={{ textAlign: "center", margin: "40px" }}>
           <Button bsStyle="primary" bsSize="large" style={{ width: "200px" }}>
