@@ -53,7 +53,7 @@ const ingredientController = {
       var filename =
         dir +
         "/" +
-        moment().format("MMMM-Do-YYYY-h:mm:ss[-]") +
+        moment().format("MMMM-Do-YYYY-hmmss[-]") +
         files[key].name;
       fs.writeFile(filename, files[key].data, err => {
         if (err) throw err;

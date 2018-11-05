@@ -21,7 +21,7 @@ export class Navbar extends Component {
             </li>
             <li className="presentation login">
               <a>
-                <i className="fas fa-user" style={{ marginRight: '10px' }} />
+                <i className="fa fa-user" style={{ marginRight: '10px' }} />
                 {this.props.user ? this.props.user.username : 'loading'}
               </a>
             </li>
