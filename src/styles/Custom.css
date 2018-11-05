@@ -6,19 +6,3 @@
 .custom-container > h1 {
   margin: 120px 0 70px 0;
 }
-
-.bowl {
-  background-image: url('../static/bowl.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  display: inline-block;
-  position: relative;
-}
-
-.bowl > img.bowl {
-  visibility: hidden
-}
-
-.bowl > .ingredient {
-  position: absolute;
-}

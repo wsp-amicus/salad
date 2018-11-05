@@ -39,7 +39,9 @@ class Checkout extends Component {
   }
 
   getTotal(products) {
-    return products.reduce((prev, cur) => prev.price + cur.price, 0);
+    let price = 0
+    products.forEach(product => price += product.price)
+    return price
   }
 
   getListComponent(products) {

@@ -4,6 +4,7 @@ import { observer } from "mobx-react";
 import { Link } from "react-router-dom";
 import { Store } from "../../../store/product";
 import "../../../styles/Cart.css";
+import CartImage from '../../../static/cart.png'
 
 const _store = Store.getInstance();
 
@@ -42,10 +43,11 @@ class Cart extends Component {
     const { transparent } = this.props;
     return (
       <DropdownButton
-        title="Cart"
+        title={<p><img id="cart" src={CartImage} alt="cart" />Cart</p>}
         className="dropdown-button"
         open={this.state.cartOpen}
-        onToggle={() => {}}
+        noCaret
+        onToggle={() => { }}
         onMouseOver={() => this.setState({ cartOpen: true })}
         onMouseLeave={() => this.setState({ cartOpen: false })}
       >

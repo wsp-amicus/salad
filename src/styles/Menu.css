@@ -1,10 +1,10 @@
-.blackground {
+.background {
   background-color: rgba(0,0,0,0);
   border: 1px solid rgba(0,0,0,0.1);
-  border-radius: 25px;
+  border-radius: 20px;
 }
 
-.blackground:hover {
+.background:hover {
   border: 1px solid rgba(0,0,0,0.4);
 }
 
@@ -12,10 +12,16 @@
   color: black;
   text-align: left;
   padding-left: 30px;
+  padding-right: 30px;
 }
+
+.product-name{
+  text-align: center
+}
+
 .product-center {
   margin: 10px auto;
-  width: 80%;
+  width: 350px;
   padding: 10px;
 }
 
