@@ -53,7 +53,7 @@
 }
 
 .address > input {
-    font-size: 16px;
+    font-size: 16px !important;
 }
 
 .address > div > div > div {

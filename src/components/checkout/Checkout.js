@@ -149,7 +149,7 @@ class Checkout extends Component {
           <h2>Derivery address</h2>
           <label>ที่อยู่</label>
           <FormGroup bsSize="large" className="address">
-            <FormControl type="text" />
+            <FormControl type="text" style={{ height: '37px', color: 'black' }} />
             <label>แขวง/ตำบล</label>
             <InputAddress
               address="subdistrict"
