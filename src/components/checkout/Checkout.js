@@ -120,7 +120,9 @@ class Checkout extends Component {
           >
             <h4>Image</h4>
             <h4>Name</h4>
+            <h4>Qty</h4>
             <h4>Price</h4>
+            <h4>TotalPrice</h4>
           </div>
           {this.getListComponent([..._store.products])}
           <div style={{ textAlign: "right" }}>
