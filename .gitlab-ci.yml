@@ -10,3 +10,5 @@ stages:
 deploy:
   stage: production
   script: npm run deploy
+  only:
+    - master
