@@ -32,7 +32,7 @@ describe("POST /users/register", () => {
 
 describe("POST /users/login",()=>{
   it('should return user',async (done) =>{
-    request(server)
+    const res = await request(server)
       .post("/users/login")
       .set("Content-Type","application/json")
       .send(JSON.stringify({username:user.username,password:user.password}))
