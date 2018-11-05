@@ -28,7 +28,6 @@ describe("POST /users/login", () => {
   it('should return user', async (done) => {
     const res = await request(server)
       .post("/users/login")
-
       .set("Content-Type", "application/json")
       .send(JSON.stringify({ username: 'w', password: 'w' }))
       .expect(200)
@@ -43,15 +42,15 @@ describe("POST /users/login", () => {
   })
 })
 
-// describe("DELETE /users/delete",()=>{
-//   it('should return "done"',async (done) => {
-//     request(server)
-//       .delete("/users/delete")
-//       .set("Content-Type","application/json")
-//       .send(JSON.stringify({username:user.username}))
-//       .expect(200)
-//       .expect(function(res){
-//         expect(res).toBe('done')
-//     })
-//   })
-// })
+describe("DELETE /users/delete",()=>{
+  it('should return "done"',async (done) => {
+    const res = await request(server)
+      .delete("/users/delete")
+      .set("Content-Type","application/json")
+      .send(JSON.stringify({username:'w'}))
+      .expect(200)
+      .catch(err => console.log('Err', err))
+      expect(res.text).toBe("done")
+      done()
+  })
+})
