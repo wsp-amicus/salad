@@ -77,6 +77,7 @@ const userController = {
         bcrypt.compare(password, user.password, function (err, isMatch) {
           if (err) throw err;
           if (isMatch) {
+            delete user.password
             res.status(200).send(user)
           } else {
             res.status(400).send("Username or Password is not match")
