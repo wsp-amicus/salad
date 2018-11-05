@@ -31,3 +31,18 @@ describe("POST /users/register", () => {
     done();
   });
 });
+
+describe("POST /users/login",()=>{
+  it('should return "You are loged in!"',function(done){
+    request(server)
+      .post("/users/login")
+      .set("Content-Type","application/json")
+      .send(JSON.stringify({username:user.username,password:user.password}))
+      .expect("Content-Type",/json/)
+      .expect(200)
+      .expect(function(res) {
+        expect(res).toBe("You are loged in");
+      });
+    done();
+  })
+})
