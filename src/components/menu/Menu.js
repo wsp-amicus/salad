@@ -1,87 +1,76 @@
-import React, { Component } from "react";
-import { Row, Col, Button, Image } from "react-bootstrap";
-import Loader from "react-loader-spinner";
-import axios from "axios";
-import { addProduct2Cart } from "../../store/product";
-import "../../styles/Menu.css";
-import CartImage from "../../static/cart.png";
+import React, { Component } from 'react'
+import { Row, Col, Button, Image } from 'react-bootstrap'
+import Loader from 'react-loader-spinner'
+import axios from 'axios'
+import { addProduct2Cart } from '../../store/product'
+import '../../styles/Menu.css'
+import CartImage from '../../static/cart.png'
 
 class Menu extends Component {
   constructor(props) {
-    super(props);
-    this.state = { products: [], loading: true };
+    super(props)
+    this.state = { products: [], loading: true }
   }
 
   componentWillMount() {
     axios
-      .get("/products")
+      .get('/products')
       .then(res => this.setState({ products: res.data, loading: false }))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
   }
 
   addProduct2Cart(product) {
-    addProduct2Cart(product);
+    addProduct2Cart(product)
   }
 
   render() {
-    const line = (
-      <Col md={12}>
-        <div className="outset" />
-      </Col>
-    )
     let _products = this.state.products.map(product => {
-      const _ingredients = product.ingredients.map(ing => <li>{ing.label}</li>);
+      const _ingredients = product.ingredients.reduce(
+        (prev, cur) => `${prev}, ${cur}`
+      )
       return (
-        <div className="blackground product-center fadeIn">
-          <Row className="show-grid">
-            <Col md={5}>
-              <div>
-                <Image
-                  src={product.imageUrl ? product.imageUrl[0] : ""}
-                  rounded
-                  responsive
-                />
-              </div>
-            </Col>
-            <Col md={7}>
-              <Row className="text">
-                <h1>{product.name}</h1>
-              </Row>
-              <Row>
-                  {line}
-              </Row>
-              <Row className="text">
-                <h4>{product.description}</h4>
-              </Row>
-              <Row className="text">
-                <ul>{_ingredients}</ul>
-              </Row>
-              <Row>
-                <Button
-                  bsStyle="success"
-                  className="button"
-                  onClick={() => this.addProduct2Cart(product)}
-                >
-                  <img id="cart" src={CartImage} alt="cart" />
-                  {product.price} ฿
-                </Button>
-              </Row>
-            </Col>
+        <div className="background product-center fadeIn">
+          <div className="MenuImage">
+            <Image
+              src={product.imageUrl ? product.imageUrl[0] : ''}
+              rounded
+              responsive
+            />
+          </div>
+          <Row className="text product-name">
+            <h3>{product.name}</h3>
+            <hr />
+          </Row>
+          <Row className="text">
+            <h4>{product.description}</h4>
+          </Row>
+          <Row className="text">
+            <p>{_ingredients}</p>
+          </Row>
+          <Row>
+            <Button
+              bsStyle="success"
+              className="button"
+              onClick={() => this.addProduct2Cart(product)}
+            >
+              <img id="cart" src={CartImage} alt="cart" />
+              {product.price} ฿
+            </Button>
           </Row>
         </div>
-      );
-    });
+      )
+    })
     return this.state.loading ? (
       <div
-        style={{ textAlign: "center", minHeight: "200px", minWidth: "200px" }}
+        style={{ textAlign: 'center', minHeight: '200px', minWidth: '200px' }}
       >
         <Loader type="ThreeDots" color="#11ad3d" height={140} width={140} />
         <h3>Amicus Loading...</h3>
       </div>
     ) : (
-      <div>{_products}</div>
-    );
+      <div style={{ display: 'flex', flexWrap: 'wrap', paddingLeft:'10%', paddingRight:'10%'}}>{_products}</div>
+    )
   }
 }
 
-export default Menu;
+export default Menu
