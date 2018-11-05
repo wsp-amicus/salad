@@ -15,6 +15,7 @@ import Admin from './admin/Index'
 import Loading from './components/Loading'
 import Cookies from 'js-cookie'
 import Custom from './components/Custom'
+import Checkout from './components/checkout/Checkout'
 import Menu from './components/menu/Menu'
 
 class App extends Component {
@@ -111,6 +112,8 @@ class App extends Component {
               <Route path="/custom" component={Custom} />
 
               <Route path="/menu" component={Menu} />
+
+              <Route path="/checkout" component={Checkout} />
 
               {/* Users */}
               <Route path="/users/register" component={Register} />
