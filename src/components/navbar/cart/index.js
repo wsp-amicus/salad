@@ -50,8 +50,8 @@ class Cart extends Component {
         onMouseOver={() => this.setState({ cartOpen: true })}
         onMouseLeave={() => this.setState({ cartOpen: false })}
       >
-      <div className="scroll">
-        {this.getComponent(_store.products, transparent)}
+        <div className="scroll">
+          {this.getComponent(_store.products, transparent)}
         </div>
 
         <Link to="/">

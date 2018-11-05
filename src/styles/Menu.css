@@ -1,6 +1,6 @@
 .blackground {
   background-color: rgba(0,0,0,0);
-  border: 1px solid rgba(0,0,0,0);
+  border: 1px solid rgba(0,0,0,0.1);
   border-radius: 25px;
 }
 
@@ -11,7 +11,7 @@
 .text {
   color: black;
   text-align: left;
-  padding-left: 15px;
+  padding-left: 30px;
 }
 .product-center {
   margin: 10px auto;
@@ -28,7 +28,7 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 15px;
+  margin: 4px 30px;
   cursor: pointer;
 }
 
