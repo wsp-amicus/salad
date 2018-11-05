@@ -31,16 +31,28 @@ describe("POST /users/register", () => {
 });
 
 describe("POST /users/login",()=>{
-  it('should return "You are loged in!"',function(done){
+  it('should return user',async (done) =>{
     request(server)
       .post("/users/login")
       .set("Content-Type","application/json")
       .send(JSON.stringify({username:user.username,password:user.password}))
-      .expect("Content-Type",/json/)
       .expect(200)
       .expect(function(res) {
-        expect(res).toBe("You are loged in");
+        expect(res).toBe(user);
       });
     done();
   })
 })
+
+// describe("DELETE /users/delete",()=>{
+//   it('should return "done"',async (done) => {
+//     request(server)
+//       .delete("/users/delete")
+//       .set("Content-Type","application/json")
+//       .send(JSON.stringify({username:user.username}))
+//       .expect(200)
+//       .expect(function(res){
+//         expect(res).toBe('done')
+//     })
+//   })
+// })
