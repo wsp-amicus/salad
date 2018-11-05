@@ -15,7 +15,7 @@ install:
   only:
     - master
   script:
-    - yarn install
+    - npm install --only=prod
   artifacts:
     paths:
       - node_modules
@@ -25,7 +25,7 @@ build:
   only:
     - master
   script:
-    - yarn run build
+    - npm run build
   dependencies:
     - install
   artifacts:
