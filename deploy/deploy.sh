@@ -14,7 +14,7 @@ echo '${USERNAME}: building production file'
 npm run build;
 ../sshalert.sh;
 echo '${USERNAME}: Server is started CTRL + C to leave';
-PORT=5555 NODE_ENV='production' node server/app.js;
+PORT=5555 NODE_ENV='production' npm run backend:node;
 "
 
 echo "you are about to deploy app to ${USERNAME}@${HOSTS}"

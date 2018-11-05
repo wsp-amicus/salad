@@ -204,7 +204,7 @@ function up() {
 
   const salmonSalad = {
     name : 'Salmon ranch salad',
-    imageUrl: 'https://media.justsalad.com/assets/img/pages/menu/salads/the-california.png',
+    imageUrl: 'https://media.justsalad.com/assets/JS_Menu_Salads_Buffalo_Chicken_Salad.png',
     ingredients: ['Green oak','carrot','salmon','Pepper Jack cheese','Chips','Ranch dressing'],
     price : 180,
     description : '320 CAL'

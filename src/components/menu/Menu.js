@@ -68,7 +68,16 @@ class Menu extends Component {
         <h3>Amicus Loading...</h3>
       </div>
     ) : (
-      <div style={{ display: 'flex', flexWrap: 'wrap', paddingLeft:'10%', paddingRight:'10%'}}>{_products}</div>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          paddingLeft: '10%',
+          paddingRight: '10%'
+        }}
+      >
+        {_products}
+      </div>
     )
   }
 }

@@ -70,11 +70,15 @@ export class Ingredient extends Component {
   }
 
   render() {
-    console.log(this.state.products);
     const _products = this.state.products;
     this.state.products.forEach((product, index) => {
+      // const ingredientJson = JSON.parse(product.ingredients);
+      // const _ingredient = ingredientJson.map(ingredient => {
+      //   return ingredient.label;
+      // });
       _products[index].ingredients = JSON.stringify(product.ingredients);
     });
+
     return (
       <div className="panel panel-primary">
         <Modal show={this.state.deleteModal} onHide={this.handleCancel}>
