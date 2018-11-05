@@ -21,7 +21,6 @@ export const Store = (function() {
 
   return {
     getInstance: function() {
-      console.log(instance);
       if (!instance) {
         instance = createInstance();
       }
