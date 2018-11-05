@@ -18,6 +18,7 @@ function fetchAPI(path, method, body) {
 }
 
 function up() {
+
   const greenOak = {
     name: 'Green oak',
     price: 10,
@@ -50,6 +51,14 @@ function up() {
     imageUrl: 'https://fp.lnwfile.com/_/fp/_raw/59/48/z2.jpg'
   }
 
+  const avocado = {
+    name: 'Avocado',
+    price: 30,
+    type: 'Vegetable',
+    description: 'Fresh organic avocado',
+    imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/81LKLCmdAQL._SY355_.jpg'
+  }
+
   const corn = {
     name: 'Corn',
     price: 5,
@@ -72,6 +81,14 @@ function up() {
     type: 'Vegetable',
     description: 'Fresh organic tomatoes',
     imageUrl: 'https://02f0a56ef46d93f03c90-22ac5f107621879d5667e0d7ed595bdb.ssl.cf2.rackcdn.com/sites/13031/photos/280882/tomatoes20170321-8553-1jjgic5_960x960.jpg'
+  }
+
+  const olive = {
+    name: 'Olive',
+    price: 5,
+    type: 'Vegetable',
+    description: 'Organic black olive',
+    imageUrl: 'http://papaginofoods.com/wp-content/uploads/2015/02/Whole-black-pitted-olvies-N.jpg'
   }
 
   const onion = {
@@ -119,7 +136,7 @@ function up() {
     price: 20,
     type: 'Meat',
     description: 'Fresh chicken breast',
-    imageUrl: 'https://farm2go.thinklabs.vn/wp-content/uploads/2017/10/719JxkiwTVL._SL1500_.jpg'
+    imageUrl: 'https://mbtskoudsalg.com/images/chicken-breast-png-7.png'
   }
 
   const pork = {
@@ -127,7 +144,7 @@ function up() {
     price: 30,
     type: 'Meat',
     description: 'High quality pork',
-    imageUrl: 'https://amishhealthyfoods.com/wp-content/uploads/2018/03/pork_chop_20170820151944.png'
+    imageUrl: 'https://png2.kisspng.com/sh/d27fefcb7b7cd342b04447721b929b27/L0KzQYm3U8I6N5VriZH0aYP2gLBuTfJmbZd4jNdqaz3qgrrzjPlvb154iNtsZT3ldbbtTgRmdpVqit54aX6wg8XsgfsuPZJnfNM6NHPkSIa6WMYvPGg7TaU5MkK0RYO5U8c4OGQ7TqoENT7zfri=/kisspng-beefsteak-grilling-spice-beef-tenderloin-steak-5abda14ca85386.4765302215223770366895.png'
   }
 
   const ham = {
@@ -176,6 +193,22 @@ function up() {
     type: 'Dressing',
     description: 'Creamy salad dressing',
     imageUrl: 'https://www.madgreens.com/sites/default/files/styles/adaptive/public/dressing-creamy-ginger_thumb.png?itok=r-oYJqEA'
+  }
+
+  const blueCheese= {
+    name : 'Blue Cheese',
+    price : 10,
+    type: 'Dressing',
+    description: 'Blue Cheese Dressing',
+    imageUrl: 'https://www.madgreens.com/sites/default/files/styles/adaptive/public/dressing-blue-cheese_thumb.png?itok=MLe-wcaT'
+  }
+
+  const balsamicVinaigrette= {
+    name : 'Balsamic Vinaigrette',
+    price : 10,
+    type: 'Dressing',
+    description: 'Balsamic Vinaigrette Dressing',
+    imageUrl: 'https://www.madgreens.com/sites/default/files/styles/adaptive/public/dressing-balsamic_thumb.png?itok=wZ2cT1wH'
   }
 
   const ceasarSalad = {
@@ -250,6 +283,7 @@ function up() {
     description : '380 CAL'
   }
 
+  fetchAPI('ingredients/create', 'POST', JSON.stringify(avocado))
   fetchAPI('ingredients/create', 'POST', JSON.stringify(greenOak))
   fetchAPI('ingredients/create', 'POST', JSON.stringify(redOak))
   fetchAPI('ingredients/create', 'POST', JSON.stringify(greenCoral))
@@ -270,6 +304,9 @@ function up() {
   fetchAPI('ingredients/create', 'POST', JSON.stringify(sesame))
   fetchAPI('ingredients/create', 'POST', JSON.stringify(thousandIsland))
   fetchAPI('ingredients/create', 'POST', JSON.stringify(cream))
+  fetchAPI('ingredients/create', 'POST', JSON.stringify(blueCheese))
+  fetchAPI('ingredients/create', 'POST', JSON.stringify(balsamicVinaigrette))
+  fetchAPI('ingredients/create', 'POST', JSON.stringify(olive))
   fetchAPI('products/create', 'POST', JSON.stringify(ceasarSalad))
   fetchAPI('products/create', 'POST', JSON.stringify(pestoSalad))
   fetchAPI('products/create', 'POST', JSON.stringify(california))

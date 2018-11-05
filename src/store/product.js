@@ -10,13 +10,17 @@ export const Store = (function() {
       addProduct: product => {
         store.products.push(product);
       },
+      removeProduct: product => {
+        store.products = store.products.filter(item => {
+          return item !== product;
+        });
+      }
     };
     return store;
   }
 
   return {
     getInstance: function() {
-      console.log(instance);
       if (!instance) {
         instance = createInstance();
       }
@@ -29,4 +33,8 @@ const _store = Store.getInstance();
 
 export const addProduct2Cart = product => {
   _store.addProduct(product);
+};
+
+export const removeProduct = product => {
+  _store.removeProduct(product);
 };

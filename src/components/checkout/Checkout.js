@@ -4,9 +4,10 @@ import { FormGroup, FormControl, Button } from "react-bootstrap";
 import InputAddress from "react-thailand-address-autocomplete";
 import { Store } from "../../store/product";
 import CartImage from "../../static/cart.png";
-import SalmonImage from "../../static/Salmon.jpg";
+import { addProduct2Cart } from "../../store/product";
 import "../../styles/Ingredients.css";
 import "./checkout.css";
+import axios from "axios";
 const _store = Store.getInstance();
 
 class Checkout extends Component {
@@ -16,16 +17,28 @@ class Checkout extends Component {
       subdistrict: "",
       district: "",
       province: "",
-      zipcode: ""
+      zipcode: "",
+      products: []
     };
     this.onChange = this.onChange.bind(this);
     this.onSelect = this.onSelect.bind(this);
+  }
+
+  componentWillMount() {
+    axios
+      .get("/products")
+      .then(res => this.setState({ products: res.data, loading: false }))
+      .catch(err => console.log(err));
   }
 
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     });
+  }
+
+  addProduct2Cart(product) {
+    addProduct2Cart(product);
   }
 
   onSelect(fullAddress) {
@@ -39,9 +52,9 @@ class Checkout extends Component {
   }
 
   getTotal(products) {
-    let price = 0
-    products.forEach(product => price += product.price)
-    return price
+    let price = 0;
+    products.forEach(product => (price += product.price));
+    return price;
   }
 
   getListComponent(products) {
@@ -69,49 +82,51 @@ class Checkout extends Component {
     });
   }
 
-  getMockSuggestion(lengths) {
-    return lengths.map(l => {
+  getSuggestProduct(products) {
+    return products.map(product => {
       return (
-        <div className="box-container" style={{ width: "200px" }}>
+        <div
+          key={product.name}
+          className="box-container"
+          style={{ width: "250px" }}
+        >
           <div className="image-container">
             <img
               className="fadeIn"
               id="box"
-              src={SalmonImage}
+              src={product.imageUrl[0]}
               alt="ingredients"
               height="auto"
               width="auto"
             />
             <div className="button-container">
-              <Button id="add-button" bsStyle="success">
+              <Button
+                id="add-button"
+                bsStyle="success"
+                onClick={() => this.addProduct2Cart(product)}
+              >
                 <img id="cart" src={CartImage} alt="cart" />
                 Add
               </Button>
             </div>
           </div>
           <hr />
-          <h3>Salmon</h3>
-          <h4>Product</h4>
-          <p>Salmon za 555+</p>
-          <h4>99999 ฿</h4>
+          <h3>{product.name}</h3>
+          <h4>{product.price} ฿</h4>
         </div>
       );
     });
   }
+
   render() {
+    const _products = this.state.products.slice(0, 3);
     return (
       <div>
         <div style={{ textAlign: "center", marginTop: "130px" }}>
           <h1>Checkout</h1>
         </div>
-        <div
-          style={{
-            margin: "20px",
-            padding: "20px"
-          }}
-        >
+        <div style={{ margin: "20px", padding: "20px" }}>
           <h2>Order Review</h2>
-
           <div
             style={{
               display: "flex",
@@ -125,20 +140,17 @@ class Checkout extends Component {
           >
             <h4>Image</h4>
             <h4>Name</h4>
+            <h4>Qty</h4>
             <h4>Price</h4>
+            <h4>TotalPrice</h4>
           </div>
-          {this.getListComponent([..._store.products])}
+          {this.getListComponent(_store.products)}
           <div style={{ textAlign: "right" }}>
+            <h3>Total</h3>
             <h3>{this.getTotal(_store.products)} ฿</h3>
           </div>
         </div>
-        <div
-          style={{
-            margin: "20px",
-            padding: "20px",
-            borderRadius: "25px"
-          }}
-        >
+        <div style={{ margin: "20px", padding: "20px", borderRadius: "25px" }}>
           <h2>Derivery address</h2>
           <FormGroup
             bsSize="large"
@@ -150,7 +162,7 @@ class Checkout extends Component {
               type="text"
               style={{ height: "37px", color: "black" }}
             />
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", flexWrap: "wrap" }}>
               <div>
                 <label>Sub-district</label>
                 <InputAddress
@@ -161,7 +173,7 @@ class Checkout extends Component {
                   style={{ width: "100%" }}
                 />
               </div>
-              <div style={{ margin: "auto" }}>
+              <div className="gear">
                 <label>District</label>
                 <InputAddress
                   address="district"
@@ -172,7 +184,7 @@ class Checkout extends Component {
                 />
               </div>
             </div>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", flexWrap: "wrap" }}>
               <div>
                 <label>Province</label>
                 <InputAddress
@@ -183,7 +195,7 @@ class Checkout extends Component {
                   style={{ width: "100%" }}
                 />
               </div>
-              <div style={{ margin: "auto" }}>
+              <div className="gear">
                 <label>Postal code</label>
                 <InputAddress
                   address="zipcode"
@@ -196,16 +208,16 @@ class Checkout extends Component {
             </div>
           </FormGroup>
         </div>
-        <div style={{ textAlign: "center", marginTop: "50px" }}>
-          <h1>Would you like anything else?</h1>
-        </div>
-        <div style={{ display: "flex", width: "80%", margin: "auto" }}>
-          {this.getMockSuggestion([{}, {}, {}])}
-        </div>
         <div style={{ textAlign: "center", margin: "40px" }}>
           <Button bsStyle="primary" bsSize="large" style={{ width: "200px" }}>
             Order
           </Button>
+        </div>
+        <div style={{ textAlign: "center", marginTop: "50px" }}>
+          <h1>Would you like anything else?</h1>
+          <div style={{ display: "flex", width: "80%", margin: "auto" }}>
+            {this.getSuggestProduct(_products)}
+          </div>
         </div>
       </div>
     );
