@@ -52,7 +52,6 @@ class Checkout extends Component {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            border: "1px solid black",
             borderRadius: "5px",
             padding: "5px 20px",
             margin: "10px"
@@ -126,13 +125,10 @@ class Checkout extends Component {
           >
             <h4>Image</h4>
             <h4>Name</h4>
-            <h4>Qty.</h4>
             <h4>Price</h4>
-            <h4>TotalPrice</h4>
           </div>
           {this.getListComponent([..._store.products])}
           <div style={{ textAlign: "right" }}>
-            <h3>Total</h3>
             <h3>{this.getTotal(_store.products)} ฿</h3>
           </div>
         </div>
@@ -200,7 +196,7 @@ class Checkout extends Component {
             </div>
           </FormGroup>
         </div>
-        <div style={{ textAlign: "center", marginTop: "130px" }}>
+        <div style={{ textAlign: "center", marginTop: "50px" }}>
           <h1>Would you like anything else?</h1>
         </div>
         <div style={{ display: "flex", width: "80%", margin: "auto" }}>

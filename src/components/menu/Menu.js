@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Button, Image } from 'react-bootstrap'
+import { Row, Button, Image } from 'react-bootstrap'
 import Loader from 'react-loader-spinner'
 import axios from 'axios'
 import { addProduct2Cart } from '../../store/product'
@@ -26,8 +26,7 @@ class Menu extends Component {
   render() {
     let _products = this.state.products.map(product => {
       const _ingredients = product.ingredients ? product.ingredients.reduce(
-        (prev, cur) => `${prev}, ${cur}`
-      ,"") : ''
+        (prev, cur) => prev ? `${prev}, ${cur}` : cur, '') : ''
       return (
         <div className="background product-center fadeIn">
           <div className="MenuImage">
@@ -68,17 +67,17 @@ class Menu extends Component {
         <h3>Amicus Loading...</h3>
       </div>
     ) : (
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          paddingLeft: '10%',
-          paddingRight: '10%'
-        }}
-      >
-        {_products}
-      </div>
-    )
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            paddingLeft: '10%',
+            paddingRight: '10%'
+          }}
+        >
+          {_products}
+        </div>
+      )
   }
 }
 

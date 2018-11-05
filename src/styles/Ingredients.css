@@ -2,11 +2,21 @@
   width: 220px;
 }
 
+.custom-list {
+  background: red;
+  min-width: 400px;
+  min-height: 500px;
+  margin-top: 10px;
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+}
+
 .ingredient-content {
   font-family: "Work Sans", sans-serif;
-  padding-left: 10%;
-  padding-right: 10%;
   display: flex;
+  max-width: 900px;
+  margin: auto;
 }
 
 .image-container {
