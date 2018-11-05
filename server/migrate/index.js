@@ -179,7 +179,7 @@ function up() {
   }
 
   const ceasarSalad = {
-    name : 'Autumn caesar salad',
+    name : 'Autumn ceasar salad',
     imageUrl: 'https://media.justsalad.com/assets/Fall_Autumn_Caesar.png',
     ingredients: ['Green oak','Green coral','Chicken','Mozzarella Cheese','Ceasar dressing'],
     price : 100,
@@ -214,8 +214,40 @@ function up() {
     name : 'Sweet Valley',
     imageUrl: 'https://media.justsalad.com/assets/JS_Menu_Salads_Modern_Greek.png',
     ingredients: ['Green oak','carrot','pork','Goat Cheese','Eggs','Agave dressing'],
+    price : 150,
+    description : '380 CAL'
+  }
+
+  const smokehouseSteak= {
+    name : 'Smokehouse steak',
+    imageUrl: 'https://media.justsalad.com/assets/JS_Menu_Salads_Smokehouse_Steak_Salad.png',
+    ingredients: ['Green oak','corn','Grilled beef','Goat Cheese','Thousand island dressing'],
     price : 180,
-    description : '320 CAL'
+    description : '380 CAL'
+  }
+
+  const TuscanZoodleBowl= {
+    name : 'Tuscan Zoodle Bowl',
+    imageUrl: 'https://media.justsalad.com/assets/Fall_Tuscan_Zoodle_Bowl.png',
+    ingredients: ['Red oak','Zoodles','Onions','Tomatoes','Grilled beef','Shaved Parmesan Cheese','Pesto dressing'],
+    price : 180,
+    description : '350 CAL'
+  }
+
+  const RoastedTurkeyHealthCobb= {
+    name : 'Roasted TurkeyHealth Cobb',
+    imageUrl: 'https://media.justsalad.com/assets/JS_Menu_Salads_Roasted_Turkey_Health_Cobb.png',
+    ingredients: ['Roasted Turkey', 'Egg', 'Tomatoes', 'Avocado', 'Sharp White Cheddar','Buttermilk Ranch dressing'],
+    price : 140,
+    description : '340 CAL'
+  }
+
+  const TokyoGrilledChicken= {
+    name : 'Tokyo grilled chicken',
+    imageUrl: 'https://media.justsalad.com/assets/img/pages/menu/salads/tokyo-supergreens.png',
+    ingredients: ['Green coral', 'Grilled Chicken', 'Carrot', 'Avocado', 'Broccoli', 'Roasted Almonds','Miso Ginger Vinaigrette'],
+    price : 120,
+    description : '380 CAL'
   }
 
   fetchAPI('ingredients/create', 'POST', JSON.stringify(greenOak))
@@ -243,6 +275,10 @@ function up() {
   fetchAPI('products/create', 'POST', JSON.stringify(california))
   fetchAPI('products/create', 'POST', JSON.stringify(salmonSalad))
   fetchAPI('products/create', 'POST', JSON.stringify(sweetValley))
+  fetchAPI('products/create', 'POST', JSON.stringify(smokehouseSteak))
+  fetchAPI('products/create', 'POST', JSON.stringify(TuscanZoodleBowl))
+  fetchAPI('products/create', 'POST', JSON.stringify(RoastedTurkeyHealthCobb))
+  fetchAPI('products/create', 'POST', JSON.stringify(TokyoGrilledChicken))
 }
 
 function down() {
