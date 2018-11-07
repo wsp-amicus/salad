@@ -34,6 +34,15 @@ const productController = {
     product.save()
     res.status(200).send('success')
   },
+  createMany(req, res) {
+    try {
+      const { body } = req
+      const result = Product.insertMany(body)
+      res.status(200).send(result);
+    } catch (err) {
+      res.status(400).send('Validation error, body must be the stringified array of objects')
+    }
+  },
   upload(files) {
     var keys = Object.keys(files)
 
