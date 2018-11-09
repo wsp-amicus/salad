@@ -33,8 +33,8 @@ function up() {
     meat,
     dressing
   }
-  fetchAPI('ingredients/create', 'POST', JSON.stringify(saladIngredients))
-  fetchAPI('products/create', 'POST', JSON.stringify(menu))
+  fetchAPI('ingredients/createMany', 'POST', JSON.stringify(saladIngredients))
+  fetchAPI('products/createMany', 'POST', JSON.stringify(menu))
 
 }
 
