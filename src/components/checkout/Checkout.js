@@ -57,6 +57,20 @@ class Checkout extends Component {
     return price;
   }
 
+  getIngredientsString(ingredients) {
+    const counts = {}
+    ingredients.forEach(item => {
+      if (!counts[item.name]) counts[item.name] = 0
+      counts[item.name] += 1
+    })
+    console.log(counts)
+    const keys = Object.keys(counts)
+    return keys.reduce((prev, cur) => {
+      return `${counts[prev] && counts[prev] > 1 ? prev + ' x ' + counts[prev] : prev}, 
+      ${counts[cur] && counts[cur] > 1 ? cur + ' x ' + counts[cur] : cur}`
+    })
+  }
+
   getListComponent(products) {
     return products.map(product => {
       return (
@@ -76,6 +90,7 @@ class Checkout extends Component {
             alt="product"
           />
           <h4 style={{ marginTop: "25px" }}>{product.name}</h4>
+          <h4 style={{ marginTop: "25px" }}>{this.getIngredientsString(product.ingredients)}</h4>
           <h4 style={{ marginTop: "25px" }}>{product.price} ฿</h4>
         </div>
       );
@@ -140,9 +155,8 @@ class Checkout extends Component {
           >
             <h4>Image</h4>
             <h4>Name</h4>
-            <h4>Qty</h4>
+            <h4>Ingredients</h4>
             <h4>Price</h4>
-            <h4>TotalPrice</h4>
           </div>
           {this.getListComponent(_store.products)}
           <div style={{ textAlign: "right" }}>
@@ -165,45 +179,53 @@ class Checkout extends Component {
             <div style={{ display: "flex", flexWrap: "wrap" }}>
               <div>
                 <label>Sub-district</label>
-                <InputAddress
-                  address="subdistrict"
-                  value={this.state.subdistrict}
-                  onChange={this.onChange}
-                  onSelect={this.onSelect}
-                  style={{ width: "100%" }}
-                />
+                <div className="input-div">
+                  <InputAddress
+                    address="subdistrict"
+                    value={this.state.subdistrict}
+                    onChange={this.onChange}
+                    onSelect={this.onSelect}
+                    style={{ width: "100%" }}
+                  />
+                </div>
               </div>
               <div className="gear">
                 <label>District</label>
-                <InputAddress
-                  address="district"
-                  value={this.state.district}
-                  onChange={this.onChange}
-                  onSelect={this.onSelect}
-                  style={{ width: "100%" }}
-                />
+                <div className="input-div">
+                  <InputAddress
+                    address="district"
+                    value={this.state.district}
+                    onChange={this.onChange}
+                    onSelect={this.onSelect}
+                    style={{ width: "100%" }}
+                  />
+                </div>
               </div>
             </div>
             <div style={{ display: "flex", flexWrap: "wrap" }}>
               <div>
                 <label>Province</label>
-                <InputAddress
-                  address="province"
-                  value={this.state.province}
-                  onChange={this.onChange}
-                  onSelect={this.onSelect}
-                  style={{ width: "100%" }}
-                />
+                <div className="input-div">
+                  <InputAddress
+                    address="province"
+                    value={this.state.province}
+                    onChange={this.onChange}
+                    onSelect={this.onSelect}
+                    style={{ width: "100%" }}
+                  />
+                </div>
               </div>
               <div className="gear">
                 <label>Postal code</label>
-                <InputAddress
-                  address="zipcode"
-                  value={this.state.zipcode}
-                  onChange={this.onChange}
-                  onSelect={this.onSelect}
-                  style={{ width: "100" }}
-                />
+                <div className="input-div">
+                  <InputAddress
+                    address="zipcode"
+                    value={this.state.zipcode}
+                    onChange={this.onChange}
+                    onSelect={this.onSelect}
+                    style={{ width: "100" }}
+                  />
+                </div>
               </div>
             </div>
           </FormGroup>

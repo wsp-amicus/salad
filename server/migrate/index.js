@@ -35,6 +35,7 @@ function up() {
   }
   fetchAPI('ingredients/create', 'POST', JSON.stringify(saladIngredients))
   fetchAPI('products/create', 'POST', JSON.stringify(menu))
+
 }
 
 function down() {
