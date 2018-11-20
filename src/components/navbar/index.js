@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { DropdownButton, Glyphicon, Navbar, Nav } from "react-bootstrap";
-import Cart from './cart'
+import Cart from "./cart";
 import transparent_logo from "../../static/small_transparent_logo.png";
 import "../../styles/Navbar.css";
 
@@ -81,7 +81,7 @@ class NavBar extends Component {
               </Nav>
             ) : (
               <Nav className="navbar-right">
-                <Cart transparent={transparent}/>
+                <Cart transparent={transparent} />
                 <DropdownButton
                   title={
                     <div>
@@ -97,6 +97,16 @@ class NavBar extends Component {
                   onMouseLeave={() => this.setState({ userOpen: false })}
                   className="dropdown-button"
                 >
+                  <li
+                    role="presentation"
+                    style={{
+                      background: transparent ? "transparent" : "#222"
+                    }}
+                  >
+                    <Link role="menuitem" tabIndex="-1" to="/users/manage">
+                      Manage
+                    </Link>
+                  </li>
                   <li
                     role="presentation"
                     style={{
