@@ -14,6 +14,7 @@ class Ingredients extends Component {
       selected: [],
       alert: false,
       enable: false,
+      loading: {},
     }
     this.showAlert = this.showAlert.bind(this)
   }
@@ -27,6 +28,13 @@ class Ingredients extends Component {
         this.state.ingre.sort(
           (a, b) => (a.type > b.type ? -1 : b.type > a.type ? 1 : 0)
         )
+        const loading = {}
+        res.data.forEach(item => loading[item.name] = true)
+        console.log(res.data)
+        this.setState({
+          loading
+        })
+        console.log('componentDidMount', loading)
       })
       .catch(err => console.log(err))
   }
@@ -43,6 +51,7 @@ class Ingredients extends Component {
   }
 
   render() {
+    console.log('render', this.state.loading)
     return (
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         <Alert
@@ -104,28 +113,41 @@ class Ingredients extends Component {
                 return (
                   <div className="box-container" key={item.name}>
                     <div className="image-container">
-                      {this.props.loading ? (
-                        <div style={{ minHeight: '200px', minWidth: '200px' }}>
-                          <Loader
-                            type="TailSpin"
-                            color="#11ad3d"
-                            height={80}
-                            width={80}
-                          />
-                        </div>
-                      ) : (
-                          <img
-                            className="fadeIn"
-                            id="box"
-                            src={
-                              item.imageUrl.length > 1
-                                ? item.imageUrl
-                                : item.imageUrl[0]
+                      <div style={{
+                        minHeight: '200px',
+                        minWidth: '200px',
+                        display: `${this.state.loading[item.name] ? 'block' : 'none'}`
+                      }}>
+                        <Loader
+                          type="TailSpin"
+                          color="#11ad3d"
+                          height={80}
+                          width={80}
+                        />
+                      </div>
+                      <img
+                        className="fadeIn"
+                        id="box"
+                        src={
+                          item.imageUrl.length > 1
+                            ? item.imageUrl
+                            : item.imageUrl[0]
+                        }
+                        alt="ingredients"
+                        height="200px"
+                        style={{
+                          display: `${!this.state.loading[item.name] ? 'block' : 'none'}`
+                        }}
+                        onLoad={() => {
+                          this.setState({
+                            loading: {
+                              ...this.state.loading,
+                              [item.name]: false,
                             }
-                            alt="ingredients"
-                            height="200px"
-                          />
-                        )}
+                          })
+                          console.log('onLoad', this.state.loading)
+                        }}
+                      />
                       <div className="button-container">
                         <Button id="add-button" bsStyle="success" onClick={() => this.setState({ selected: [...this.state.selected, { ...item, id: this.state.selected.length }] })}>
                           <img id="cart" src={CartImage} alt="cart" />
@@ -144,8 +166,7 @@ class Ingredients extends Component {
               : <h4>No ingredient</h4>}
           </div>
         </div>
-
-      </div >
+      </div>
     )
   }
 }
