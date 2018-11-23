@@ -71,3 +71,13 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.alert {
+  font-size: 22px;
+  top: 55px;
+  z-index: 99;
+  position: fixed;
+  left: 50vw;
+  margin-left: -50vw;
+  width: 100vw;
+}

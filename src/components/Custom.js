@@ -20,7 +20,7 @@ export default class Custom extends Component {
     return (
       <div className="custom-container">
         <h1>Create your own salad!</h1>
-        <Ingredient loading={this.state.loading} />
+        <Ingredient loading={this.state.loading} user={this.props.user} />
       </div>
     )
   }

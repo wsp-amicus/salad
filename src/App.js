@@ -109,7 +109,7 @@ class App extends Component {
                 component={() => <Home height={this.state.height} />}
               />
 
-              <Route path="/custom" component={Custom} />
+              <Route path="/custom" component={() => <Custom user={this.state.user} />} />
 
               <Route path="/menu" component={Menu} />
 

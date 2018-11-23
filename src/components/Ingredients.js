@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import React, { Component } from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Alert } from 'react-bootstrap'
 import '../styles/Ingredients.css'
 import Loader from 'react-loader-spinner'
 import CartImage from '../static/cart.png'
@@ -11,8 +11,11 @@ class Ingredients extends Component {
     super(props)
     this.state = {
       ingre: [],
-      selected: []
+      selected: [],
+      alert: false,
+      enable: false,
     }
+    this.showAlert = this.showAlert.bind(this)
   }
   componentDidMount() {
     Axios.get('/ingredients')
@@ -34,20 +37,39 @@ class Ingredients extends Component {
     return price
   }
 
+  showAlert() {
+    this.setState({ alert: true, enable: true })
+    setTimeout(() => this.setState({ alert: false }), 5000)
+  }
+
   render() {
     return (
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <Alert
+          bsStyle="danger"
+          className="alert"
+          style={{
+            animation: `${this.state.alert ? 'fadeIn' : 'fadeOut'} 0.5s forwards`,
+            display: `${this.state.enable ? 'block' : 'none'}`,
+          }}>
+          Please login
+        </Alert>
         <div className="custom-list">
           <h2 style={{ marginBottom: '50px' }}>Ingredients</h2>
           <h4 style={{ display: 'flex' }}>Total price: <p style={{ color: 'red', marginLeft: 'auto', marginRight: '0', fontSize: '22px' }}>{this.getTotalPrice(this.state.selected)} ฿</p></h4>
           <Button
-            onClick={() => addProduct2Cart({
-              name: 'Custom',
-              ingredients: this.state.selected,
-              price: this.getTotalPrice(this.state.selected),
-              description: '',
-              imageUrl: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2IJmKt8z72wzaYgCmlhlmdcW-4dKtoqtUE8qDM_9PjVIj1kby'],
-            })}
+            onClick={() => {
+              if (this.props.user)
+                addProduct2Cart({
+                  name: 'Custom',
+                  ingredients: this.state.selected,
+                  price: this.getTotalPrice(this.state.selected),
+                  description: '',
+                  imageUrl: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2IJmKt8z72wzaYgCmlhlmdcW-4dKtoqtUE8qDM_9PjVIj1kby'],
+                })
+              else
+                this.showAlert()
+            }}
             bsStyle="primary"
             style={{ background: 'green' }}
           >
