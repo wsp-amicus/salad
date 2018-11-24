@@ -75,7 +75,7 @@ class Ingredients extends Component {
                     ingredients: this.state.selected,
                     price: this.getTotalPrice(this.state.selected),
                     description: '',
-                    imageUrl: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2IJmKt8z72wzaYgCmlhlmdcW-4dKtoqtUE8qDM_9PjVIj1kby'],
+                    imageUrl: ['https://howtoboilanegg.files.wordpress.com/2010/03/food-question-mark.jpg'],
                   })
                   this.setState({ selected: [] })
                   this.showAlert('Your custom menu is added to cart.', 'success')
