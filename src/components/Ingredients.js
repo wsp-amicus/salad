@@ -12,6 +12,8 @@ class Ingredients extends Component {
     this.state = {
       ingre: [],
       selected: [],
+      alertMessage: '',
+      alertStyle: 'danger',
       alert: false,
       enable: false,
       loading: {},
@@ -30,11 +32,9 @@ class Ingredients extends Component {
         )
         const loading = {}
         res.data.forEach(item => loading[item.name] = true)
-        console.log(res.data)
         this.setState({
           loading
         })
-        console.log('componentDidMount', loading)
       })
       .catch(err => console.log(err))
   }
@@ -45,30 +45,30 @@ class Ingredients extends Component {
     return price
   }
 
-  showAlert() {
-    this.setState({ alert: true, enable: true })
-    setTimeout(() => this.setState({ alert: false }), 5000)
+  showAlert(alertMessage, alertStyle) {
+    clearTimeout(this.clearAlert)
+    this.setState({ alert: true, enable: true, alertMessage, alertStyle: alertStyle || 'danger' })
+    this.clearAlert = setTimeout(() => this.setState({ alert: false }), 5000)
   }
 
   render() {
-    console.log('render', this.state.loading)
     return (
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         <Alert
-          bsStyle="danger"
+          bsStyle={this.state.alertStyle}
           className="alert"
           style={{
             animation: `${this.state.alert ? 'fadeIn' : 'fadeOut'} 0.5s forwards`,
             display: `${this.state.enable ? 'block' : 'none'}`,
           }}>
-          Please login
+          {this.state.alertMessage}
         </Alert>
         <div className="custom-list">
           <h2 style={{ marginBottom: '50px' }}>Ingredients</h2>
           <h4 style={{ display: 'flex' }}>Total price: <p style={{ color: 'red', marginLeft: 'auto', marginRight: '0', fontSize: '22px' }}>{this.getTotalPrice(this.state.selected)} ฿</p></h4>
           <Button
             onClick={() => {
-              if (this.props.user)
+              if (this.props.user) {
                 addProduct2Cart({
                   name: 'Custom',
                   ingredients: this.state.selected,
@@ -76,8 +76,11 @@ class Ingredients extends Component {
                   description: '',
                   imageUrl: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2IJmKt8z72wzaYgCmlhlmdcW-4dKtoqtUE8qDM_9PjVIj1kby'],
                 })
+                this.setState({ selected: [] })
+                this.showAlert('Your custom menu is added to cart.', 'success')
+              }
               else
-                this.showAlert()
+                this.showAlert('Please login')
             }}
             bsStyle="primary"
             style={{ background: 'green' }}
@@ -145,11 +148,24 @@ class Ingredients extends Component {
                               [item.name]: false,
                             }
                           })
-                          console.log('onLoad', this.state.loading)
                         }}
                       />
                       <div className="button-container">
-                        <Button id="add-button" bsStyle="success" onClick={() => this.setState({ selected: [...this.state.selected, { ...item, id: this.state.selected.length }] })}>
+                        <Button
+                          id="add-button"
+                          bsStyle="success"
+                          onClick={() => {
+                            const names = this.state.selected.map(item => item.name)
+                            if (!names.includes(item.name))
+                              this.setState({
+                                selected: [
+                                  ...this.state.selected,
+                                  { ...item, id: this.state.selected.length }
+                                ]
+                              })
+                            else
+                              this.showAlert(`${item.name} is already added.`)
+                          }}>
                           <img id="cart" src={CartImage} alt="cart" />
                           Add
                         </Button>
