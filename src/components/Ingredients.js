@@ -53,7 +53,7 @@ class Ingredients extends Component {
 
   render() {
     return (
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div className="ingredients-container">
         <Alert
           bsStyle={this.state.alertStyle}
           className="alert"
@@ -63,51 +63,53 @@ class Ingredients extends Component {
           }}>
           {this.state.alertMessage}
         </Alert>
-        <div className="custom-list">
-          <h2 style={{ marginBottom: '50px' }}>Ingredients</h2>
-          <h4 style={{ display: 'flex' }}>Total price: <p style={{ color: 'red', marginLeft: 'auto', marginRight: '0', fontSize: '22px' }}>{this.getTotalPrice(this.state.selected)} ฿</p></h4>
-          <Button
-            onClick={() => {
-              if (this.props.user) {
-                addProduct2Cart({
-                  name: 'Custom',
-                  ingredients: this.state.selected,
-                  price: this.getTotalPrice(this.state.selected),
-                  description: '',
-                  imageUrl: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2IJmKt8z72wzaYgCmlhlmdcW-4dKtoqtUE8qDM_9PjVIj1kby'],
-                })
-                this.setState({ selected: [] })
-                this.showAlert('Your custom menu is added to cart.', 'success')
-              }
-              else
-                this.showAlert('Please login')
-            }}
-            bsStyle="primary"
-            style={{ background: 'green' }}
-          >
-            <img src={CartImage} alt="cart" height="20px" style={{ marginRight: '10px' }} />
-            Add to cart
+        <div className="custom-list-container">
+          <div className="custom-list">
+            <h2 style={{ marginBottom: '50px' }}>Ingredients</h2>
+            <h4 style={{ display: 'flex' }}>Total price: <p style={{ color: 'red', marginLeft: 'auto', marginRight: '0', fontSize: '22px' }}>{this.getTotalPrice(this.state.selected)} ฿</p></h4>
+            <Button
+              onClick={() => {
+                if (this.props.user) {
+                  addProduct2Cart({
+                    name: 'Custom',
+                    ingredients: this.state.selected,
+                    price: this.getTotalPrice(this.state.selected),
+                    description: '',
+                    imageUrl: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2IJmKt8z72wzaYgCmlhlmdcW-4dKtoqtUE8qDM_9PjVIj1kby'],
+                  })
+                  this.setState({ selected: [] })
+                  this.showAlert('Your custom menu is added to cart.', 'success')
+                }
+                else
+                  this.showAlert('Please login')
+              }}
+              bsStyle="primary"
+              style={{ background: 'green' }}
+            >
+              <img src={CartImage} alt="cart" height="20px" style={{ marginRight: '10px' }} />
+              Add to cart
           </Button>
-          <hr />
-          {this.state.selected.length > 0 ? this.state.selected.map(item => (
-            <div style={{ display: 'flex' }}>
-              <img src={item.imageUrl.length > 1
-                ? item.imageUrl
-                : item.imageUrl[0]
-              }
-                alt="selected"
-                height="100px"
-              />
-              <h4 style={{ margin: 'auto', padding: '0 10px 0 0' }}>{item.name}</h4>
-              <Button
-                bsStyle="danger"
-                style={{ height: '35px', margin: 'auto', marginRight: '0' }}
-                onClick={() => this.setState({ selected: this.state.selected.filter(i => i.id !== item.id) })}
-              >
-                X
+            <hr />
+            {this.state.selected.length > 0 ? this.state.selected.map(item => (
+              <div style={{ display: 'flex' }}>
+                <img src={item.imageUrl.length > 1
+                  ? item.imageUrl
+                  : item.imageUrl[0]
+                }
+                  alt="selected"
+                  height="100px"
+                />
+                <h4 style={{ margin: 'auto', padding: '0 10px 0 0' }}>{item.name}</h4>
+                <Button
+                  bsStyle="danger"
+                  style={{ height: '35px', margin: 'auto', marginRight: '0' }}
+                  onClick={() => this.setState({ selected: this.state.selected.filter(i => i.id !== item.id) })}
+                >
+                  X
               </Button>
-            </div>
-          )) : <h4>No ingredient selected</h4>}
+              </div>
+            )) : <h4>No ingredient selected</h4>}
+          </div>
         </div>
         <div className="ingredient-content">
           <div className="ingreMenu">
