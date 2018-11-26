@@ -87,6 +87,7 @@
     "backend": "nodemon --exec babel-node server/app.js",
     "backend:node": "babel-node server/app.js",
     "frontend": "node scripts/start.js",
+    "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "test:backend": "jest --noStackTrace --forceExit --runInBand",
     "testcafe": "testcafe chrome test/AmicusTest.test.js",
