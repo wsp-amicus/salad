@@ -93,8 +93,9 @@
     "testcafe": "testcafe chrome test/AmicusTest.test.js",
     "deploy": "deploy/deploy.sh",
     "format": "prettier --print-width 120 --no-semi --single-quote --trailing-comma es5 --write src/**/*.js",
-    "db:up": "node ./server/migrate --u",
-    "db:down": "node ./server/migrate --d"
+    "db:up": "babel-node ./server/migrate --u",
+    "db:down": "babel-node ./server/migrate --d",
+    "db:renew": "yarn db:down; yarn db:up"
   },
   "jest": {
     "collectCoverageFrom": [

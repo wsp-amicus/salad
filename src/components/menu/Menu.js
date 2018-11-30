@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Button, Image } from 'react-bootstrap'
+import { Row, Button, Image, Alert } from 'react-bootstrap'
 import Loader from 'react-loader-spinner'
 import axios from 'axios'
 import { addProduct2Cart } from '../../store/product'
@@ -9,7 +9,12 @@ import CartImage from '../../static/cart.png'
 class Menu extends Component {
   constructor(props) {
     super(props)
-    this.state = { products: [], loading: true }
+    this.state = {
+      products: [],
+      loading: true,
+      alert: false,
+      enable: false,
+    }
   }
 
   componentWillMount() {
@@ -23,12 +28,26 @@ class Menu extends Component {
     addProduct2Cart(product)
   }
 
+  showAlert = () => {
+    this.setState({ alert: true, enable: true })
+    setTimeout(() => this.setState({ alert: false }), 5000)
+  }
+
   render() {
     let _products = this.state.products.map(product => {
       const _ingredients = product.ingredients ? product.ingredients.reduce(
         (prev, cur) => prev ? `${prev}, ${cur}` : cur, '') : ''
       return (
         <div className="background product-center fadeIn">
+          <Alert
+            bsStyle="danger"
+            className="alert"
+            style={{
+              animation: `${this.state.alert ? 'fadeIn' : 'fadeOut'} 0.5s forwards`,
+              display: `${this.state.enable ? 'block' : 'none'}`,
+            }}>
+            Please login
+        </Alert>
           <div className="MenuImage">
             <Image
               src={product.imageUrl ? product.imageUrl[0] : ''}
@@ -50,7 +69,12 @@ class Menu extends Component {
             <Button
               bsStyle="success"
               className="button"
-              onClick={() => this.addProduct2Cart(product)}
+              onClick={() => {
+                if (this.props.user)
+                  addProduct2Cart(product)
+                else
+                  this.showAlert()
+              }}
             >
               <img id="cart" src={CartImage} alt="cart" />
               {product.price} ฿

@@ -17,6 +17,7 @@ import Cookies from 'js-cookie'
 import Custom from './components/Custom'
 import Checkout from './components/checkout/Checkout'
 import Menu from './components/menu/Menu'
+import Manage from './components/users/Manage'
 
 class App extends Component {
   constructor(props) {
@@ -109,7 +110,7 @@ class App extends Component {
                 component={() => <Home height={this.state.height} />}
               />
 
-              <Route path="/custom" component={Custom} />
+              <Route path="/custom" component={() => <Custom user={this.state.user} />} />
 
               <Route path="/menu" component={Menu} />
 
@@ -125,6 +126,7 @@ class App extends Component {
                 path="/users/logout"
                 component={() => <Logout verifyLogin={this.verifyLogin} />}
               />
+              <Route path="/users/manage" component={Manage} />
 
               {/* Admin */}
               {adminRoute}

@@ -43,3 +43,21 @@
 .promotion div div img {
   width: 100%;
 }
+
+.promotion {
+  margin-bottom: 40px;
+}
+
+.home-menu {
+  display: flex;
+}
+
+@media(max-width: 768px) {
+  .home-menu {
+    display: block;
+  }
+
+  .home-menu > div {
+    width: 100vw !important;
+  }
+}

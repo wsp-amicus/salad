@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Parallax } from 'react-parallax'
 import { Roll } from 'react-reveal'
-import { Fade } from 'react-bootstrap'
+import { Fade, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import cover from '../static/cover.jpg'
 import '../styles/Home.css'
 
@@ -36,6 +37,35 @@ export default class Home extends Component {
   changeSlogan() {
     const index = slogans.indexOf(this.state.slogan)
     this.setState({ slogan: slogans[(index + 1) % slogans.length] })
+  }
+
+  getMenus = (image, button, link) => {
+    return (
+      <div style={{
+        overflow: 'hidden',
+        width: '50vw',
+        height: '700px',
+        background: `url('${image}')`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}>
+        <div style={{
+          height: `100%`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'rgba(0, 0, 0, 0.3)'
+        }}>
+          <Link to={link}>
+            <Button bsStyle={button.color} style={{
+              fontSize: '25px',
+              padding: '10px 20px',
+            }}>{button.text}</Button>
+          </Link>
+        </div>
+      </div>
+    )
   }
 
   render() {
@@ -78,6 +108,10 @@ export default class Home extends Component {
               </div>
             </Roll>
           </div>
+        </div>
+        <div className="home-menu">
+          {this.getMenus('https://media-cdn.tripadvisor.com/media/photo-s/0c/dd/7f/0a/we-have-many-salads-to.jpg', { text: 'See our Menus', color: 'primary' }, '/menu')}
+          {this.getMenus('https://www.jessicagavin.com/wp-content/uploads/2016/05/salad-ingredients-with-homemade-lemon-basil-dressing.jpg', { text: 'Custom your own Salad', color: 'info' }, '/custom')}
         </div>
       </div>
     )
