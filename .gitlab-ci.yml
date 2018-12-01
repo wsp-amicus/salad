@@ -37,7 +37,7 @@ deploy:
   only:
     - master
   script:
-    - curl $hooks_URL
+    - sshpass -p $hooks_URL bash ./deploy/deploy.sh
   dependencies:
     - install
     - build
