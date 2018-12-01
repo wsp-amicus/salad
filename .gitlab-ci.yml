@@ -14,38 +14,38 @@ before_script:
   - ssh-keyscan -H $DEPLOYMENT_SERVER_IP >> ~/.ssh/known_hosts
 
 stages:
-  # - install
-  # - build
+  - install
+  - build
   - deploy
 
-# install:
-#   stage: install
-#   only:
-#     - master
-#   script:
-#     - npm install --only=prod
-#   artifacts:
-#     paths:
-#       - node_modules
+install:
+  stage: install
+  only:
+    - master
+  script:
+    - npm install --only=prod
+  artifacts:
+    paths:
+      - node_modules
 
-# build:
-#   stage: build
-#   only:
-#     - master
-#   script:
-#     - npm run build
-#   dependencies:
-#     - install
-#   artifacts:
-#     paths:
-#       - build
+build:
+  stage: build
+  only:
+    - master
+  script:
+    - npm run build
+  dependencies:
+    - install
+  artifacts:
+    paths:
+      - build
 
 deploy:
   stage: deploy
   only:
     - master
   script:
-    - ssh wsp@$DEPLOYMENT_SERVER_IP "cd salad; ls;"
-  # dependencies:
-  #   - install
-  #   - build
+    - ssh wsp@$DEPLOYMENT_SERVER_IP "git clone https://github.com/wsp-amicus/salad.git salad2;cd salad2;npm run build --only=prod;cd ..;rm -r salad;sudo kill \$(sudo lsof -t -i :5555);mv salad2 salad;cd salad;PORT=5555 NODE_ENV='production' npm run backend:node;"
+  dependencies:
+    - install
+    - build
