@@ -43,7 +43,7 @@ deploy:
     - ls
     - sshpass -V
     - export SSHPASS=$USER_PASS 
-    - sshpass -e ssh -l wsp wsp.thitgorn.com "cd salad; ls; git pull;"
+    - sshpass -e ssh -l wsp wsp.thitgorn.com "cd salad; ls;"
   dependencies:
     - install
     - build
