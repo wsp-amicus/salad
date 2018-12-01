@@ -40,7 +40,10 @@ deploy:
   only:
     - master
   script:
-    - sshpass -p '$USER_PASS' bash ./deploy/deploy.sh
+    - ls
+    - sshpass -V
+    - export SSHPASS=$USER_PASS 
+    - sshpass -e bash ./deploy/deploy.sh
   dependencies:
     - install
     - build
