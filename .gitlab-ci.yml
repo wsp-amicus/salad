@@ -6,7 +6,12 @@ cache:
     - node_modules
 
 before_script:
-  - apt-get update -qq && apt-get install -y -qq sshpass
+  - mkdir -p ~/.ssh
+  - echo "$DEPLOY_SERVER_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - eval "$(ssh-agent -s)"
+  - ssh-add ~/.ssh/id_rsa
+  - ssh-keyscan -H $DEPLOYMENT_SERVER_IP >> ~/.ssh/known_hosts
 
 stages:
   # - install
@@ -40,10 +45,7 @@ deploy:
   only:
     - master
   script:
-    - ls
-    - sshpass -V
-    - export SSHPASS=$USER_PASS 
-    - script -qc 'sshpass -e ssh -l wsp wsp.thitgorn.com "./sshalert.sh"'
+    - ssh wsp@wsp.thitgorn.com "cd salad; ls;"
   # dependencies:
   #   - install
   #   - build
