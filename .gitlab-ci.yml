@@ -5,6 +5,9 @@ cache:
   paths:
     - node_modules
 
+before_script:
+  - apt-get update -qq && apt-get install -y -qq sshpass
+
 stages:
   - install
   - build
@@ -37,7 +40,7 @@ deploy:
   only:
     - master
   script:
-    - sshpass -p $hooks_URL bash ./deploy/deploy.sh
+    - sshpass -p '$USER_PASS' bash ./deploy/deploy.sh
   dependencies:
     - install
     - build
