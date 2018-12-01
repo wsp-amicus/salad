@@ -45,7 +45,7 @@ deploy:
   only:
     - master
   script:
-    - ssh wsp@wsp.thitgorn.com "cd salad; ls;"
+    - ssh wsp@$DEPLOYMENT_SERVER_IP "cd salad; ls;"
   # dependencies:
   #   - install
   #   - build
