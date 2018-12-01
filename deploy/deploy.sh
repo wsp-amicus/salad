@@ -18,5 +18,6 @@ PORT=5555 NODE_ENV='production' npm run backend:node;
 "
 
 echo "you are about to deploy app to ${USERNAME}@${HOSTS}"
+ssh
 ssh -l ${USERNAME} ${HOSTS} "${SCRIPT}"
 
