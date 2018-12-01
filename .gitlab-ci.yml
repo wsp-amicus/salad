@@ -44,6 +44,6 @@ deploy:
     - sshpass -V
     - export SSHPASS=$USER_PASS 
     - script -qc 'sshpass -e ssh -l wsp wsp.thitgorn.com "./sshalert.sh"'
-  dependencies:
-    - install
-    - build
+  # dependencies:
+  #   - install
+  #   - build
