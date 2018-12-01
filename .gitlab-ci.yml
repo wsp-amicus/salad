@@ -9,31 +9,31 @@ before_script:
   - apt-get update -qq && apt-get install -y -qq sshpass
 
 stages:
-  - install
-  - build
+  # - install
+  # - build
   - deploy
 
-install:
-  stage: install
-  only:
-    - master
-  script:
-    - npm install --only=prod
-  artifacts:
-    paths:
-      - node_modules
+# install:
+#   stage: install
+#   only:
+#     - master
+#   script:
+#     - npm install --only=prod
+#   artifacts:
+#     paths:
+#       - node_modules
 
-build:
-  stage: build
-  only:
-    - master
-  script:
-    - npm run build
-  dependencies:
-    - install
-  artifacts:
-    paths:
-      - build
+# build:
+#   stage: build
+#   only:
+#     - master
+#   script:
+#     - npm run build
+#   dependencies:
+#     - install
+#   artifacts:
+#     paths:
+#       - build
 
 deploy:
   stage: deploy
@@ -42,8 +42,8 @@ deploy:
   script:
     - ls
     - sshpass -V
-    - export SSHPASS=$USER_PASS
-    - script -qc 'sshpass -e ssh -l wsp wsp.thitgorn.com "cd salad; ls;g"'
+    - export SSHPASS=$USER_PASS 
+    - script -qc 'sshpass -e ssh -l wsp wsp.thitgorn.com "./sshalert.sh"'
   dependencies:
     - install
     - build
