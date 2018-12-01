@@ -1,4 +1,4 @@
-import express from "express";
+const express = require("express");
 const fs = require("fs");
 const https = require("https");
 const path = require("path");
@@ -7,8 +7,10 @@ const mongoose = require("mongoose");
 const config = require("../config/database");
 const app = express();
 const fileUpload = require("express-fileupload");
+const customenv = require("dotenv").config().parsed;
 
-let port = process.env.PORT || 5000;
+let port = process.env.PORT || customenv.PORT || 5000;
+process.env.NODE_ENV = customenv.NODE_ENV || process.env.NODE_ENV;
 
 mongoose.connect(config.database);
 let db = mongoose.connection;
@@ -93,4 +95,4 @@ app.listen(port, () => {
   console.log(`Server started at port: ${port}`);
 });
 
-module.exports = app
+module.exports = app;
