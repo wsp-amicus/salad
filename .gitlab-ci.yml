@@ -43,7 +43,8 @@ deploy:
     - ls
     - sshpass -V
     - export SSHPASS=$USER_PASS 
-    - sshpass -e bash ./deploy/deploy.sh
+    - sshpass -e scp -o stricthostkeychecking=no -r . wsp@wsp.thitgorn.com:/home/wsp/salad
+    - sshpass -e ssh -l wsp wsp.thitgorn.com "cd salad; ls;"
   dependencies:
     - install
     - build
