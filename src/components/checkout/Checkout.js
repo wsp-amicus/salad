@@ -59,19 +59,11 @@ class Checkout extends Component {
   }
 
   getIngredientsString(ingredients) {
-    const counts = {};
-    ingredients.forEach(item => {
-      if (!counts[item.name]) counts[item.name] = 0;
-      counts[item.name] += 1;
-    });
-    console.log(counts);
-    const keys = Object.keys(counts);
-    return keys.reduce((prev, cur) => {
-      return `${
-        counts[prev] && counts[prev] > 1 ? prev + " x " + counts[prev] : prev
-      }, 
-      ${counts[cur] && counts[cur] > 1 ? cur + " x " + counts[cur] : cur}`;
-    });
+    const _ingredients = ingredients.filter(ingredient => ingredient)
+    console.log(_ingredients)
+    return _ingredients.reduce((prev, cur) => {
+      return `${prev}, ${cur}`
+    })
   }
 
   getListComponent(products) {
