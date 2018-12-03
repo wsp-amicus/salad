@@ -124,7 +124,7 @@ class NavBar extends Component {
         </Navbar>
         <style>{`
           .dropdown-menu {
-            background: ${transparent ? "transparent" : "#222"};
+            background: ${currentURL === '/' ? "transparent" : "#222"};
           }
         `}</style>
       </div>
