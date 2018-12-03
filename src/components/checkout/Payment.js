@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
+import CreditCardInput from "react-credit-card-input";
 
 export class Payment extends Component {
   constructor(props) {
@@ -8,13 +9,21 @@ export class Payment extends Component {
       currentMethod: "Cash"
     };
     this.changeMethod = this.changeMethod.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   changeMethod(val) {
     this.setState({ currentMethod: val });
   }
 
+  handleChange(val) {
+    return name => {
+      this.setState({ [name]: val });
+    };
+  }
+
   render() {
+    const { cardNumber, expiry, cvc } = this.state;
     return (
       <div style={{ margin: "20px", padding: "20px" }}>
         <h2>Payment method</h2>
@@ -31,9 +40,34 @@ export class Payment extends Component {
           Credit / Debit Card
         </Button>
         {this.state.currentMethod === "Cash" ? (
-          <div>Cash</div>
+          <div />
         ) : (
-          <div>Credit</div>
+          <div
+            style={{
+              margin: "10px",
+              padding: "10px",
+              backgroundColor: "rgba(0,0,0,0.1)",
+              width: "400px"
+            }}
+          >
+            <CreditCardInput
+              cardNumberInputProps={{
+                value: cardNumber,
+                onChange: this.handleChange("cardNumber")
+              }}
+              cardExpiryInputProps={{
+                value: expiry,
+                onChange: this.handleChange("expiry")
+              }}
+              cardCVCInputProps={{
+                value: cvc,
+                onChange: this.handleChange("cvc")
+              }}
+              fieldClassName="input"
+            />
+            <div>Card holder name</div>
+            <input name="name" style={{ width: '100%'}}/>
+          </div>
         )}
       </div>
     );
