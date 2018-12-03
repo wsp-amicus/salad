@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Axios from "axios";
-import "./styles/App.css";
 import NotFound from "./components/NotFound";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
@@ -19,6 +18,7 @@ import Checkout from "./components/checkout/Checkout";
 import Menu from "./components/menu/Menu";
 import AfterSell from "./components/checkout/AfterSell";
 import EditInfo from "./components/users/EditInfo";
+import "./styles/App.css";
 
 class App extends Component {
   constructor(props) {
@@ -95,7 +95,6 @@ class App extends Component {
         />
       );
     });
-    console.log(this.state.user)
     return (
       <Router>
         <div>
