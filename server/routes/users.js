@@ -12,6 +12,5 @@ router.get('/index', userController.index)
 router.get('/find', userController.find)
 router.post('/update', userController.update)
 router.delete('/delete', userController.delete)
-router.get('/:username', userController.findByUsername)
 
 module.exports = router;
