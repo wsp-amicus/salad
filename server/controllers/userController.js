@@ -89,6 +89,7 @@ const userController = {
   },
   changePassword: async (req, res) => {
     const { username, password, newPassword } = req.body
+    console.log(req.body)
     const user = await User.findOne({ username })
     bcrypt.compare(password, user.password, (err, isMatch) => {
       if (err) throw err
