@@ -94,8 +94,7 @@ const userController = {
       if (err) throw err
       if (isMatch) {
         const updated = User.updateOne({ username }, {
-          ...user,
-          newPassword
+          password: newPassword
         })
         res.status(200).send(updated)
       }

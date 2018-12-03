@@ -13,11 +13,13 @@ export const Store = (function () {
       deliveryCode: observable.box(""),
       addProduct: product => {
         store.products.push(product);
+        localStorage.setItem('products', store.products)
       },
       removeProduct: product => {
         store.products = store.products.filter(item => {
           return item !== product;
         });
+        localStorage.setItem('products', store.products)
       },
       genDelivery: user => {
         return new Promise(async (resolved, reject) => {
@@ -41,7 +43,9 @@ export const Store = (function () {
         });
       }
     };
-    // store.products.push()
+    const _products = localStorage.getItem('products')
+    if (_products)
+      store.products.push(_products)
     return store;
   }
 
@@ -59,10 +63,12 @@ export const Store = (function () {
 const _store = Store.getInstance();
 
 export const addProduct2Cart = product => {
-  // localStorage.setItem()
-  _store.addProduct(product);
+  console.log(localStorage.getItem('products'))
+  console.log(product)
+  _store.addProduct({ ...product, key: _store.products.length });
 };
 
 export const removeProduct = product => {
+  _store.products.find(item => item.name === product.name)
   _store.removeProduct(product);
 };
