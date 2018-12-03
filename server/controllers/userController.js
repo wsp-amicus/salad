@@ -2,9 +2,15 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 
 const validateEmail = (req, res, next) => {
+<<<<<<< HEAD
+  const email = req.body.email
+  const validate = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  if (validate.test(String(email).toLowerCase())) return next()
+=======
   const email = req.body.email;
   const validate = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (validate.test(String(email).toLowerCase())) return next();
+>>>>>>> 5fa6165f99aab88227a3495b238ac0290d786f8b
   else {
     res.status(400).send("Wrong email format.");
   }
@@ -41,13 +47,13 @@ const userController = {
 
     // if email exist
     User.findOne({ email: email }, (err, user) => {
-      if (err) throw err;
+      if (err) throw err
       if (user != null) {
         res.status(400).send("Email is already taken.");
       } else {
         // if username exist
         User.findOne({ username: username }, (err, user1) => {
-          if (err) throw err;
+          if (err) throw err
           if (user1 != null) {
             res.status(400).send("Username is already taken.");
           } else {
@@ -71,7 +77,7 @@ const userController = {
     const username = req.body.username;
     const password = req.body.password;
     User.findOne({ username: username }, (err, user) => {
-      if (err) throw err;
+      if (err) throw err
       if (!user) {
         res.status(400).send("Username or Password is not match");
       } else {
@@ -83,7 +89,7 @@ const userController = {
           } else {
             res.status(400).send("Username or Password is not match");
           }
-        });
+        })
       }
     });
   },
