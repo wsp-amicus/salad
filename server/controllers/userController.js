@@ -20,14 +20,16 @@ const userController = {
     });
   },
   find(req, res) {
-    User.findOne(req.query, (err, users) => {
+    User.findOne(req.query, (err, user) => {
       if (err) {
         res.status(500).send("Error on query.");
+        return
       }
-      if (!users) {
+      if (!user) {
         res.status(404).send("User is not found");
+        return
       }
-      res.send(users);
+      res.send(user);
     });
   },
   register(req, res) {
