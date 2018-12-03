@@ -128,7 +128,10 @@ class App extends Component {
                 component={() => <AfterSell user={this.state.user} />}
               />
 
-              <Route path="/checkout" component={Checkout} />
+              <Route
+                path="/checkout"
+                component={() => <Checkout user={this.state.user} />}
+              />
 
               {/* Users */}
               <Route path="/users/register" component={Register} />

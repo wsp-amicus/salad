@@ -1,5 +1,5 @@
 import { observable } from "mobx";
-import randomstring from "randomstring";
+import axios from "axios";
 
 // make it singleTon so we don't need to pass like props
 export const Store = (function() {
@@ -19,8 +19,26 @@ export const Store = (function() {
           return item !== product;
         });
       },
-      genDelivery: () => {
-        store.deliveryCode.set(randomstring.generate());
+      genDelivery: user => {
+        return new Promise(async (resolved, reject) => {
+          let price = 0;
+          store.products.forEach(product => {
+            price += product.price;
+          });
+          const productnames = store.products.map(product => product.name);
+          await axios
+            .post("/transactions", {
+              products: JSON.stringify(productnames),
+              price: price,
+              username: user.username,
+              payment: store.payment.get()
+            })
+            .then(res => {
+              store.deliveryCode.set(res.data);
+              resolved(res);
+            })
+            .catch(err => reject(err));
+        });
       }
     };
     return store;

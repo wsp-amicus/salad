@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import { FormGroup, FormControl, Button } from "react-bootstrap";
 import InputAddress from "react-thailand-address-autocomplete";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Payment from "./Payment";
 import { Store } from "../../store/product";
 import CartImage from "../../static/cart.png";
@@ -22,10 +22,12 @@ class Checkout extends Component {
       district: "",
       province: "",
       zipcode: "",
-      products: []
+      products: [],
+      redirect: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSelect = this.onSelect.bind(this);
+    this.order = this.order.bind(this);
   }
 
   componentWillMount() {
@@ -36,7 +38,9 @@ class Checkout extends Component {
   }
 
   order() {
-    _store.genDelivery();
+    _store.genDelivery(this.props.user).then(() => {
+      this.setState({ redirect: true });
+    });
   }
 
   onChange(e) {
@@ -73,7 +77,7 @@ class Checkout extends Component {
   }
 
   getIngredientsString(ingredients) {
-    const _ingredients = ingredients.filter(ingredient => ingredient)
+    const _ingredients = ingredients.filter(ingredient => ingredient);
     return _ingredients.reduce((prev, cur) => {
       return `${prev}, ${cur}`;
     });
@@ -144,6 +148,9 @@ class Checkout extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/aftersell" />;
+    }
     const _products = this.state.products.slice(0, 3);
     return (
       <div>
@@ -245,11 +252,14 @@ class Checkout extends Component {
         </div>
         <Payment />
         <div style={{ textAlign: "center", margin: "40px" }}>
-          <Link to="/aftersell" onClick={this.order}>
-            <Button bsStyle="primary" bsSize="large" style={{ width: "200px" }}>
-              Order
-            </Button>
-          </Link>
+          <Button
+            onClick={this.order}
+            bsStyle="primary"
+            bsSize="large"
+            style={{ width: "200px" }}
+          >
+            Order
+          </Button>
         </div>
         <div style={{ textAlign: "center", marginTop: "50px" }}>
           <h1>Would you like anything else?</h1>
