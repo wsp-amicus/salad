@@ -19,6 +19,7 @@ import Checkout from "./components/checkout/Checkout";
 import Menu from "./components/menu/Menu";
 import AfterSell from "./components/checkout/AfterSell";
 import EditInfo from "./components/users/EditInfo";
+import EditPassword from "./components/users/EditPassword";
 
 class App extends Component {
   constructor(props) {
@@ -145,6 +146,8 @@ class App extends Component {
                 component={() => <Logout verifyLogin={this.verifyLogin} />}
               />
               <Route path="/users/edit-info" component={() => <EditInfo user={this.state.user}/>} />
+              <Route path="/users/edit-password" component={() => <EditPassword user={this.state.user}/>} />
+
 
               {/* Admin */}
               {adminRoute}
