@@ -41,13 +41,13 @@ const userController = {
 
     // if email exist
     User.findOne({ email: email }, (err, user) => {
-      if (err) throw err;
+      if (err) throw err
       if (user != null) {
         res.status(400).send("Email is already taken.");
       } else {
         // if username exist
         User.findOne({ username: username }, (err, user1) => {
-          if (err) throw err;
+          if (err) throw err
           if (user1 != null) {
             res.status(400).send("Username is already taken.");
           } else {
@@ -71,7 +71,7 @@ const userController = {
     const username = req.body.username;
     const password = req.body.password;
     User.findOne({ username: username }, (err, user) => {
-      if (err) throw err;
+      if (err) throw err
       if (!user) {
         res.status(400).send("Username or Password is not match");
       } else {
@@ -83,7 +83,7 @@ const userController = {
           } else {
             res.status(400).send("Username or Password is not match");
           }
-        });
+        })
       }
     });
   },
@@ -95,26 +95,24 @@ const userController = {
   },
   verification(req, res) {
     User.findOne({ _id: req.body.uid }, (err, user) => {
-      if (err) throw err;
-      res.send(user);
-    });
+      if (err) throw err
+      res.send(user)
+    })
   },
-  update(req, res) {
-    User.findOne({ _id: req.body._id }, (err, user) => {
-      if (err) throw err;
-      user.firstName = req.body.firstName;
-      user.lastName = req.body.lastName;
-      user.password = req.body.password;
-      user.permission = req.body.permission;
-      user.save();
-      res.status(200).send("done");
-    });
+  async update(req, res) {
+    const { username, firstName, lastName, email } = req.body
+    const updated = await User.updateOne(
+      { username },
+      { firstName, lastName, email }
+    )
+    if (!updated) throw res.status(400).send(`No user ${username} found.`)
+    res.send(updated)
   },
   delete(req, res) {
-    User.deleteOne(req.body, err => {
-      if (err) throw err;
-      res.status(200).send("done");
-    });
+    User.deleteOne(req.query, err => {
+      if (err) throw err
+      res.status(200).send('done')
+    })
   }
 };
 
