@@ -8,6 +8,9 @@ import Product from "./pages/Product";
 import CreateProduct from "./pages/Product/Create";
 import EditProduct from "./pages/Product/Edit";
 import Transaction from "./pages/Transaction";
+import IncomePerMonth from "./pages/Transaction/IncomePerMonth";
+import Payment from "./pages/Transaction/Payment";
+import MostUserBuy from "./pages/Transaction/MostUserBuy";
 
 export default [
   { path: "/admin", component: Dashboard, exact: true, permission: 0 },
@@ -54,6 +57,24 @@ export default [
   {
     path: "/admin/transactions",
     component: Transaction,
+    exact: true,
+    permission: 100
+  },
+  {
+    path: "/admin/transactions/incomepermonth",
+    component: IncomePerMonth,
+    exact: false,
+    permission: 100
+  },
+  {
+    path: "/admin/transactions/payment",
+    component: Payment,
+    exact: false,
+    permission: 100
+  },
+  {
+    path: "/admin/transactions/mostuserbuy",
+    component: MostUserBuy,
     exact: false,
     permission: 100
   }
