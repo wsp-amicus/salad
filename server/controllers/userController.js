@@ -113,13 +113,6 @@ const userController = {
       if (err) throw err;
       res.status(200).send("done");
     });
-  },
-  findByUsername: (req, res) => {
-    const { username } = req.params;
-    User.findOne({ username }, (err, user) => {
-      if (err) throw err;
-      res.status(200).send(user);
-    });
   }
 };
 
