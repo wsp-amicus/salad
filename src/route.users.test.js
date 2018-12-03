@@ -39,25 +39,18 @@ describe("POST /users/register", () => {
 });
 
 describe("POST /users/login", () => {
-  it("should return user", async done => {
-    const res = await request(server)
+  test("should return user", done => {
+    request(server)
       .post("/users/login")
       .set("Content-Type", "application/json")
-      .send(JSON.stringify({ username: "w", password: "w" }))
-      .expect(200)
+      .send({ username: "w", password: "www" })
+      
       // .catch(err => console.log("Err", err));
-    const loginUser = {
-      firstName: "w",
-      lastName: "w",
-      email: "w@w.com",
-      username: "w"
-    };
-    const { firstName, lastName, email, username } = loginUser;
-    expect(firstName).toBe(res.body.firstName);
-    expect(lastName).toBe(res.body.lastName);
-    expect(email).toBe(res.body.email);
-    expect(username).toBe(res.body.username);
-    done();
+    .then(response => {
+      expect(response.statusCode).toBe(400);
+      expect(response.text).toBe("Username or Password is not match");
+      done();
+    })
   });
 });
 
