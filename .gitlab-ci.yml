@@ -43,6 +43,10 @@ build:
 
 test:
   stage: test
+  services:
+    - mongo:3.2
+  variables:
+    MONGODB_URI: mongodb://mongo:27017/amicus-salad
   only:
     - master
   script:
