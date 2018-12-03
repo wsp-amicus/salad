@@ -9,7 +9,7 @@ const app = express();
 const fileUpload = require("express-fileupload");
 const customenv = require("dotenv").config().parsed;
 
-let port = process.env.PORT || customenv.PORT || 5000;
+let port = process.env.PORT || customenv.BACKEND_PORT || 5000;
 process.env.NODE_ENV = customenv.NODE_ENV || process.env.NODE_ENV;
 
 mongoose.connect(config.database);
