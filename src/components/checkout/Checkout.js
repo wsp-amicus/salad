@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import { FormGroup, FormControl, Button } from "react-bootstrap";
 import InputAddress from "react-thailand-address-autocomplete";
+import Payment from "./Payment";
 import { Store } from "../../store/product";
 import CartImage from "../../static/cart.png";
 import { addProduct2Cart } from "../../store/product";
@@ -58,17 +59,19 @@ class Checkout extends Component {
   }
 
   getIngredientsString(ingredients) {
-    const counts = {}
+    const counts = {};
     ingredients.forEach(item => {
-      if (!counts[item.name]) counts[item.name] = 0
-      counts[item.name] += 1
-    })
-    console.log(counts)
-    const keys = Object.keys(counts)
+      if (!counts[item.name]) counts[item.name] = 0;
+      counts[item.name] += 1;
+    });
+    console.log(counts);
+    const keys = Object.keys(counts);
     return keys.reduce((prev, cur) => {
-      return `${counts[prev] && counts[prev] > 1 ? prev + ' x ' + counts[prev] : prev}, 
-      ${counts[cur] && counts[cur] > 1 ? cur + ' x ' + counts[cur] : cur}`
-    })
+      return `${
+        counts[prev] && counts[prev] > 1 ? prev + " x " + counts[prev] : prev
+      }, 
+      ${counts[cur] && counts[cur] > 1 ? cur + " x " + counts[cur] : cur}`;
+    });
   }
 
   getListComponent(products) {
@@ -90,7 +93,9 @@ class Checkout extends Component {
             alt="product"
           />
           <h4 style={{ marginTop: "25px" }}>{product.name}</h4>
-          <h4 style={{ marginTop: "25px" }}>{this.getIngredientsString(product.ingredients)}</h4>
+          <h4 style={{ marginTop: "25px" }}>
+            {this.getIngredientsString(product.ingredients)}
+          </h4>
           <h4 style={{ marginTop: "25px" }}>{product.price} ฿</h4>
         </div>
       );
@@ -230,6 +235,7 @@ class Checkout extends Component {
             </div>
           </FormGroup>
         </div>
+        <Payment />
         <div style={{ textAlign: "center", margin: "40px" }}>
           <Button bsStyle="primary" bsSize="large" style={{ width: "200px" }}>
             Order
