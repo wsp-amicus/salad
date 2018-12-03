@@ -49,11 +49,11 @@ class App extends Component {
     if (this.state.width === 0) this.setState({ width: window.innerWidth });
   }
 
-  async verifyLogin() {
+  verifyLogin() {
     try {
       const uid = Cookies.get("amicus-salad-uid");
       if (uid) {
-        await Axios.post("/users/verification", {
+        Axios.post("/users/verification", {
           uid: uid
         })
           .then(res => {
