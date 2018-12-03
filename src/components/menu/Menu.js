@@ -11,7 +11,8 @@ class Menu extends Component {
     super(props)
     this.state = {
       products: [],
-      loading: true,
+      queryLoading: true,
+      loading: {},
       alert: false,
       enable: false,
     }
@@ -20,7 +21,11 @@ class Menu extends Component {
   componentWillMount() {
     axios
       .get('/products')
-      .then(res => this.setState({ products: res.data, loading: false }))
+      .then(res => {
+        const loading = {}
+        res.data.forEach(item => loading[item.name] = true)
+        this.setState({ products: res.data, queryLoading: false, loading })
+      })
       .catch(err => console.log(err))
   }
 
@@ -49,10 +54,35 @@ class Menu extends Component {
             Please login
         </Alert>
           <div className="MenuImage">
+            <div style={{
+              minHeight: '200px',
+              minWidth: '200px',
+              display: `${this.state.loading[product.name] ? 'flex' : 'none'}`,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+              <Loader
+                type="TailSpin"
+                color="#11ad3d"
+                height={150}
+                width={150}
+              />
+            </div>
             <Image
               src={product.imageUrl ? product.imageUrl[0] : ''}
               rounded
               responsive
+              style={{
+                display: `${!this.state.loading[product.name] ? 'block' : 'none'}`
+              }}
+              onLoad={() =>
+                this.setState({
+                  loading: {
+                    ...this.state.loading,
+                    [product.name]: false,
+                  }
+                })
+              }
             />
           </div>
           <Row className="text product-name">
@@ -80,10 +110,10 @@ class Menu extends Component {
               {product.price} ฿
             </Button>
           </Row>
-        </div>
+        </div >
       )
     })
-    return this.state.loading ? (
+    return this.state.queryLoading ? (
       <div
         style={{ textAlign: 'center', minHeight: '200px', minWidth: '200px' }}
       >
