@@ -2,15 +2,9 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 
 const validateEmail = (req, res, next) => {
-<<<<<<< HEAD
   const email = req.body.email
   const validate = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   if (validate.test(String(email).toLowerCase())) return next()
-=======
-  const email = req.body.email;
-  const validate = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (validate.test(String(email).toLowerCase())) return next();
->>>>>>> f065c976a040d378671b6545e1ba31fbc87a6650
   else {
     res.status(400).send("Wrong email format.");
   }
