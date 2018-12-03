@@ -1,24 +1,25 @@
-import React, { Component } from "react";
+import React, { Component, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Cookies from "js-cookie";
 import Axios from "axios";
-import NotFound from "./components/NotFound";
-import Home from "./components/Home";
 import Footer from "./components/Footer";
 import NavBar from "./components/navbar";
-import Register from "./components/users/Register";
-import Login from "./components/users/Login";
-import Logout from "./components/users/Logout";
+import Loading from "./components/Loading";
 import Copyright from "./components/Copyright";
 import adminRoutes from "./admin/routes";
-import Admin from "./admin/Index";
-import Loading from "./components/Loading";
-import Cookies from "js-cookie";
-import Custom from "./components/Custom";
-import Checkout from "./components/checkout/Checkout";
-import Menu from "./components/menu/Menu";
-import AfterSell from "./components/checkout/AfterSell";
-import EditInfo from "./components/users/EditInfo";
-import EditPassword from "./components/users/EditPassword";
+
+const Admin = lazy(() => import("./admin/Index"));
+const Logout = lazy(() => import("./components/users/Logout"));
+const Login = lazy(() => import("./components/users/Login"));
+const Custom = lazy(() => import("./components/Custom"));
+const Checkout = lazy(() => import("./components/checkout/Checkout"));
+const Menu = lazy(() => import("./components/menu/Menu"));
+const AfterSell = lazy(() => import("./components/checkout/AfterSell"));
+const EditInfo = lazy(() => import("./components/users/EditInfo"));
+const EditPassword = lazy(() => import("./components/users/EditPassword"));
+const Register = lazy(() => import("./components/users/Register"));
+const Home = lazy(() => import("./components/Home"));
+const NotFound = lazy(() => import("./components/NotFound"));
 
 class App extends Component {
   constructor(props) {
@@ -97,70 +98,77 @@ class App extends Component {
     });
     return (
       <Router>
-        <div>
-          {window.location.pathname.includes("/admin") ? null : (
-            <NavBar user={this.state.user} width={this.state.width} />
-          )}
-          <div
-            className={`${
-              window.location.pathname.includes("/admin") ? "" : "main"
-            }`}
-          >
-            <Switch>
-              <Route
-                exact
-                path="/"
-                component={() => <Home height={this.state.height} />}
-              />
+        <Suspense fallback={<Loading />}>
+          <div>
+            {window.location.pathname.includes("/admin") ? null : (
+              <NavBar user={this.state.user} width={this.state.width} />
+            )}
+            <div
+              className={`${
+                window.location.pathname.includes("/admin") ? "" : "main"
+              }`}
+            >
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  component={() => <Home height={this.state.height} />}
+                />
 
-              <Route
-                path="/custom"
-                component={() => <Custom user={this.state.user} />}
-              />
+                <Route
+                  path="/custom"
+                  component={() => <Custom user={this.state.user} />}
+                />
 
-              <Route
-                path="/menu"
-                component={() => <Menu user={this.state.user} />}
-              />
+                <Route
+                  path="/menu"
+                  component={() => <Menu user={this.state.user} />}
+                />
 
-              <Route
-                path="/aftersell"
-                component={() => <AfterSell user={this.state.user} />}
-              />
+                <Route
+                  path="/aftersell"
+                  component={() => <AfterSell user={this.state.user} />}
+                />
 
-              <Route
-                path="/checkout"
-                component={() => <Checkout user={this.state.user} />}
-              />
+                <Route
+                  path="/checkout"
+                  component={() => <Checkout user={this.state.user} />}
+                />
 
-              {/* Users */}
-              <Route path="/users/register" component={Register} />
-              <Route
-                path="/users/login"
-                component={() => <Login verifyLogin={this.verifyLogin} />}
-              />
-              <Route
-                path="/users/logout"
-                component={() => <Logout verifyLogin={this.verifyLogin} />}
-              />
-              <Route path="/users/edit-info" component={() => <EditInfo user={this.state.user}/>} />
-              <Route path="/users/edit-password" component={() => <EditPassword user={this.state.user}/>} />
+                {/* Users */}
+                <Route path="/users/register" component={Register} />
+                <Route
+                  path="/users/login"
+                  component={() => <Login verifyLogin={this.verifyLogin} />}
+                />
+                <Route
+                  path="/users/logout"
+                  component={() => <Logout verifyLogin={this.verifyLogin} />}
+                />
+                <Route
+                  path="/users/edit-info"
+                  component={() => <EditInfo user={this.state.user} />}
+                />
+                <Route
+                  path="/users/edit-password"
+                  component={() => <EditPassword user={this.state.user} />}
+                />
 
+                {/* Admin */}
+                {adminRoute}
 
-              {/* Admin */}
-              {adminRoute}
-
-              {/* 404 not found */}
-              <Route component={NotFound} />
-            </Switch>
-          </div>
-          {window.location.pathname.includes("/admin") ? null : (
-            <div>
-              <Footer />
-              <Copyright />
+                {/* 404 not found */}
+                <Route component={NotFound} />
+              </Switch>
             </div>
-          )}
-        </div>
+            {window.location.pathname.includes("/admin") ? null : (
+              <div>
+                <Footer />
+                <Copyright />
+              </div>
+            )}
+          </div>
+        </Suspense>
       </Router>
     );
   }
