@@ -34,7 +34,7 @@ export const Store = (function() {
               payment: store.payment.get()
             })
             .then(res => {
-              store.deliveryCode.set(res.data);
+              store.deliveryCode.set(res.data[0]._id);
               resolved(res);
             })
             .catch(err => reject(err));
