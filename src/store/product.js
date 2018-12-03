@@ -11,15 +11,18 @@ export const Store = (function () {
       address: observable({}),
       payment: observable.box("Cash"),
       deliveryCode: observable.box(""),
+      getProducts: () => store.products,
       addProduct: product => {
         store.products.push(product);
-        localStorage.setItem('products', store.products)
+        localStorage.clear()
+        localStorage.setItem('products', JSON.stringify(store.products))
       },
       removeProduct: product => {
         store.products = store.products.filter(item => {
           return item !== product;
         });
-        localStorage.setItem('products', store.products)
+        localStorage.clear()
+        localStorage.setItem('products', JSON.stringify(store.products))
       },
       genDelivery: user => {
         return new Promise(async (resolved, reject) => {
@@ -42,10 +45,17 @@ export const Store = (function () {
             .catch(err => reject(err));
         });
       }
-    };
+    }
     const _products = localStorage.getItem('products')
-    if (_products)
-      store.products.push(_products)
+
+    if (_products && typeof _products === 'string') {
+      try {
+        const products = JSON.parse(_products)
+        products.forEach(product => store.addProduct(product))
+      } catch (err) {
+        localStorage.clear()
+      }
+    }
     return store;
   }
 
@@ -63,8 +73,6 @@ export const Store = (function () {
 const _store = Store.getInstance();
 
 export const addProduct2Cart = product => {
-  localStorage.getItem('products').forEach(item => console.log(item))
-  console.log(product)
   _store.addProduct({ ...product, key: _store.products.length });
 };
 

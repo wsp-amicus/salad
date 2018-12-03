@@ -175,7 +175,7 @@ class Checkout extends Component {
             <h4>Ingredients</h4>
             <h4>Price</h4>
           </div>
-          {this.getListComponent(_store.products)}
+          {this.getListComponent(_store.getProducts())}
           <div style={{ textAlign: "right" }}>
             <h3>Total</h3>
             <h3>{this.getTotal(_store.products)} ฿</h3>
