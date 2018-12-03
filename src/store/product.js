@@ -48,7 +48,8 @@ export const Store = (function() {
             })
             .then(res => {
               store.deliveryCode.set(res.data[0]._id);
-              store.products.clear()
+              store.products.clear();
+              localStorage.clear();
               resolved(res);
             })
             .catch(err => reject(err));
