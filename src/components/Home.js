@@ -111,7 +111,7 @@ export default class Home extends Component {
         </div>
         <div className="home-menu">
           {this.getMenus('https://media-cdn.tripadvisor.com/media/photo-s/0c/dd/7f/0a/we-have-many-salads-to.jpg', { text: 'See our Menus', color: 'primary' }, '/menu')}
-          {this.getMenus('https://www.jessicagavin.com/wp-content/uploads/2016/05/salad-ingredients-with-homemade-lemon-basil-dressing.jpg', { text: 'Custom your own Salad', color: 'info' }, '/custom')}
+          {this.getMenus('https://www.jessicagavin.com/wp-content/uploads/2016/05/salad-ingredients-with-homemade-lemon-basil-dressing.jpg', { text: 'Custom your own Salad', color: 'primary' }, '/custom')}
         </div>
       </div>
     )
