@@ -5,6 +5,14 @@ cache:
   paths:
     - node_modules
 
+before_script:
+  - mkdir -p ~/.ssh
+  - echo "$DEPLOY_SERVER_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - eval "$(ssh-agent -s)"
+  - ssh-add ~/.ssh/id_rsa
+  - ssh-keyscan -H $DEPLOYMENT_SERVER_IP >> ~/.ssh/known_hosts
+
 stages:
   - install
   - build
@@ -37,7 +45,7 @@ deploy:
   only:
     - master
   script:
-    - curl $hooks_URL
+    - ssh wsp@$DEPLOYMENT_SERVER_IP "git clone https://github.com/wsp-amicus/salad.git salad2;cd salad2;npm install --only=prod;rm .env;mv .env.production .env;npm run build;cd ..;rm -r salad;npm run prod:stop;mv salad2 salad;cd salad;npm run prod"
   dependencies:
     - install
     - build
