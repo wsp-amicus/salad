@@ -2,9 +2,15 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 
 const validateEmail = (req, res, next) => {
+<<<<<<< HEAD
   const email = req.body.email
   const validate = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   if (validate.test(String(email).toLowerCase())) return next()
+=======
+  const email = req.body.email;
+  const validate = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (validate.test(String(email).toLowerCase())) return next();
+>>>>>>> f065c976a040d378671b6545e1ba31fbc87a6650
   else {
     res.status(400).send("Wrong email format.");
   }
@@ -95,26 +101,24 @@ const userController = {
   },
   verification(req, res) {
     User.findOne({ _id: req.body.uid }, (err, user) => {
-      if (err) throw err;
-      res.send(user);
-    });
+      if (err) throw err
+      res.send(user)
+    })
   },
-  update(req, res) {
-    User.findOne({ _id: req.body._id }, (err, user) => {
-      if (err) throw err;
-      user.firstName = req.body.firstName;
-      user.lastName = req.body.lastName;
-      user.password = req.body.password;
-      user.permission = req.body.permission;
-      user.save();
-      res.status(200).send("done");
-    });
+  async update(req, res) {
+    const { username, firstName, lastName, email } = req.body
+    const updated = await User.updateOne(
+      { username },
+      { firstName, lastName, email }
+    )
+    if (!updated) throw res.status(400).send(`No user ${username} found.`)
+    res.send(updated)
   },
   delete(req, res) {
-    User.deleteOne(req.body, err => {
-      if (err) throw err;
-      res.status(200).send("done");
-    });
+    User.deleteOne(req.query, err => {
+      if (err) throw err
+      res.status(200).send('done')
+    })
   }
 };
 
