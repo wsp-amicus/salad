@@ -12,5 +12,6 @@ router.get('/index', userController.index)
 router.get('/find', userController.find)
 router.post('/update', userController.update)
 router.delete('/delete', userController.delete)
+router.post('/changePassword', userController.changePassword)
 
 module.exports = router;

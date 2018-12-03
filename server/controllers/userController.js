@@ -75,7 +75,7 @@ const userController = {
       if (!user) {
         res.status(400).send("Username or Password is not match");
       } else {
-        bcrypt.compare(password, user.password, function(err, isMatch) {
+        bcrypt.compare(password, user.password, function (err, isMatch) {
           if (err) throw err;
           if (isMatch) {
             delete user.password;
@@ -86,6 +86,22 @@ const userController = {
         })
       }
     });
+  },
+  changePassword: async (req, res) => {
+    const { username, password, newPassword } = req.body
+    const user = await User.findOne({ username }).lean().exec()
+    bcrypt.compare(password, user.password, async (err, isMatch) => {
+      if (err)
+        throw err
+      if (isMatch) {
+        const updated = await User.updateOne({ username }, {
+          password: await bcrypt.hashSync(newPassword)
+        })
+        res.status(200).send(updated)
+      } else {
+        res.status(400).send('Wrong password')
+      }
+    })
   },
   forgetPassword(req, res) {
     // idk maybe send email to reset password

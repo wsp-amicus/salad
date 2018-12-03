@@ -2,15 +2,13 @@ import React, { Component } from 'react'
 import { Alert } from 'react-bootstrap'
 import Axios from 'axios'
 
-class EditInfo extends Component {
+class EditPassword extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      firstName: this.props.user ? this.props.user.firstName : '',
-      lastName: this.props.user ? this.props.user.lastName : '',
-      email: this.props.user ? this.props.user.email : '',
-      username: this.props.user ? this.props.user.username : '',
-      loading: false,
+      username:this.props.user ? this.props.user.username : '',
+      password: '',
+      newPassword: '',
       alertMessage: '',
       alertStyle: 'danger',
       enable: false,
@@ -36,19 +34,21 @@ class EditInfo extends Component {
   }
 
   handleEdit = e => {
-    this.showAlert('Profile is already edited.', 'success')
     this.setState({ loading: true })
-    Axios.post('/users/update', {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.email,
+    Axios.post('/users/changePassword', {      
       username: this.state.username,
+      password: this.state.password,
+      newPassword : this.state.newPassword
     })
       .then(res => {
+        console.log('done')
         this.setState({ redirect: true, loading: false })
+        this.showAlert('Password is already changed.', 'success')
       })
       .catch(err => {
+        console.log('err')
         this.setState({ errormsg: err.response.data, loading: false })
+        this.showAlert('Invalid password','danger')
       })
   }
 
@@ -82,50 +82,27 @@ class EditInfo extends Component {
           </div>
           <div className="row">
             <div className="form-group col-12 col-md-6">
-              <label>First name</label>
+              <label>Old password</label>
               <input
-                name="firstName"
-                type="text"
+                type="password"
+                name="password"
                 className="form-control"
-                id="firstname"
-                placeholder="First Name"
-                value={this.state.firstName}
+                placeholder="Old password"
                 onChange={this.handleInputChange.bind(this)}
                 required
               />
             </div>
 
             <div className="form-group col-12 col-md-6">
-              <label>Last name</label>
+              <label>New password</label>
               <input
-                name="lastName"
-                type="text"
+                type="password"
+                name="newPassword"
                 className="form-control"
-                id="lastname"
-                placeholder="Last Name"
-                value={this.state.lastName}
+                placeholder="New password"
                 onChange={this.handleInputChange.bind(this)}
                 required
               />
-            </div>
-          </div>
-          <div className="row">
-            <div className="form-group col-12 col-md-6">
-              <label>Email address</label>
-              <input
-                name="email"
-                type="email"
-                className="form-control"
-                id="email"
-                aria-describedby="emailHelp"
-                placeholder="Enter email"
-                value={this.state.email}
-                onChange={this.handleInputChange.bind(this)}
-                required
-              />
-              <small id="emailHelp" className="form-text text-muted">
-                We'll never share your email with anyone else.
-              </small>
             </div>
           </div>
         </form>
@@ -133,9 +110,9 @@ class EditInfo extends Component {
           <button
             type="submit"
             className="btn btn-success"
-            onClick={() => this.handleEdit()}
-          >
-            Edit
+            onClick={() => {this.handleEdit()}}
+            >
+            Submit
           </button>
         </div>
         <hr />
@@ -144,4 +121,4 @@ class EditInfo extends Component {
   }
 }
 
-export default EditInfo
+export default EditPassword
