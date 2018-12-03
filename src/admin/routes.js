@@ -7,6 +7,7 @@ import EditIngredient from "./pages/Ingredient/Edit";
 import Product from "./pages/Product";
 import CreateProduct from "./pages/Product/Create";
 import EditProduct from "./pages/Product/Edit";
+import Transaction from "./pages/Transaction";
 
 export default [
   { path: "/admin", component: Dashboard, exact: true, permission: 0 },
@@ -47,6 +48,12 @@ export default [
   {
     path: "/admin/products/edit",
     component: EditProduct,
+    exact: false,
+    permission: 100
+  },
+  {
+    path: "/admin/transactions",
+    component: Transaction,
     exact: false,
     permission: 100
   }

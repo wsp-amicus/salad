@@ -1,52 +1,57 @@
-import React, { Component } from 'react'
-import MetisMenu from 'react-metismenu'
-import RouterLink from 'react-metismenu-router-link'
-import 'react-metismenu/dist/react-metismenu-standart.min.css'
+import React, { Component } from "react";
+import MetisMenu from "react-metismenu";
+import RouterLink from "react-metismenu-router-link";
+import "react-metismenu/dist/react-metismenu-standart.min.css";
 
 const content = [
   {
-    icon: 'dashboard',
-    label: 'Dashboard',
-    to: '/admin',
+    icon: "dashboard",
+    label: "Dashboard",
+    to: "/admin"
   },
   {
-    icon: 'user',
-    label: 'User',
-    to: '/admin/users',
+    icon: "user",
+    label: "User",
+    to: "/admin/users"
   },
   {
-    icon: 'shopping-basket',
-    label: 'Ingredient',
+    icon: "shopping-basket",
+    label: "Ingredient",
     content: [
       {
-        icon: 'eye',
-        label: 'View',
-        to: '/admin/ingredients',
+        icon: "eye",
+        label: "View",
+        to: "/admin/ingredients"
       },
       {
-        icon: 'plus',
-        label: 'Add',
-        to: '/admin/ingredients/create',
-      },
-    ],
+        icon: "plus",
+        label: "Add",
+        to: "/admin/ingredients/create"
+      }
+    ]
   },
   {
-    icon: 'shopping-basket',
-    label: 'Products',
+    icon: "shopping-basket",
+    label: "Products",
     content: [
       {
-        icon: 'eye',
-        label: 'View',
-        to: '/admin/products',
+        icon: "eye",
+        label: "View",
+        to: "/admin/products"
       },
       {
-        icon: 'plus',
-        label: 'Add',
-        to: '/admin/products/create',
-      },
-    ],
+        icon: "plus",
+        label: "Add",
+        to: "/admin/products/create"
+      }
+    ]
   },
-]
+  {
+    icon: "bar-chart",
+    label: "Transactions",
+    to: "/admin/transactions"
+  }
+];
 
 export class Sidebar extends Component {
   render() {
@@ -58,8 +63,8 @@ export class Sidebar extends Component {
           activeLinkFromLocation
         />
       </div>
-    )
+    );
   }
 }
 
-export default Sidebar
+export default Sidebar;

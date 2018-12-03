@@ -4,7 +4,6 @@ const https = require("https");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const config = require("../config/database");
 const app = express();
 const fileUpload = require("express-fileupload");
 const customenv = require("dotenv").config().parsed;
@@ -12,7 +11,9 @@ const customenv = require("dotenv").config().parsed;
 let port = process.env.PORT || customenv.BACKEND_PORT || 5000;
 process.env.NODE_ENV = customenv.NODE_ENV || process.env.NODE_ENV;
 
-mongoose.connect(config.database);
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost:27017/amicus-salad"
+);
 let db = mongoose.connection;
 
 // Check connection
