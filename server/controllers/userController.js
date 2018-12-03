@@ -101,33 +101,6 @@ const userController = {
   },
   verification(req, res) {
     User.findOne({ _id: req.body.uid }, (err, user) => {
-<<<<<<< HEAD
-      if (err) throw err
-      res.send(user)
-    })
-  },
-  async update(req, res) {
-    const { username, firstName, lastName, email } = req.body
-    const updated = await User.updateOne(
-      { username },
-      { firstName, lastName, email }
-    )
-    if (!updated) throw res.status(400).send(`No user ${username} found.`)
-    res.send(updated)
-  },
-  delete(req, res) {
-    User.deleteOne(req.query, err => {
-      if (err) throw err
-      res.status(200).send('done')
-    })
-  },
-  findByUsername: (req, res) => {
-    const { username } = req.params
-    User.findOne({ username }, (err, user) => {
-      if (err) throw err
-      res.status(200).send(user)
-    })
-=======
       if (err) throw err;
       res.send(user);
     });
@@ -148,7 +121,6 @@ const userController = {
       if (err) throw err;
       res.status(200).send("done");
     });
->>>>>>> 5fa6165f99aab88227a3495b238ac0290d786f8b
   }
 };
 
