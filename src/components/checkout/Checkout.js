@@ -38,6 +38,7 @@ class Checkout extends Component {
   }
 
   order() {
+    localStorage.clear()
     _store.genDelivery(this.props.user).then(() => {
       this.setState({ redirect: true });
     });
