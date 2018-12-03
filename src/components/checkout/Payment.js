@@ -44,7 +44,9 @@ export class Payment extends Component {
         ) : (
           <div
             style={{
-              margin: "10px",
+              textAlign: "center",
+              margin: "auto",
+              marginTop: "10px",
               padding: "10px",
               backgroundColor: "rgba(0,0,0,0.1)",
               width: "400px"
@@ -66,7 +68,7 @@ export class Payment extends Component {
               fieldClassName="input"
             />
             <div>Card holder name</div>
-            <input name="name" style={{ width: '100%'}}/>
+            <input name="name" style={{ width: "100%" }} />
           </div>
         )}
       </div>
