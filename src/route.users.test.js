@@ -14,6 +14,10 @@ const user = {
   password: "password"
 };
 
+const mockUser = {
+  username : "adijawd"
+}
+
 describe("GET /test", () => {
   test("It should response You are now connected with backend !", done => {
     request(server)
@@ -34,6 +38,17 @@ describe("POST /users/register", () => {
       .send(JSON.stringify(user))
       .expect(200);
     expect(res.text).toBe("You are ready to login!");
+    done();
+  });
+});
+describe("POST /users/register", () => {
+  it('should return "Email is already taken."', async done => {
+    const res = await request(server)
+      .post("/users/register")
+      .set("Content-Type", "application/json")
+      .send(JSON.stringify(user))
+      .expect(400);
+    expect(res.text).toBe("Email is already taken.");
     done();
   });
 });
@@ -68,14 +83,11 @@ describe("Find /users/find", () => {
 
 describe("Find /users/find", () => {
   it('should return "User is not found"', async done => {
-    const mockUser = {
-      username : "adijawd"
-    }
     const res = await request(server)
       .get(`/users/find?username=${mockUser.username}`)
       .then(response =>{
         expect(response.statusCode).toBe(404)
-        expect(response.text).toBe("User is not found'")
+        expect(response.text).toBe("User is not found")
         done();
       })
   });
