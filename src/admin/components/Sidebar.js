@@ -49,7 +49,23 @@ const content = [
   {
     icon: "bar-chart",
     label: "Transactions",
-    to: "/admin/transactions"
+    content: [
+      {
+        icon: "bar-chart",
+        label: "Income",
+        to: "/admin/transactions/incomepermonth"
+      },
+      {
+        icon: "bar-chart",
+        label: "Payment",
+        to: "/admin/transactions/payment"
+      },
+      {
+        icon: "bar-chart",
+        label: "Most User",
+        to: "/admin/transactions/mostuserbuy"
+      }
+    ]
   }
 ];
 

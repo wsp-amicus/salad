@@ -24,6 +24,16 @@ export const Store = (function () {
         localStorage.clear()
         localStorage.setItem('products', JSON.stringify(store.products))
       },
+      transactions: observable([]),
+      getTransactions: async () => {
+        if (store.transactions.length === 0)
+          await axios.get("/transactions").then(res => {
+            res.data.forEach(item => {
+              store.transactions[store.transactions.length] = item;
+            });
+          });
+        return store.transactions;
+      },
       genDelivery: user => {
         return new Promise(async (resolved, reject) => {
           let price = 0;

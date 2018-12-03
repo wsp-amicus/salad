@@ -117,8 +117,8 @@ class NavBar extends Component {
                       background: transparent ? 'transparent' : '#222'
                     }}
                   >
-                    <Link role="menuitem" tabIndex="-1" to="/users/edit-info">
-                      Edit password
+                    <Link role="menuitem" tabIndex="-1" to="/users/edit-password">
+                      Change password
                     </Link>
                   </li>
                   <li
