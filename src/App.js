@@ -7,6 +7,7 @@ import NavBar from "./components/navbar";
 import Loading from "./components/Loading";
 import Copyright from "./components/Copyright";
 import adminRoutes from "./admin/routes";
+import "./styles/App.css";
 
 const Admin = lazy(() => import("./admin/Index"));
 const Logout = lazy(() => import("./components/users/Logout"));
