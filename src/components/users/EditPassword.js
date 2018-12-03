@@ -6,6 +6,7 @@ class EditPassword extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      username:this.props.user ? this.props.user.username : '',
       password: '',
       newPassword: '',
       loading: false,
@@ -34,20 +35,26 @@ class EditPassword extends Component {
   }
 
   handleEdit = e => {
-    this.showAlert('Profile is already edited.', 'success')
+    console.log('called')
+    console.log(this.state.username)
+    console.log(this.state.password)
+    console.log(this.state.newPassword)
+
     this.setState({ loading: true })
-    Axios.post('/users/update', {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.email,
+    Axios.post('/users/changePassword', {      
       username: this.state.username,
-      password: this.state.hashPassword
+      password: this.state.password,
+      newPassword : this.state.newPassword
     })
       .then(res => {
+        console.log('done')
         this.setState({ redirect: true, loading: false })
+        this.showAlert('Profile is already edited.', 'success')
       })
       .catch(err => {
+        console.log('err')
         this.setState({ errormsg: err.response.data, loading: false })
+        this.showAlert('Invalid password','danger')
       })
   }
 
@@ -83,7 +90,7 @@ class EditPassword extends Component {
             <div className="form-group col-12 col-md-6">
               <label>Old password</label>
               <input
-                type="text"
+                type="password"
                 name="password"
                 className="form-control"
                 placeholder="Old password"
@@ -95,7 +102,7 @@ class EditPassword extends Component {
             <div className="form-group col-12 col-md-6">
               <label>New password</label>
               <input
-                type="text"
+                type="password"
                 name="newPassword"
                 className="form-control"
                 placeholder="New password"

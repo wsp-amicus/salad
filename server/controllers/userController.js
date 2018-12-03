@@ -2,9 +2,9 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 
 const validateEmail = (req, res, next) => {
-  const email = req.body.email;
-  const validate = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (validate.test(String(email).toLowerCase())) return next();
+  const email = req.body.email
+  const validate = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  if (validate.test(String(email).toLowerCase())) return next()
   else {
     res.status(400).send("Wrong email format.");
   }
@@ -75,7 +75,7 @@ const userController = {
       if (!user) {
         res.status(400).send("Username or Password is not match");
       } else {
-        bcrypt.compare(password, user.password, function(err, isMatch) {
+        bcrypt.compare(password, user.password, function (err, isMatch) {
           if (err) throw err;
           if (isMatch) {
             delete user.password;
@@ -86,6 +86,20 @@ const userController = {
         })
       }
     });
+  },
+  changePassword: async (req, res) => {
+    const { username, password, newPassword } = req.body
+    const user = await User.findOne({ username })
+    bcrypt.compare(password, user.password, (err, isMatch) => {
+      if (err) throw err
+      if (isMatch) {
+        const updated = User.updateOne({ username }, {
+          ...user,
+          newPassword
+        })
+        res.status(200).send(updated)
+      }
+    })
   },
   forgetPassword(req, res) {
     // idk maybe send email to reset password

@@ -2,7 +2,7 @@ import { observable } from "mobx";
 import axios from "axios";
 
 // make it singleTon so we don't need to pass like props
-export const Store = (function() {
+export const Store = (function () {
   var instance;
 
   function createInstance() {
@@ -34,18 +34,20 @@ export const Store = (function() {
               payment: store.payment.get()
             })
             .then(res => {
-              store.deliveryCode.set(res.data);
+              store.deliveryCode.set(res.data[0]._id);
               resolved(res);
             })
             .catch(err => reject(err));
         });
       }
     };
+    // store.products.push()
     return store;
   }
 
+
   return {
-    getInstance: function() {
+    getInstance: function () {
       if (!instance) {
         instance = createInstance();
       }
@@ -57,6 +59,7 @@ export const Store = (function() {
 const _store = Store.getInstance();
 
 export const addProduct2Cart = product => {
+  // localStorage.setItem()
   _store.addProduct(product);
 };
 

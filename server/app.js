@@ -17,12 +17,12 @@ mongoose.connect(
 let db = mongoose.connection;
 
 // Check connection
-db.once("open", function() {
+db.once("open", function () {
   console.log("Connected to MongoDB");
 });
 
 // Check for DB errors
-db.on("error", function(err) {
+db.on("error", function (err) {
   console.log(err);
 });
 
@@ -44,11 +44,12 @@ app.use("/dashboard", require("./routes/dashboard"));
 app.use("/ingredients", require("./routes/ingredient"));
 app.use("/products", require("./routes/product"));
 app.use("/storage", require("./routes/storage"));
+app.use("/transactions", require("./routes/transactions"));
 
 // use this in production only
 if (process.env.NODE_ENV === "production") {
   // redirect http to https
-  app.use(function(req, res, next) {
+  app.use(function (req, res, next) {
     if (req.secure) {
       // request was via https, so do no special handling
       next();
