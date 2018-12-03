@@ -2,7 +2,7 @@ import { observable } from "mobx";
 import axios from "axios";
 
 // make it singleTon so we don't need to pass like props
-export const Store = (function () {
+export const Store = (function() {
   var instance;
 
   function createInstance() {
@@ -14,15 +14,21 @@ export const Store = (function () {
       getProducts: () => store.products,
       addProduct: product => {
         store.products.push(product);
-        localStorage.clear()
-        localStorage.setItem('products', JSON.stringify(store.products))
+        localStorage.clear();
+        localStorage.setItem("products", JSON.stringify(store.products));
       },
       removeProduct: product => {
-        store.products = store.products.filter(item => {
-          return item !== product;
-        });
-        localStorage.clear()
-        localStorage.setItem('products', JSON.stringify(store.products))
+        store.products.remove(product);
+        // store.products.forEach((item, index) => {
+        //   if (item === product) {
+
+        //   }
+        // });
+        // store.products = store.products.filter(item => {
+        //   return item !== product;
+        // });
+        localStorage.clear();
+        localStorage.setItem("products", JSON.stringify(store.products));
       },
       transactions: observable([]),
       getTransactions: async () => {
@@ -55,23 +61,22 @@ export const Store = (function () {
             .catch(err => reject(err));
         });
       }
-    }
-    const _products = localStorage.getItem('products')
+    };
+    const _products = localStorage.getItem("products");
 
-    if (_products && typeof _products === 'string') {
+    if (_products && typeof _products === "string") {
       try {
-        const products = JSON.parse(_products)
-        products.forEach(product => store.addProduct(product))
+        const products = JSON.parse(_products);
+        products.forEach(product => store.addProduct(product));
       } catch (err) {
-        localStorage.clear()
+        localStorage.clear();
       }
     }
     return store;
   }
 
-
   return {
-    getInstance: function () {
+    getInstance: function() {
       if (!instance) {
         instance = createInstance();
       }
@@ -87,6 +92,6 @@ export const addProduct2Cart = product => {
 };
 
 export const removeProduct = product => {
-  const finded = _store.products.find(item => item.name === product.name)
+  const finded = _store.products.find(item => item.name === product.name);
   _store.removeProduct(finded);
 };

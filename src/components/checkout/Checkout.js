@@ -38,7 +38,7 @@ class Checkout extends Component {
   }
 
   order() {
-    localStorage.clear()
+    localStorage.clear();
     _store.genDelivery(this.props.user).then(() => {
       this.setState({ redirect: true });
     });
@@ -176,7 +176,7 @@ class Checkout extends Component {
             <h4>Ingredients</h4>
             <h4>Price</h4>
           </div>
-          {this.getListComponent(_store.getProducts())}
+          {this.getListComponent(_store.products)}
           <div style={{ textAlign: "right" }}>
             <h3>Total</h3>
             <h3>{this.getTotal(_store.products)} ฿</h3>
