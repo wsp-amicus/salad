@@ -63,12 +63,12 @@ export const Store = (function () {
 const _store = Store.getInstance();
 
 export const addProduct2Cart = product => {
-  console.log(localStorage.getItem('products'))
+  localStorage.getItem('products').forEach(item => console.log(item))
   console.log(product)
   _store.addProduct({ ...product, key: _store.products.length });
 };
 
 export const removeProduct = product => {
-  _store.products.find(item => item.name === product.name)
-  _store.removeProduct(product);
+  const finded = _store.products.find(item => item.name === product.name)
+  _store.removeProduct(finded);
 };

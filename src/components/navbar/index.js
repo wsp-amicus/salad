@@ -118,7 +118,7 @@ class NavBar extends Component {
                     }}
                   >
                     <Link role="menuitem" tabIndex="-1" to="/users/edit-password">
-                      Edit password
+                      Change password
                     </Link>
                   </li>
                   <li

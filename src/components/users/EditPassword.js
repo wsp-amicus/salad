@@ -9,7 +9,6 @@ class EditPassword extends Component {
       username:this.props.user ? this.props.user.username : '',
       password: '',
       newPassword: '',
-      loading: false,
       alertMessage: '',
       alertStyle: 'danger',
       enable: false,
@@ -35,11 +34,6 @@ class EditPassword extends Component {
   }
 
   handleEdit = e => {
-    console.log('called')
-    console.log(this.state.username)
-    console.log(this.state.password)
-    console.log(this.state.newPassword)
-
     this.setState({ loading: true })
     Axios.post('/users/changePassword', {      
       username: this.state.username,
@@ -49,7 +43,7 @@ class EditPassword extends Component {
       .then(res => {
         console.log('done')
         this.setState({ redirect: true, loading: false })
-        this.showAlert('Profile is already edited.', 'success')
+        this.showAlert('Password is already changed.', 'success')
       })
       .catch(err => {
         console.log('err')
@@ -73,7 +67,7 @@ class EditPassword extends Component {
         >
           {this.state.alertMessage}
         </Alert>
-        <h1 style={{ marginTop: '100px' }}>Edit user information</h1>
+        <h1 style={{ marginTop: '150px' }}>Edit user information</h1>
         <hr />
         <form>
           {this.state.errormsg ? (
