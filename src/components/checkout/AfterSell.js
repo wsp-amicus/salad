@@ -5,8 +5,11 @@ const _store = Store.getInstance();
 
 export class AfterSell extends Component {
   componentDidMount() {
-    // save to database
-    console.log(JSON.stringify(_store.deliveryCode.get()));
+    if (_store.deliveryCode.get() !== "") {
+      // save to database
+    }
+    console.log(JSON.stringify(_store.address));
+    console.log("mounted")
   }
 
   render() {
@@ -18,7 +21,7 @@ export class AfterSell extends Component {
         }}
       >
         <h3>You order is completed.</h3>
-        <div>Tracking number is {_store.deliveryCode.get()}</div>
+        <div>Tracking code is {_store.deliveryCode.get()}</div>
         <h2>You will recieve the product less than 30 minutes</h2>
         <img
           style={{ width: "100%" }}
