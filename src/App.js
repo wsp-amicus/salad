@@ -18,7 +18,7 @@ import Custom from "./components/Custom";
 import Checkout from "./components/checkout/Checkout";
 import Menu from "./components/menu/Menu";
 import AfterSell from "./components/checkout/AfterSell";
-import Manage from "./components/users/Manage";
+import EditInfo from "./components/users/EditInfo";
 
 class App extends Component {
   constructor(props) {
@@ -95,6 +95,7 @@ class App extends Component {
         />
       );
     });
+    console.log(this.state.user)
     return (
       <Router>
         <div>
@@ -140,7 +141,7 @@ class App extends Component {
                 path="/users/logout"
                 component={() => <Logout verifyLogin={this.verifyLogin} />}
               />
-              <Route path="/users/manage" component={Manage} />
+              <Route path="/users/edit-info" component={() => <EditInfo user={this.state.user}/>} />
 
               {/* Admin */}
               {adminRoute}
