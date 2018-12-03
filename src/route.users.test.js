@@ -15,8 +15,8 @@ const user = {
 };
 
 const mockUser = {
-  username : "adijawd"
-}
+  username: "adijawd"
+};
 
 describe("GET /test", () => {
   test("It should response You are now connected with backend !", done => {
@@ -41,6 +41,7 @@ describe("POST /users/register", () => {
     done();
   });
 });
+
 describe("POST /users/register", () => {
   it('should return "Email is already taken."', async done => {
     const res = await request(server)
@@ -59,25 +60,25 @@ describe("POST /users/login", () => {
       .post("/users/login")
       .set("Content-Type", "application/json")
       .send({ username: "w", password: "www" })
-      
+
       // .catch(err => console.log("Err", err));
-    .then(response => {
-      expect(response.statusCode).toBe(400);
-      expect(response.text).toBe("Username or Password is not match");
-      done();
-    })
+      .then(response => {
+        expect(response.statusCode).toBe(400);
+        expect(response.text).toBe("Username or Password is not match");
+        done();
+      });
   });
 });
 
 describe("Find /users/find", () => {
-  it('should return user', async done => {
+  it("should return user", async done => {
     const res = await request(server)
       .get(`/users/find?username=${user.username}`)
-      .then(response =>{
-        expect(response.body.firstName).toBe(`${user.firstName}`)
-        expect(response.body.lastName).toBe(`${user.lastName}`)
+      .then(response => {
+        expect(response.body.firstName).toBe(`${user.firstName}`);
+        expect(response.body.lastName).toBe(`${user.lastName}`);
         done();
-      })
+      });
   });
 });
 
@@ -85,21 +86,20 @@ describe("Find /users/find", () => {
   it('should return "User is not found"', async done => {
     const res = await request(server)
       .get(`/users/find?username=${mockUser.username}`)
-      .then(response =>{
-        expect(response.statusCode).toBe(404)
-        expect(response.text).toBe("User is not found")
+      .then(response => {
+        expect(response.statusCode).toBe(404);
+        expect(response.text).toBe("User is not found");
         done();
-      })
+      });
   });
 });
-
 
 describe("DELETE /users/delete", () => {
   it('should return "done"', async done => {
     const res = await request(server)
       .delete("/users/delete")
       .set("Content-Type", "application/json")
-      .send({ username: "w" })
+      .send({ username: user.username })
       .expect(200)
       .catch(err => console.log("Err", err));
     expect(res.text).toBe("done");
