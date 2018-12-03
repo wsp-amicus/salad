@@ -12,11 +12,13 @@ before_script:
   - eval "$(ssh-agent -s)"
   - ssh-add ~/.ssh/id_rsa
   - ssh-keyscan -H $DEPLOYMENT_SERVER_IP >> ~/.ssh/known_hosts
+  - sudo apt install -y mongodb;
+  - sudo systemctl start mongodb;
 
 stages:
   - install
   - build
-  # - test
+  - test
   - deploy
 
 install:
@@ -41,15 +43,16 @@ build:
     paths:
       - build
 
-# test:
-#   stage: test
-#   only:
-#     - master
-#   script:
-#     - npm run test:backend
-#   dependencies:
-#     - install
-#     - build
+test:
+  stage: test
+  only:
+    - master
+  script:
+    - mongod
+    - npm run test:backend
+  dependencies:
+    - install
+    - build
 
 deploy:
   stage: deploy
