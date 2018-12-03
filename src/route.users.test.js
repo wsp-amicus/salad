@@ -59,7 +59,7 @@ describe("DELETE /users/delete", () => {
     const res = await request(server)
       .delete("/users/delete")
       .set("Content-Type", "application/json")
-      .send(JSON.stringify({ username: "w" }))
+      .send({ username: "w" })
       .expect(200)
       .catch(err => console.log("Err", err));
     expect(res.text).toBe("done");
