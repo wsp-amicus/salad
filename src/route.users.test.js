@@ -38,7 +38,6 @@ describe("POST /users/register", () => {
   });
 });
 
-<<<<<<< HEAD
 describe("POST /users/login", () => {
   it("should return user", async done => {
     const res = await request(server)
@@ -61,25 +60,6 @@ describe("POST /users/login", () => {
     done();
   });
 });
-=======
-// describe("POST /users/login", () => {
-//   it('should return user', async (done) => {
-//     const res = await request(server)
-//       .post("/users/login")
-//       .set("Content-Type", "application/json")
-//       .send(JSON.stringify({ username: 'w', password: 'w' }))
-//       .expect(200)
-//       .catch(err => console.log('Err', err))
-//     const loginUser = { firstName: 'w', lastName: 'w', email: 'w@w.com', username: 'w' }
-//     const { firstName, lastName, email, username } = loginUser
-//     expect(firstName).toBe(res.body.firstName)
-//     expect(lastName).toBe(res.body.lastName)
-//     expect(email).toBe(res.body.email)
-//     expect(username).toBe(res.body.username)
-//     done()
-//   })
-// })
->>>>>>> master
 
 describe("DELETE /users/delete", () => {
   it('should return "done"', async done => {
