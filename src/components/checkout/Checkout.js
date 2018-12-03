@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import { FormGroup, FormControl, Button } from "react-bootstrap";
 import InputAddress from "react-thailand-address-autocomplete";
+import { Link } from "react-router-dom";
 import Payment from "./Payment";
 import { Store } from "../../store/product";
 import CartImage from "../../static/cart.png";
@@ -9,12 +10,14 @@ import { addProduct2Cart } from "../../store/product";
 import "../../styles/Ingredients.css";
 import "./checkout.css";
 import axios from "axios";
+
 const _store = Store.getInstance();
 
 class Checkout extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      address: "",
       subdistrict: "",
       district: "",
       province: "",
@@ -30,6 +33,10 @@ class Checkout extends Component {
       .get("/products")
       .then(res => this.setState({ products: res.data, loading: false }))
       .catch(err => console.log(err));
+  }
+
+  order() {
+    _store.genDelivery();
   }
 
   onChange(e) {
@@ -50,6 +57,13 @@ class Checkout extends Component {
       province,
       zipcode
     });
+    _store.address = {
+      address: this.state.address,
+      subdistrict,
+      district,
+      province,
+      zipcode
+    };
   }
 
   getTotal(products) {
@@ -59,11 +73,10 @@ class Checkout extends Component {
   }
 
   getIngredientsString(ingredients) {
-    const _ingredients = ingredients.filter(ingredient => ingredient)
-    console.log(_ingredients)
+    const _ingredients = ingredients.filter(ingredient => ingredient);
     return _ingredients.reduce((prev, cur) => {
-      return `${prev}, ${cur}`
-    })
+      return `${prev}, ${cur}`;
+    });
   }
 
   getListComponent(products) {
@@ -172,6 +185,9 @@ class Checkout extends Component {
             <FormControl
               type="text"
               style={{ height: "37px", color: "black" }}
+              name="address"
+              onChange={this.onChange}
+              value={this.state.address}
             />
             <div style={{ display: "flex", flexWrap: "wrap" }}>
               <div>
@@ -229,9 +245,11 @@ class Checkout extends Component {
         </div>
         <Payment />
         <div style={{ textAlign: "center", margin: "40px" }}>
-          <Button bsStyle="primary" bsSize="large" style={{ width: "200px" }}>
-            Order
-          </Button>
+          <Link to="/aftersell" onClick={this.order}>
+            <Button bsStyle="primary" bsSize="large" style={{ width: "200px" }}>
+              Order
+            </Button>
+          </Link>
         </div>
         <div style={{ textAlign: "center", marginTop: "50px" }}>
           <h1>Would you like anything else?</h1>

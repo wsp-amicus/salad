@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import CreditCardInput from "react-credit-card-input";
+import { Store } from "../../store/product";
+const _store = Store.getInstance();
 
 export class Payment extends Component {
   constructor(props) {
@@ -14,6 +16,7 @@ export class Payment extends Component {
 
   changeMethod(val) {
     this.setState({ currentMethod: val });
+    _store.payment.set(val);
   }
 
   handleChange(val) {
