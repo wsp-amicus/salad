@@ -60,7 +60,7 @@ deploy:
   only:
     - master
   script:
-    - ssh wsp@$DEPLOYMENT_SERVER_IP "git clone https://github.com/wsp-amicus/salad.git salad2;cd salad2;npm install --only=prod;rm .env;mv .env.production .env;cd ..; ls;rm -rf salad;echo '\n';ls;mv salad2/ salad/;ls;cd salad;npm run prod:stop;npm run prod"
+    - ssh wsp@$DEPLOYMENT_SERVER_IP "git clone https://github.com/wsp-amicus/salad.git salad2;cd salad2;npm install --only=prod;rm .env;mv .env.production .env;npm run build;cd ..; ls;rm -rf salad;echo '\n';ls;mv salad2/ salad/;ls;cd salad;npm run prod:stop;npm run prod"
   dependencies:
     - install
     - build
