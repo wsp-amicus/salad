@@ -73,7 +73,7 @@ class Checkout extends Component {
   }
 
   getIngredientsString(ingredients) {
-    const _ingredients = ingredients.filter(ingredient => ingredient);
+    const _ingredients = ingredients.filter(ingredient => ingredient)
     return _ingredients.reduce((prev, cur) => {
       return `${prev}, ${cur}`;
     });
