@@ -106,7 +106,7 @@
     "db:up": "babel-node ./server/migrate --u",
     "db:down": "babel-node ./server/migrate --d",
     "db:renew": "yarn db:down; yarn db:up",
-    "prod": "forever start -c 'npm run backend:node'",
+    "prod": "forever start -c 'npm run backend:node' ./",
     "prod:stop": "forever stopall"
   },
   "jest": {
