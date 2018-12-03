@@ -72,7 +72,7 @@ class Ingredients extends Component {
                 if (this.props.user) {
                   addProduct2Cart({
                     name: 'Custom',
-                    ingredients: this.state.selected,
+                    ingredients: this.state.selected.map(item => item.name),
                     price: this.getTotalPrice(this.state.selected),
                     description: '',
                     imageUrl: ['https://howtoboilanegg.files.wordpress.com/2010/03/food-question-mark.jpg'],
