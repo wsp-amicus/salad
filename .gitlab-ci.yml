@@ -60,4 +60,3 @@ deploy:
   dependencies:
     - install
     - build
-    - test

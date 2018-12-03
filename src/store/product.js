@@ -1,4 +1,5 @@
 import { observable } from "mobx";
+import randomstring from "randomstring";
 
 // make it singleTon so we don't need to pass like props
 export const Store = (function() {
@@ -7,6 +8,9 @@ export const Store = (function() {
   function createInstance() {
     var store = {
       products: observable([]),
+      address: observable({}),
+      payment: observable.box("Cash"),
+      deliveryCode: observable.box(""),
       addProduct: product => {
         store.products.push(product);
       },
@@ -14,6 +18,9 @@ export const Store = (function() {
         store.products = store.products.filter(item => {
           return item !== product;
         });
+      },
+      genDelivery: () => {
+        store.deliveryCode.set(randomstring.generate());
       }
     };
     return store;
