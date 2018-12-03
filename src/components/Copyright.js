@@ -9,8 +9,8 @@ export default class Home extends Component {
         <Grid>
           <Row className="show-grid">
             <div className="center">
-              &copy;
-              {new Date().getFullYear()} copyright: Amicus
+              &copy;{' '}
+              {new Date().getFullYear()} Copyright: Amicus Co., Ltd. All rights reserved
             </div>
           </Row>
         </Grid>
