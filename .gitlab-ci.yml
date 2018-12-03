@@ -16,7 +16,6 @@ before_script:
 stages:
   - install
   - build
-  - test
   - deploy
 
 install:
@@ -40,16 +39,6 @@ build:
   artifacts:
     paths:
       - build
-
-test:
-  stage: test
-  only:
-    - master
-  script:
-    - npm run test:backend
-  dependencies:
-    - install
-    - build
 
 deploy:
   stage: deploy
