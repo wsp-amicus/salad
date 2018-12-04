@@ -19,14 +19,6 @@ export const Store = (function() {
       },
       removeProduct: product => {
         store.products.remove(product);
-        // store.products.forEach((item, index) => {
-        //   if (item === product) {
-
-        //   }
-        // });
-        // store.products = store.products.filter(item => {
-        //   return item !== product;
-        // });
         localStorage.clear();
         localStorage.setItem("products", JSON.stringify(store.products));
       },
@@ -56,6 +48,8 @@ export const Store = (function() {
             })
             .then(res => {
               store.deliveryCode.set(res.data[0]._id);
+              store.products.clear();
+              localStorage.clear();
               resolved(res);
             })
             .catch(err => reject(err));

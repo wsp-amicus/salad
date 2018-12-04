@@ -67,7 +67,7 @@ class EditPassword extends Component {
         >
           {this.state.alertMessage}
         </Alert>
-        <h1 style={{ marginTop: '150px' }}>Edit user information</h1>
+        <h1 style={{ marginTop: '70px' }}>Change password</h1>
         <hr />
         <form>
           {this.state.errormsg ? (
@@ -109,10 +109,10 @@ class EditPassword extends Component {
         <div style={{ height: '70px' }}>
           <button
             type="submit"
-            className="btn btn-success"
+            className="btn btn-primary"
             onClick={() => {this.handleEdit()}}
             >
-            Submit
+            Change password
           </button>
         </div>
         <hr />
