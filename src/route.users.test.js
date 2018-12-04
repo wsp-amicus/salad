@@ -55,7 +55,7 @@ describe("POST /users/register", () => {
 });
 
 describe("POST /users/login", () => {
-  test("should return user", done => {
+  test("should return usename not matchr", done => {
     request(server)
       .post("/users/login")
       .set("Content-Type", "application/json")
@@ -76,12 +76,12 @@ describe("POST /users/login", () => {
     request(server)
       .post("/users/login")
       .set("Content-Type", "application/json")
-      .send({ username: "pawan1234", password: "123456789" })
+      .send({ username: "admin", password: "password" })
 
       // .catch(err => console.log("Err", err));
       .then(response => {
         expect(response.statusCode).toBe(200);
-        expect(response.body.username).toBe("pawan1234");
+        expect(response.body.username).toBe("admin");
         done();
       });
   });
