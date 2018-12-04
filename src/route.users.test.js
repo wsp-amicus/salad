@@ -70,6 +70,24 @@ describe("POST /users/login", () => {
   });
 });
 
+
+describe("POST /users/login", () => {
+  test("should return user", done => {
+    request(server)
+      .post("/users/login")
+      .set("Content-Type", "application/json")
+      .send({ username: "pawan1234", password: "123456789" })
+
+      // .catch(err => console.log("Err", err));
+      .then(response => {
+        expect(response.statusCode).toBe(200);
+        expect(response.body.username).toBe("pawan1234");
+        done();
+      });
+  });
+});
+
+
 describe("Find /users/find", () => {
   it("should return user", async done => {
     const res = await request(server)
