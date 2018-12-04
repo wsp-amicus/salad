@@ -67,7 +67,7 @@ class EditInfo extends Component {
         >
           {this.state.alertMessage}
         </Alert>
-        <h1 style={{ marginTop: '150px' }}>Edit user information</h1>
+        <h1 style={{ marginTop: '70px' }}>Edit user information</h1>
         <hr />
         <form>
           {this.state.errormsg ? (
