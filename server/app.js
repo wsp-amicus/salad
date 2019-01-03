@@ -48,6 +48,9 @@ app.use("/transactions", require("./routes/transactions"));
 
 // use this in production only
 if (process.env.NODE_ENV === "production") {
+  app.get('/.well-known/acme-challenge/KVuG7M7sKtJGel60Rcvi0ketW-Y480QTJoyutozc2Co', (req,res) => {
+    res.send('KVuG7M7sKtJGel60Rcvi0ketW-Y480QTJoyutozc2Co.FO5qm4PIP8INnsRscbbh8RjILzEgmTCDmGdmRolKr8o')
+  })
   // redirect http to https
   app.use(function (req, res, next) {
     if (req.secure) {
